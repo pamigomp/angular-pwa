@@ -3,6 +3,7 @@
 body, html {
   height: calc(100% - 4em);
 }
+
 body {
   background: brown;
   color: #fff;
@@ -14,5 +15,11 @@ body {
   padding: 2em;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
