@@ -1,0 +1,45 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Simple Node.js server to serve Angular app",
+  "main": "server.js",
+  "keywords": [
+    "Node.js",
+    "Node",
+    "Express.js",
+    "express",
+    "heroku",
+    "winston"
+  ],
+  "author": "Michal Pietrzak",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "cluster": "node cluster.js"
+  },
+  "dependencies": {
+    "body-parser": "1.19.0",
+    "compression": "1.7.4",
+    "consign": "0.1.6",
+    "cors": "2.8.5",
+    "cross-env": "5.2.0",
+    "dotenv": "8.0.0",
+    "envalid": "5.0.0",
+    "errorhandler": "1.5.1",
+    "express": "4.17.1",
+    "helmet": "3.20.0",
+    "morgan": "1.9.1",
+    "response-time": "2.3.2",
+    "selfsigned": "1.10.4",
+    "winston": "3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "1.19.1"
+  },
+  "engines": {
+    "node": "10.15.0",
+    "npm": "6.1.0"
+  },
+  "private": false
+}

@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "description": "Simple Node.js server to serve Angular app",
+  "keywords": [
+    "Node.js",
+    "Node",
+    "Express.js",
+    "express",
+    "heroku",
+    "winston"
+  ],
+  "repository": "",
+  "success_url": "/",
+  "addons": [],
+  "buildpacks": [
+    "heroku/nodejs"
+  ],
+  "env": {
+    "NODE_ENV": {
+      "description": "Run as a production environment on Heroku",
+      "value": "production"
+    }
+  },
+  "image": "heroku/nodejs",
+  "formation": {},
+  "scripts": {}
+}
