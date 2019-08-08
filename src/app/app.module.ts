@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
-import { DataService } from './data.service';
-import { PushNotificationService } from './push-notification.service';
+import { ConfigService } from './services/config/config.service';
+import { PushNotificationService } from './services/push-notification/push-notification.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToasterComponent } from './toaster/toaster.component';
-import { CheckForUpdateService } from './check-for-update.service';
+import { ToasterComponent } from './components/toaster/toaster.component';
+import { CheckForUpdateService } from './services/check-for-update/check-for-update.service';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -21,10 +22,11 @@ import { CheckForUpdateService } from './check-for-update.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MaterialModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     BrowserAnimationsModule
   ],
-  providers: [DataService, PushNotificationService, CheckForUpdateService],
+  providers: [ConfigService, PushNotificationService, CheckForUpdateService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

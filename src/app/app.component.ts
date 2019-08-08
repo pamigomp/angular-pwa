@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SwPush, SwUpdate } from '@angular/service-worker';
-import { DataService } from './data.service';
-import { PushNotificationService } from './push-notification.service';
-import { CheckForUpdateService } from './check-for-update.service';
+import { PushNotificationService } from './services/push-notification/push-notification.service';
+import { CheckForUpdateService } from './services/check-for-update/check-for-update.service';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +11,10 @@ import { CheckForUpdateService } from './check-for-update.service';
 export class AppComponent implements OnInit {
   readonly VAPID_PUBLIC_KEY = 'BMGa4HqOdJegpK4JH-XPbgZjAdBNGcI63SrBtRPwmUSiJddXiv8CLY0CYkRJT8Qiz7Ds2ja-P5rk3B-PHokxoAs';
   title = 'angular-pwa';
-  joke: any;
   updateAvailable = false;
 
   constructor(private swUpdate: SwUpdate,
               private checkForUpdateService: CheckForUpdateService,
-              private data: DataService,
               private swPush: SwPush,
               private pushService: PushNotificationService) {
     if (this.swUpdate.isEnabled) {
@@ -41,10 +38,6 @@ export class AppComponent implements OnInit {
         window.open(url, '_blank');
       });
     }
-
-    this.data.gimmeJokes().subscribe((res) => {
-      this.joke = res;
-    });
   }
 
   unsubscribe() {
