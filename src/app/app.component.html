@@ -1,5 +1,37 @@
-<app-push-notification></app-push-notification>
-
-<app-update-notification></app-update-notification>
+<mat-sidenav-container class="mat-typography">
+  <mat-sidenav #sidenav>
+    <mat-toolbar color="accent">
+      <img alt="{{title}}" class="logo" src="assets/icons/icon-96x96.png"/>
+    </mat-toolbar>
+    <mat-nav-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <a matLine>Dashboard</a>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <a matLine>Logout</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-toolbar color="primary">
+    <span>
+      <button (click)="sidenav.open()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+    </span>
+    <span>{{title}}</span>
+  </mat-toolbar>
+  <div class="content">
+    <mat-tab-group>
+      <mat-tab label="Push Notifications">
+        <app-push-notification></app-push-notification>
+      </mat-tab>
+      <mat-tab label="Update flow">
+        <app-update-notification></app-update-notification>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</mat-sidenav-container>
 
 <router-outlet></router-outlet>
