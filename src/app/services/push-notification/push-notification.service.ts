@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ConfigService } from "../config/config.service";
 
 @Injectable()
 export class PushNotificationService {
-  readonly SERVER_API_URL = 'http://localhost:8080/api/v1';
+  private SERVER_API_URL: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.SERVER_API_URL = this.configService.get('API_URL');
   }
 
   public createSubscription(subscription: PushSubscription) {
