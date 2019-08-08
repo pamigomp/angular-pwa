@@ -9,14 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConfigService } from './services/config/config.service';
 import { PushNotificationService } from './services/push-notification/push-notification.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToasterComponent } from './components/toaster/toaster.component';
 import { CheckForUpdateService } from './services/check-for-update/check-for-update.service';
 import { MaterialModule } from './material.module';
+import { PushNotificationComponent } from './components/push-notification/push-notification.component';
+import { UpdateNotificationComponent } from './components/update-notification/update-notification.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToasterComponent
+    PushNotificationComponent,
+    UpdateNotificationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 
 import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatDialogModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
@@ -28,6 +30,7 @@ import {
     MatInputModule,
     MatSelectModule,
     MatMenuModule,
+    MatDialogModule,
     MatSidenavModule,
     MatListModule,
     MatIconModule,
@@ -46,6 +49,7 @@ import {
     MatInputModule,
     MatSelectModule,
     MatMenuModule,
+    MatDialogModule,
     MatSidenavModule,
     MatListModule,
     MatIconModule,
@@ -56,6 +60,10 @@ import {
     MatRadioModule,
     MatProgressSpinnerModule
   ],
+  providers: [{
+    provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+    useValue: {duration: 3000, verticalPosition: 'top'}
+  }],
 })
 export class MaterialModule {
 }
