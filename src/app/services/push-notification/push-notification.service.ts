@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ConfigService } from "../config/config.service";
+import { ConfigService } from '../config/config.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PushNotificationService {
   private SERVER_API_URL: string;
 
