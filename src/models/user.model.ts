@@ -1,4 +1,6 @@
-export class UserModel {
+import { Deserializable } from './deserializable.model';
+
+export class UserModel implements Deserializable {
   id: string;
   email: string;
   firstName: string;
@@ -9,10 +11,14 @@ export class UserModel {
   postalCode?: string;
   city?: string;
   phone?: string;
-  regular?: boolean = true;
+  regular = true;
   lastLogin: string;
   token: string;
-  provider?: string;
+  provider?: 'FACEBOOK' | 'GOOGLE' | 'INSTAGRAM' | 'TWITTER';
   profilePicture?: string;
-  emailVerified?: boolean = false;
+  emailVerified = false;
+
+  deserialize(input: any): this {
+    return Object.assign(this, input);
+  }
 }

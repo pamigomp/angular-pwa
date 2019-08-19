@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SwUpdate, UpdateActivatedEvent, UpdateAvailableEvent } from "@angular/service-worker";
-import { CheckForUpdateService } from "../../services/check-for-update/check-for-update.service";
-import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from "@angular/material";
+import { SwUpdate, UpdateActivatedEvent, UpdateAvailableEvent } from '@angular/service-worker';
+import { CheckForUpdateService } from '../../services/check-for-update/check-for-update.service';
+import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-update-notification',

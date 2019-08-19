@@ -1,5 +1,7 @@
-export class ImageModel {
-  paymentStatus?: boolean = false;
+import { Deserializable } from './deserializable.model';
+
+export class ImageModel implements Deserializable {
+  paymentStatus = false;
   discount?: string;
   totalPrice: number;
   shippingDate?: string;
@@ -10,4 +12,8 @@ export class ImageModel {
   shippingId: string;
   status: 'PENDING_PAYMENT' | 'PENDING' | 'PROCESSING' | 'PENDING_SHIPMENT' | 'SEND' | 'SHIPPED' | 'COMPLETED' | 'CANCELLED';
   paymentMethod: 'CASH' | 'CREDIT_CARD' | 'DEBIT_CARD' | 'BANK_TRANSFER' | 'BLIK' | 'PAYPAL';
+
+  deserialize(input: any): this {
+    return Object.assign(this, input);
+  }
 }

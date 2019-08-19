@@ -1,4 +1,6 @@
-export class CustomerModel {
+import { Deserializable } from './deserializable.model';
+
+export class CustomerModel implements Deserializable {
   email: string;
   password: string;
   firstName: string;
@@ -9,7 +11,11 @@ export class CustomerModel {
   postalCode?: string;
   city?: string;
   phone?: string;
-  regular?: boolean = true;
+  regular = true;
   lastLogin: string;
   salt?: string;
+
+  deserialize(input: any): this {
+    return Object.assign(this, input);
+  }
 }
