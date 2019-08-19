@@ -1,6 +1,6 @@
-import { Desarializable } from './deserializable.model';
+import { Deserializable } from './deserializable.model';
 
-export class CartModel implements Desarializable {
+export class CartModel implements Deserializable {
   products: CartProductModel[];
   customerId: string;
 
@@ -11,7 +11,7 @@ export class CartModel implements Desarializable {
   }
 }
 
-export class CartProductModel implements Desarializable {
+export class CartProductModel implements Deserializable {
   id: string;
   price: number;
   amount: number;
