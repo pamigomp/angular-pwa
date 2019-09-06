@@ -14,6 +14,10 @@ export class CheckForUpdateService {
     const everySixHours$ = interval(6 * 60 * 60 * 1000);
     const everySixHoursOnceAppIsStable$ = concat(appIsStable$, everySixHours$);
 
-    everySixHoursOnceAppIsStable$.subscribe(() => swUpdate.checkForUpdate());
+    everySixHoursOnceAppIsStable$.subscribe(() => {
+      if (swUpdate.isEnabled) {
+        return swUpdate.checkForUpdate();
+      }
+    });
   }
 }
