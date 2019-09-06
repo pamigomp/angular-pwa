@@ -8,3 +8,9 @@ export interface ErrorResponse {
   error: string | object;
 }
 
+export interface AuthResponse {
+  _id: string;
+  email: string;
+  token: string;
+}
+

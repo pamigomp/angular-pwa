@@ -12,17 +12,17 @@ export class CartService {
   private SERVER_API_URL: string;
 
   constructor(private httpService: HttpClient, private configService: ConfigService) {
-   this.SERVER_API_URL = this.configService.get('API_URL');
+    this.SERVER_API_URL = this.configService.get('API_URL');
   }
 
-  public getCart(id: number): Observable<CartModel> {
+  getCart(id: number): Observable<CartModel> {
     return this.httpService.get<CartModel>(`${this.SERVER_API_URL}/carts/${id}`).pipe(
       map(data => new CartModel().deserialize(data)),
       catchError(() => throwError('User not found'))
     );
   }
 
-  public getAllCarts(): Observable<CartModel[]> {
+  getAllCarts(): Observable<CartModel[]> {
     return this.httpService.get<CartModel[]>(`${this.SERVER_API_URL}/carts`).pipe(
       map(data => data.map(item => new CartModel().deserialize(item)))
     );

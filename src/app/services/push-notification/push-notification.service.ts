@@ -8,21 +8,21 @@ import { ConfigService } from '../config/config.service';
 export class PushNotificationService {
   private SERVER_API_URL: string;
 
-  constructor(private http: HttpClient, private configService: ConfigService) {
+  constructor(private httpClient: HttpClient, private configService: ConfigService) {
     this.SERVER_API_URL = this.configService.get('API_URL');
   }
 
-  public createSubscription(subscription: PushSubscription) {
-    return this.http.post(`${this.SERVER_API_URL}/subscribe`, subscription);
+  createSubscription(subscription: PushSubscription) {
+    return this.httpClient.post(`${this.SERVER_API_URL}/subscribe`, subscription);
   }
 
-  public deleteSubscription(subscription: PushSubscription) {
+  deleteSubscription(subscription: PushSubscription) {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
       body: subscription,
     };
-    return this.http.delete(`${this.SERVER_API_URL}/unsubscribe`, options);
+    return this.httpClient.delete(`${this.SERVER_API_URL}/unsubscribe`, options);
   }
 }
