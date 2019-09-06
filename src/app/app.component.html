@@ -35,10 +35,10 @@
 </mat-sidenav-container>
 
 <nav class="nav nav-pills">
-  <a *ngIf="isAuthenticated" class="nav-link" routerLink="todos" routerLinkActive="active">Todo List</a>
-  <a *ngIf="isAuthenticated" class="nav-link" routerLink="users" routerLinkActive="active">Users</a>
-  <a *ngIf="!isAuthenticated" class="nav-link" routerLink="login" routerLinkActive="active">Login</a>
-  <a (click)="logout()" *ngIf="isAuthenticated" class="nav-link" href="#">Logout</a>
+  <a *ngIf="authService.isAuthenticated()" class="nav-link" routerLink="todos" routerLinkActive="active">Todo List</a>
+  <a *ngIf="authService.isAuthenticated()" class="nav-link" routerLink="users" routerLinkActive="active">Users</a>
+  <a *ngIf="!authService.isAuthenticated()" class="nav-link" routerLink="login" routerLinkActive="active">Login</a>
+  <a (click)="logout()" *ngIf="authService.isAuthenticated()" class="nav-link" href="#">Logout</a>
 </nav>
 
 <router-outlet></router-outlet>

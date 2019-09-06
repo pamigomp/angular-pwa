@@ -9,10 +9,8 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'angular-pwa';
-  isAuthenticated: boolean;
 
-  constructor(private authService: AuthService, private router: Router) {
-    this.isAuthenticated = this.authService.isAuthenticated();
+  constructor(public authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
