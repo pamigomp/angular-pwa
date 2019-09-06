@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ConfigService } from './services/config/config.service';
 import { PushNotificationService } from './services/push-notification/push-notification.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +20,7 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { TokenInterceptor } from './token.interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -50,7 +51,11 @@ export function tokenGetter() {
       }
     }),
   ],
-  providers: [ConfigService, PushNotificationService, CheckForUpdateService, AuthService, AuthGuard],
+  providers: [ConfigService, PushNotificationService, CheckForUpdateService, AuthService, AuthGuard, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
