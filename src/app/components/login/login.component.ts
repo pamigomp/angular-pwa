@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    this.authService.login(this.username, this.password)
+    this.authService.signInCustomerLocal(this.username, this.password)
       .pipe(first())
       .subscribe(
         result => this.router.navigate(['todos']),
