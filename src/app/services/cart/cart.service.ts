@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CartModel } from '../../../models/cart.model';
+import { CartModel } from '../../models/cart.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ConfigService } from '../config/config.service';

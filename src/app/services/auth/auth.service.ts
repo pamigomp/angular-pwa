@@ -4,7 +4,7 @@ import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ConfigService } from '../config/config.service';
 import { AuthResponse } from '../../models/response.model';
-import { CustomerModel } from '../../../models/customer.model';
+import { CustomerModel } from '../../models/customer.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 const helper = new JwtHelperService();
