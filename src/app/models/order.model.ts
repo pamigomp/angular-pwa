@@ -1,6 +1,7 @@
 import { Deserializable } from './deserializable.model';
 
-export class ImageModel implements Deserializable {
+export class OrderModel implements Deserializable {
+  _id: string;
   paymentStatus = false;
   discount?: string;
   totalPrice: number;

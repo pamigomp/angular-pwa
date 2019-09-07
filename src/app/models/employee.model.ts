@@ -1,6 +1,7 @@
 import { Deserializable } from './deserializable.model';
 
 export class EmployeeModel implements Deserializable {
+  _id: string;
   username: string;
   password: string;
   firstName: string;

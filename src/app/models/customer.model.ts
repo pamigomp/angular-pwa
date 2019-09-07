@@ -1,6 +1,7 @@
 import { Deserializable } from './deserializable.model';
 
 export class CustomerModel implements Deserializable {
+  _id: string;
   email: string;
   password: string;
   firstName: string;

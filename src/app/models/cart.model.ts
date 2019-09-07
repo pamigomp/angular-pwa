@@ -1,6 +1,7 @@
 import { Deserializable } from './deserializable.model';
 
 export class CartModel implements Deserializable {
+  _id: string;
   products: CartProductModel[];
   customerId: string;
 

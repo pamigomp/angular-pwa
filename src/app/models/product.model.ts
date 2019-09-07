@@ -1,6 +1,7 @@
 import { Deserializable } from './deserializable.model';
 
 export class ProductModel implements Deserializable {
+  _id: string;
   title: string;
   saleTaxRate: number;
   salePriceGross: number;
