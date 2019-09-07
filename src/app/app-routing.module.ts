@@ -6,7 +6,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 
 const routes: Routes = [
-  {path: 'todos', component: TodoListComponent, canActivate: [AuthGuard]},
+  {path: 'todos', component: TodoListComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
   {path: 'users', component: UserListComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent}
 ];

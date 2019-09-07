@@ -29,6 +29,19 @@ export class AuthService {
     return accessToken && !helper.isTokenExpired(accessToken);
   }
 
+  isAdmin(): boolean {
+    return this.getRole() === 'Admin';
+  }
+
+  getRole(): string {
+    const accessToken = this.getToken();
+    if (accessToken) {
+      return helper.decodeToken(accessToken).role;
+    } else {
+      return null;
+    }
+  }
+
   login(email: string, password: string): Observable<boolean> {
     return this.httpClient.post<{ user: AuthResponse }>(`${this.SERVER_API_URL}/signin/customer/local`, {
       email,
