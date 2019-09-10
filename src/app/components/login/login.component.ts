@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     this.authService.signInCustomerLocal(this.username, this.password)
       .pipe(first())
       .subscribe(
-        result => this.router.navigate(['todos']),
+        result => this.router.navigate(['/todos']),
         err => this.error = 'Could not authenticate'
       );
   }

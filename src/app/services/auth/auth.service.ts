@@ -6,7 +6,7 @@ import { ConfigService } from '../config/config.service';
 import { AuthResponse } from '../../models/response.model';
 import { CustomerModel } from '../../models/customer.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { EmployeeModel } from "../../models/employee.model";
+import { EmployeeModel } from '../../models/employee.model';
 
 const helper = new JwtHelperService();
 
