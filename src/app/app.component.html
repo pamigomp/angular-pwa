@@ -1,19 +1,13 @@
-<div class="mat-app-background basic-container">
-  <mat-toolbar class="example-header">Header</mat-toolbar>
+<div class="app-container">
+  <app-header></app-header>
 
-  <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="true" [fixedTopGap]="60"
-                 [fixedBottomGap]="60">
-      Sidenav
-    </mat-sidenav>
+  <mat-sidenav-container class="app-sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="app-sidenav">Sidenav</mat-sidenav>
 
     <mat-sidenav-content>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
 
-  <mat-toolbar class="example-footer">Footer</mat-toolbar>
+  <app-footer></app-footer>
 </div>
-<span class="version-info">Current build: 8.1.4</span>
-
-

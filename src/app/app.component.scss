@@ -1,38 +1,16 @@
-.basic-container {
-  padding: 30px;
-}
-
-.version-info {
-  font-size: 8pt;
-  float: right;
-}
-
-.example-container {
-  position: absolute;
-  top: 60px;
-  bottom: 60px;
-  left: 0;
-  right: 0;
-}
-
-.example-sidenav {
+.app-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  background: rgba(255, 0, 0, 0.5);
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.example-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+.app-sidenav-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
 }
 
-.example-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.app-sidenav {
+  display: flex;
+  flex-direction: column;
 }

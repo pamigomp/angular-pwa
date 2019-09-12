@@ -17,15 +17,13 @@ import { AuthGuard } from './auth.guard';
 import { AuthService } from './services/auth/auth.service';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TodoListComponent } from './components/todo-list/todo-list.component';
-import { UserListComponent } from './components/user-list/user-list.component';
 import { TokenInterceptor } from './token.interceptor';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { HomeComponent } from './components/home/home.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
+import { HeaderComponent } from './components/layout/header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { SidenavComponent } from './components/layout/sidenav/sidenav.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 export function tokenGetter() {
@@ -43,9 +41,7 @@ export function tokenGetter() {
     PushNotificationComponent,
     RegistrationComponent,
     SidenavComponent,
-    TodoListComponent,
-    UpdateNotificationComponent,
-    UserListComponent
+    UpdateNotificationComponent
   ],
   imports: [
     AppRoutingModule,
