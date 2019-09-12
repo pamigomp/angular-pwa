@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatButtonModule,
+  MatButtonToggleModule,
   MatCardModule,
   MatCheckboxModule,
   MatDialogModule,
@@ -24,6 +25,7 @@ import {
 @NgModule({
   imports: [
     MatButtonModule,
+    MatButtonToggleModule,
     MatCheckboxModule,
     MatToolbarModule,
     MatCardModule,
@@ -43,6 +45,7 @@ import {
   ],
   exports: [
     MatButtonModule,
+    MatButtonToggleModule,
     MatCheckboxModule,
     MatToolbarModule,
     MatCardModule,

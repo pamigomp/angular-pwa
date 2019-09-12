@@ -22,6 +22,10 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { TokenInterceptor } from './token.interceptor';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { HomeComponent } from './components/home/home.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -36,7 +40,10 @@ export function tokenGetter() {
     TodoListComponent,
     UserListComponent,
     RegistrationComponent,
-    HomeComponent
+    HomeComponent,
+    FooterComponent,
+    HeaderComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +54,7 @@ export function tokenGetter() {
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
