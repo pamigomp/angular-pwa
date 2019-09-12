@@ -26,6 +26,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -34,27 +35,28 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    PushNotificationComponent,
-    UpdateNotificationComponent,
-    LoginComponent,
-    TodoListComponent,
-    UserListComponent,
-    RegistrationComponent,
-    HomeComponent,
     FooterComponent,
     HeaderComponent,
-    SidenavComponent
+    HomeComponent,
+    LoginComponent,
+    NotFoundComponent,
+    PushNotificationComponent,
+    RegistrationComponent,
+    SidenavComponent,
+    TodoListComponent,
+    UpdateNotificationComponent,
+    UserListComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    MaterialModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    BrowserModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule,
     FlexLayoutModule,
+    FormsModule,
+    HttpClientModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     JwtModule.forRoot({
       config: {
         tokenGetter,
