@@ -25,6 +25,7 @@ import { HeaderComponent } from './components/layout/header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SidenavComponent } from './components/layout/sidenav/sidenav.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -48,6 +49,7 @@ export function tokenGetter() {
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    FontAwesomeModule,
     FormsModule,
     HttpClientModule,
     MaterialModule,

@@ -1,4 +1,16 @@
 .app-header {
-  display: flex;
-  flex-direction: row;
+  font-size: 12px;
+  line-height: normal;
+}
+
+.with-icon {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.mat-icon {
+  font-size: unset;
+  height: unset;
+  width: unset;
+  padding-right: 3px;
 }

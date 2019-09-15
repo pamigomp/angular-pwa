@@ -1,1 +1,30 @@
-<mat-toolbar class="app-header">Header</mat-toolbar>
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" class="app-header">
+  <a href="/">
+    <img src="../../../../assets/pig_photo_logo_with_title.png" alt="Photo pig logo" height="60">
+  </a>
+  <div fxLayout="column">
+    <span>Skontaktuj się z nami</span>
+    <div fxLayoutAlign="start">
+      <mat-icon class="mat-icon">phone</mat-icon>+48 600 123 456
+    </div>
+    <span>pn-pt 8:00-18:00 | sb-nd 10:00-16:00</span>
+  </div>
+  <mat-form-field>
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput type="search" placeholder="Szukaj..." class="search-input">
+  </mat-form-field>
+  <div fxLayout="row">
+    <div fxLayoutAlign="center" class="with-icon">
+      <mat-icon>shopping_cart</mat-icon>Twój koszyk
+    </div>
+    <div fxLayoutAlign="center" class="with-icon">
+      <mat-icon>person</mat-icon>Zaloguj się
+    </div>
+    <div fxLayoutAlign="center" class="with-icon">
+      <mat-icon>person_add</mat-icon>Zarejestruj się
+    </div>
+    <div fxLayoutAlign="center" class="with-icon">
+      <mat-icon>exit_to_app</mat-icon>Wyloguj się
+    </div>
+  </div>
+</mat-toolbar>

@@ -1,1 +1,28 @@
-<mat-toolbar class="app-footer">Footer</mat-toolbar>
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" class="app-footer">
+  <div>
+    Foto Pig 2019. Wszelkie prawa zastrzeżone
+  </div>
+  <div fxLayout="column">
+    <span>Dział obsługi klienta</span>
+    <div fxLayoutAlign="start">
+      <mat-icon class="mat-icon">phone</mat-icon>
+      +48 600 123 456
+    </div>
+    <span>pn-pt 8:00-18:00 | sb-nd 10:00-16:00</span>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <span>Znajdź nas</span>
+    <div fxLayoutAlign="center" class="with-icon">
+      <fa-icon [icon]="facebook" size="2x"></fa-icon>
+    </div>
+    <div fxLayoutAlign="center" class="with-icon">
+      <fa-icon [icon]="twitter" size="2x"></fa-icon>
+    </div>
+    <div fxLayoutAlign="center" class="with-icon">
+      <fa-icon [icon]="instagram" size="2x"></fa-icon>
+    </div>
+    <div fxLayoutAlign="center" class="with-icon">
+      <fa-icon [icon]="youtube" size="2x"></fa-icon>
+    </div>
+  </div>
+</mat-toolbar>

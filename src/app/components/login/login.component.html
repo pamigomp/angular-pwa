@@ -1,14 +1,16 @@
-<h4 *ngIf="error">{{error}}</h4>
-<form (ngSubmit)="submit()">
-  <div class="form-group col-3">
-    <label for="username">Username</label>
-    <input [(ngModel)]="username" class="form-control" id="username" name="username" type="text"/>
-  </div>
-  <div class="form-group col-3">
-    <label for="password">Password</label>
-    <input [(ngModel)]="password" class="form-control" id="password" name="password" type="password"/>
-  </div>
-  <div class="form-group col-3">
-    <button class="btn btn-primary" type="submit">Login</button>
-  </div>
-</form>
+<div fxLayoutAlign="center center">
+  <h4 *ngIf="error">{{error}}</h4>
+  <form (ngSubmit)="submit()">
+    <div class="form-group col-3">
+      <label for="username">Username</label>
+      <input [(ngModel)]="username" class="form-control" id="username" name="username" type="text"/>
+    </div>
+    <div class="form-group col-3">
+      <label for="password">Password</label>
+      <input [(ngModel)]="password" class="form-control" id="password" name="password" type="password"/>
+    </div>
+    <div class="form-group col-3">
+      <button class="btn btn-primary" type="submit">Login</button>
+    </div>
+  </form>
+</div>
