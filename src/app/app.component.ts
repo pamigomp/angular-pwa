@@ -14,8 +14,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.categoryService.getAllCategories().subscribe((value: CategoryModel[]) => {
-      this.categories = value;
+    this.categoryService.getAllCategories().subscribe((categories: CategoryModel[]) => {
+      this.categories = categories;
     });
   }
 }

@@ -2,7 +2,7 @@
   <app-header></app-header>
 
   <mat-sidenav-container fxFlex="1">
-    <mat-sidenav mode="side" opened fxLayout="column">
+    <mat-sidenav fxLayout="column" mode="side" opened>
       <span style="margin: 10px;">Wybierz kategorię:</span>
       <ul>
         <li *ngFor="let category of categories" style="margin-bottom: 10px;">{{category.name}}</li>
