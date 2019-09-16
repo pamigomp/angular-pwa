@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
   error: string;
-  redirectUrl: string;
+  returnUrl: string;
 
   constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
   }
@@ -21,14 +21,14 @@ export class LoginComponent implements OnInit {
     this.authService.signInCustomerLocal(this.username, this.password)
       .pipe(first())
       .subscribe(
-        result => this.router.navigate([this.redirectUrl]),
+        result => this.router.navigate([this.returnUrl]),
         err => this.error = 'Could not authenticate'
       );
   }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
-      this.redirectUrl = params.returnUrl;
+      this.returnUrl = params.returnUrl || '/home';
     });
   }
 

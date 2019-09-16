@@ -1,8 +1,8 @@
-<mat-toolbar class="app-header" fxLayout="row" fxLayoutAlign="space-between center">
-  <a routerLink="/">
+<mat-toolbar class="mat-primary app-header" fxLayout="row" fxLayoutAlign="space-between center">
+  <a fxFlex="1 0 auto" routerLink="/">
     <img alt="Photo pig logo" height="60" src="../../../../assets/pig_photo_logo_with_title.png">
   </a>
-  <div fxLayout="column">
+  <div fxFlex="6 0 auto" fxLayout="column">
     <span>Skontaktuj się z nami</span>
     <div fxLayoutAlign="start">
       <mat-icon class="mat-icon">phone</mat-icon>
@@ -10,31 +10,31 @@
     </div>
     <span>pn-pt 8:00-18:00 | sb-nd 10:00-16:00</span>
   </div>
-  <mat-form-field>
+  <mat-form-field fxFlex="2 0 auto" fxLayoutAlign="end center">
     <mat-icon matPrefix>search</mat-icon>
     <input class="search-input" matInput placeholder="Szukaj..." type="search">
   </mat-form-field>
-  <div fxLayout="row">
-    <div class="with-icon" fxLayoutAlign="center" *ngIf="!isAuthenticated()">
-      <a routerLink="/cart">
+  <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="end center">
+    <div *ngIf="!isAuthenticated()" fxLayoutAlign="center">
+      <a mat-button routerLink="/cart">
         <mat-icon>shopping_cart</mat-icon>
         Twój koszyk
       </a>
     </div>
-    <div class="with-icon" fxLayoutAlign="center" *ngIf="!isAuthenticated()">
-      <a routerLink="/login">
+    <div *ngIf="!isAuthenticated()" fxLayoutAlign="center">
+      <a mat-button routerLink="/login">
         <mat-icon>person</mat-icon>
         Zaloguj się
       </a>
     </div>
-    <div class="with-icon" fxLayoutAlign="center" *ngIf="!isAuthenticated()">
-      <a routerLink="/register">
+    <div *ngIf="!isAuthenticated()" fxLayoutAlign="center">
+      <a mat-button routerLink="/register">
         <mat-icon>person_add</mat-icon>
         Zarejestruj się
       </a>
     </div>
-    <div class="with-icon" fxLayoutAlign="center" *ngIf="isAuthenticated()">
-      <a routerLink="/home" (click)="logout()">
+    <div *ngIf="isAuthenticated()" fxLayoutAlign="center">
+      <a (click)="logout()" mat-button routerLink="/home">
         <mat-icon>exit_to_app</mat-icon>
         Wyloguj się
       </a>

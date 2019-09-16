@@ -1,4 +1,4 @@
-<mat-toolbar class="app-footer" fxLayout="row" fxLayoutAlign="space-between center">
+<mat-toolbar class="mat-primary app-footer" fxLayout="row" fxLayoutAlign="space-between center">
   <div>
     Foto Pig 2019. Wszelkie prawa zastrzeżone
   </div>
@@ -11,18 +11,18 @@
     <span>pn-pt 8:00-18:00 | sb-nd 10:00-16:00</span>
   </div>
   <div fxLayout="row" fxLayoutAlign="center center">
-    <span>Znajdź nas</span>
-    <div class="with-icon" fxLayoutAlign="center">
-      <fa-icon [icon]="facebook" size="2x"></fa-icon>
-    </div>
-    <div class="with-icon" fxLayoutAlign="center">
-      <fa-icon [icon]="twitter" size="2x"></fa-icon>
-    </div>
-    <div class="with-icon" fxLayoutAlign="center">
-      <fa-icon [icon]="instagram" size="2x"></fa-icon>
-    </div>
-    <div class="with-icon" fxLayoutAlign="center">
-      <fa-icon [icon]="youtube" size="2x"></fa-icon>
-    </div>
+    <span>Znajdź nas na:</span>
+    <button aria-label="Znajdź nas na Facebooku" mat-icon-button>
+      <fa-icon [icon]="facebook" fxLayoutAlign="center center" size="2x"></fa-icon>
+    </button>
+    <button aria-label="Znajdź nas na Twiterze" mat-icon-button>
+      <fa-icon [icon]="twitter" fxLayoutAlign="center center" size="2x"></fa-icon>
+    </button>
+    <button aria-label="Znajdź nas na Instagramie" mat-icon-button>
+      <fa-icon [icon]="instagram" fxLayoutAlign="center center" size="2x"></fa-icon>
+    </button>
+    <button aria-label="Znajdź nas na YouTube" mat-icon-button>
+      <fa-icon [icon]="youtube" fxLayoutAlign="center center" size="2x"></fa-icon>
+    </button>
   </div>
 </mat-toolbar>
