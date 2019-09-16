@@ -27,6 +27,7 @@ import { SidenavComponent } from './components/layout/sidenav/sidenav.component'
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CartComponent } from './components/cart/cart.component';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -54,6 +55,7 @@ export function tokenGetter() {
     FontAwesomeModule,
     FormsModule,
     HttpClientModule,
+    MatCarouselModule,
     MaterialModule,
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),

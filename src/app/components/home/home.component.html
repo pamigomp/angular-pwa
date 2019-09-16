@@ -1,1 +1,36 @@
-<p>home works!</p>
+<mat-carousel
+  [autoplay]="true"
+  [hideArrows]="false"
+  [hideIndicators]="false"
+  [loop]="true"
+  [useKeyboard]="true"
+  [useMouseWheel]="false"
+  class="carousel"
+  color="primary"
+  fxLayoutAlign="center start"
+  interval="5000"
+  maxWidth="1000px"
+  orientation="ltr"
+  proportion="35"
+  slides="8"
+  timings="250ms ease-in"
+>
+  <mat-carousel-slide
+    *ngFor="let slide of slides; let i = index"
+    hideOverlay="false"
+    image="assets/sliders/1920x675_{{i}}.jpg"
+    overlayColor="#00000040"
+  >
+  </mat-carousel-slide>
+</mat-carousel>
+
+<div class="card-container" fxLayout="row wrap" fxLayoutAlign="space-between start">
+  <mat-card *ngFor="let category of categories" class="example-card">
+    <img alt="Aparat" mat-card-image src="../../../assets/aparat.jpeg">
+    <mat-card-content>
+      <p>
+        <strong>{{category.name}}</strong> od 15,00zł
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
