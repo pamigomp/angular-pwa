@@ -28,6 +28,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CartComponent } from './components/cart/cart.component';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
+import { CategoryComponent } from './components/category/category.component';
+import { ProductComponent } from './components/product/product.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -45,7 +47,9 @@ export function tokenGetter() {
     RegistrationComponent,
     SidenavComponent,
     UpdateNotificationComponent,
-    CartComponent
+    CartComponent,
+    CategoryComponent,
+    ProductComponent
   ],
   imports: [
     AppRoutingModule,
