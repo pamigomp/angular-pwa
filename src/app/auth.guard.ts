@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
         if (roles.includes(this.authService.getRole())) {
           return true;
         } else {
-          console.log('You don\'t have access to this page');
+          console.log('[App] You don\'t have access to this page');
           this.router.navigate(['/forbidden']);
           return false;
         }

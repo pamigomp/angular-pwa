@@ -1,20 +1,31 @@
 <mat-toolbar class="mat-primary app-header" fxLayout="row" fxLayoutAlign="space-between center">
-  <a fxFlex="1 0 auto" routerLink="/">
-    <img alt="Photo pig logo" height="60" src="../../../../assets/pig_photo_logo_with_title.png">
+  <a class="padding" routerLink="/">
+    <img alt="Photo piggy logo" height="50" src="../../../../assets/logo_with_title.png">
   </a>
-  <div fxFlex="6 0 auto" fxLayout="column">
+  <div class="padding full-height" fxLayout="column" fxLayoutAlign="space-evenly start">
     <span>Skontaktuj się z nami</span>
-    <div fxLayoutAlign="start">
-      <mat-icon class="mat-icon">phone</mat-icon>
-      +48 600 123 456
+    <div fxLayoutAlign="start stretch" fxLayoutGap="8px">
+      <a class="contact-link" href="tel:+48600123456" mat-button>
+        <mat-icon class="mat-icon">phone</mat-icon>
+        +48 600 123 456
+      </a>
+      <mat-divider [vertical]="true"></mat-divider>
+      <a class="contact-link" href="mailto:photopiggy@gmail.com" mat-button>
+        <mat-icon class="mat-icon">mail</mat-icon>
+        photopiggy@gmail.com
+      </a>
     </div>
-    <span>pn-pt 8:00-18:00 | sb-nd 10:00-16:00</span>
+    <div fxLayoutAlign="start stretch" fxLayoutGap="8px">
+      <span>pn-pt 8:00-18:00</span>
+      <mat-divider [vertical]="true"></mat-divider>
+      <span>sb-nd 10:00-16:00</span>
+    </div>
   </div>
-  <mat-form-field fxFlex="2 0 auto" fxLayoutAlign="end center">
+  <mat-form-field class="padding" fxLayoutAlign="end center">
     <mat-icon matPrefix>search</mat-icon>
     <input class="search-input" matInput placeholder="Szukaj..." type="search">
   </mat-form-field>
-  <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="end center">
+  <div fxLayout="row" fxLayoutAlign="end center">
     <div *ngIf="!isAuthenticated()" fxLayoutAlign="center">
       <a mat-button routerLink="/cart">
         <mat-icon>shopping_cart</mat-icon>

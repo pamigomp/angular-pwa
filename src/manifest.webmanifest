@@ -1,7 +1,7 @@
 {
-  "name": "Photo Pig",
-  "short_name": "Photo Pig",
-  "description": "Sklep Photo Pig",
+  "name": "Photo Piggy",
+  "short_name": "Photo Piggy",
+  "description": "Sklep Photo Piggy",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

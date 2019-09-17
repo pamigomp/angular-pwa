@@ -22,7 +22,7 @@ export class PushNotificationComponent implements OnInit {
   ngOnInit() {
     if (this.swPushEnabled) {
       this.swPush.messages.subscribe(event => {
-        console.log('Received notification: ', event);
+        console.log('[App] Received notification: ', event);
       });
 
       this.swPush.notificationClicks.subscribe(event => {

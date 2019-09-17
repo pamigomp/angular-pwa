@@ -1,14 +1,25 @@
 <mat-toolbar class="mat-primary app-footer" fxLayout="row" fxLayoutAlign="space-between center">
   <div>
-    Foto Pig 2019. Wszelkie prawa zastrzeżone
+    Foto Piggy 2019. Wszelkie prawa zastrzeżone
   </div>
-  <div fxLayout="column">
+  <div class="full-height" fxLayout="column" fxLayoutAlign="space-evenly start">
     <span>Dział obsługi klienta</span>
-    <div fxLayoutAlign="start">
-      <mat-icon class="mat-icon">phone</mat-icon>
-      +48 600 123 456
+    <div fxLayoutAlign="start stretch" fxLayoutGap="8px">
+      <a class="contact-link" href="tel:+48600123456" mat-button>
+        <mat-icon class="mat-icon">phone</mat-icon>
+        +48 600 123 456
+      </a>
+      <mat-divider [vertical]="true"></mat-divider>
+      <a class="contact-link" href="mailto:photopiggy@gmail.com" mat-button>
+        <mat-icon class="mat-icon">mail</mat-icon>
+        photopiggy@gmail.com
+      </a>
     </div>
-    <span>pn-pt 8:00-18:00 | sb-nd 10:00-16:00</span>
+    <div fxLayoutAlign="start stretch" fxLayoutGap="8px">
+      <span>pn-pt 8:00-18:00</span>
+      <mat-divider [vertical]="true"></mat-divider>
+      <span>sb-nd 10:00-16:00</span>
+    </div>
   </div>
   <div fxLayout="row" fxLayoutAlign="center center">
     <span>Znajdź nas na:</span>

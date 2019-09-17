@@ -1,3 +1,20 @@
 .app-container {
   min-height: 100vh;
 }
+
+.active {
+  background-color: rgb(0, 0, 0, 0.1);
+}
+
+mat-sidenav {
+  min-width: 205px;
+}
+
+h4 {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+mat-nav-list > a{
+  padding-left: 15px;
+}
