@@ -38,7 +38,8 @@
     {
       "name": "backend-api",
       "urls": [
-        "https://localhost/api/**"
+        "https://localhost/api/**",
+        "https://shop-master-thesis.herokuapp.com/api/**"
       ],
       "cacheConfig": {
         "strategy": "freshness",
