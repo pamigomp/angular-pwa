@@ -2,7 +2,7 @@
   <app-header></app-header>
 
   <mat-sidenav-container fxFlex="1">
-    <mat-sidenav fxLayout="column" mode="side" opened>
+    <mat-sidenav fxLayout="column" mode="side" opened fxHide.lt-lg="true">
       <h4 mat-subheader>Kategorie:</h4>
       <mat-nav-list>
         <a *ngFor="let category of categories" [routerLink]="['/categories', category.name]"

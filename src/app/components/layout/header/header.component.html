@@ -2,7 +2,7 @@
   <a class="padding" routerLink="/">
     <img alt="Photo piggy logo" height="50" src="../../../../assets/logo_with_title.png">
   </a>
-  <div class="padding full-height" fxLayout="column" fxLayoutAlign="space-evenly start">
+  <div fxHide.lt-lg="true" class="padding full-height" fxLayout="column" fxLayoutAlign="space-evenly start">
     <span>Skontaktuj się z nami</span>
     <div fxLayoutAlign="start stretch" fxLayoutGap="8px">
       <a class="contact-link" href="tel:+48600123456" mat-button>
@@ -21,7 +21,7 @@
       <span>sb-nd 10:00-16:00</span>
     </div>
   </div>
-  <mat-form-field class="padding" fxLayoutAlign="end center">
+  <mat-form-field class="padding" fxLayoutAlign="end center" fxHide.lt-lg="true">
     <mat-icon matPrefix>search</mat-icon>
     <input class="search-input" matInput placeholder="Szukaj..." type="search">
   </mat-form-field>
