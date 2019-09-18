@@ -30,6 +30,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CategoryComponent } from './components/category/category.component';
 import { ProductComponent } from './components/product/product.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -49,7 +50,8 @@ export function tokenGetter() {
     UpdateNotificationComponent,
     CartComponent,
     CategoryComponent,
-    ProductComponent
+    ProductComponent,
+    ProfileComponent
   ],
   imports: [
     AppRoutingModule,

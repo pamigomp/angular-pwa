@@ -26,10 +26,16 @@
     <input class="search-input" matInput placeholder="Szukaj..." type="search">
   </mat-form-field>
   <div fxLayout="row" fxLayoutAlign="end center">
-    <div *ngIf="!isAuthenticated()" fxLayoutAlign="center">
+    <div fxLayoutAlign="center">
       <a mat-button routerLink="/cart">
         <mat-icon>shopping_cart</mat-icon>
         Twój koszyk
+      </a>
+    </div>
+    <div *ngIf="isAuthenticated()" fxLayoutAlign="center">
+      <a mat-button routerLink="/profile">
+        <mat-icon>person</mat-icon>
+        Twój profil
       </a>
     </div>
     <div *ngIf="!isAuthenticated()" fxLayoutAlign="center">
