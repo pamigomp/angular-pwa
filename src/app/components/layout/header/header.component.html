@@ -1,16 +1,24 @@
-<mat-toolbar class="mat-primary app-header" fxLayout="row" fxLayoutAlign="space-between center">
-  <a class="padding" routerLink="/">
-    <img alt="Photo piggy logo" height="50" src="../../../../assets/logo_with_title.png">
+<mat-toolbar class="mat-primary app-header" fxLayout="row">
+  <button
+    (click)="drawerOpen()"
+    *ngIf="isHandset$ | async"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+    type="button">
+    <mat-icon aria-label="Ikona rozwinięcia bocznego menu">menu</mat-icon>
+  </button>
+  <a aria-label="Strona główna" class="padding" routerLink="/">
+    <img alt="Photo piggy logo" height="40" src="../../../../assets/logo_with_title.png">
   </a>
-  <div fxHide.lt-lg="true" class="padding full-height" fxLayout="column" fxLayoutAlign="space-evenly start">
+  <div class="padding full-height" fxHide.lt-md="true" fxLayout="column" fxLayoutAlign="space-evenly start">
     <span>Skontaktuj się z nami</span>
     <div fxLayoutAlign="start stretch" fxLayoutGap="8px">
-      <a class="contact-link" href="tel:+48600123456" mat-button>
+      <a aria-label="Zadzwoń" class="contact-link" href="tel:+48600123456" mat-button>
         <mat-icon class="mat-icon">phone</mat-icon>
         +48 600 123 456
       </a>
       <mat-divider [vertical]="true"></mat-divider>
-      <a class="contact-link" href="mailto:photopiggy@gmail.com" mat-button>
+      <a aria-label="Wyślij e-mail" class="contact-link" href="mailto:photopiggy@gmail.com" mat-button>
         <mat-icon class="mat-icon">mail</mat-icon>
         photopiggy@gmail.com
       </a>
@@ -21,37 +29,38 @@
       <span>sb-nd 10:00-16:00</span>
     </div>
   </div>
-  <mat-form-field class="padding" fxLayoutAlign="end center" fxHide.lt-lg="true">
+  <span fxFlex="1 1 auto"></span>
+  <mat-form-field class="padding" fxHide.lt-md="true" fxLayoutAlign="end center">
     <mat-icon matPrefix>search</mat-icon>
     <input class="search-input" matInput placeholder="Szukaj..." type="search">
   </mat-form-field>
   <div fxLayout="row" fxLayoutAlign="end center">
     <div fxLayoutAlign="center">
-      <a mat-button routerLink="/cart">
+      <a aria-label="Przycisk twój koszyk" mat-button routerLink="/cart">
         <mat-icon>shopping_cart</mat-icon>
         Twój koszyk
       </a>
     </div>
     <div *ngIf="isAuthenticated()" fxLayoutAlign="center">
-      <a mat-button routerLink="/profile">
+      <a aria-label="Przycisk twoj profil" mat-button routerLink="/profile">
         <mat-icon>person</mat-icon>
         Twój profil
       </a>
     </div>
     <div *ngIf="!isAuthenticated()" fxLayoutAlign="center">
-      <a mat-button routerLink="/login">
+      <a aria-label="Przycisk zaloguj się" mat-button routerLink="/login">
         <mat-icon>person</mat-icon>
         Zaloguj się
       </a>
     </div>
     <div *ngIf="!isAuthenticated()" fxLayoutAlign="center">
-      <a mat-button routerLink="/register">
+      <a aria-label="Przycisk zarejestruj się" mat-button routerLink="/register">
         <mat-icon>person_add</mat-icon>
         Zarejestruj się
       </a>
     </div>
     <div *ngIf="isAuthenticated()" fxLayoutAlign="center">
-      <a (click)="logout()" mat-button routerLink="/home">
+      <a (click)="logout()" aria-label="Przycisk wyloguj się" mat-button routerLink="/home">
         <mat-icon>exit_to_app</mat-icon>
         Wyloguj się
       </a>

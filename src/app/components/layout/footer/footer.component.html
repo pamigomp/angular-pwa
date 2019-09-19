@@ -1,16 +1,16 @@
 <mat-toolbar class="mat-primary app-footer" fxLayout="row" fxLayoutAlign="space-between center">
-  <div>
-    Foto Piggy {{currentYear}}. Wszelkie prawa zastrzeżone
+  <div class="padding" fxLayout="row wrap">
+    <span>Foto Piggy {{currentYear}}.</span><span> Wszelkie prawa zastrzeżone</span>
   </div>
-  <div class="full-height" fxLayout="column" fxLayoutAlign="space-evenly start">
+  <div class="padding full-height" fxHide.lt-md="true" fxLayout="column" fxLayoutAlign="space-evenly start">
     <span>Dział obsługi klienta</span>
-    <div fxLayoutAlign="start stretch" fxLayoutGap="8px" fxHide.lt-lg="true">
-      <a class="contact-link" href="tel:+48600123456" mat-button>
+    <div fxLayoutAlign="start stretch" fxLayoutGap="8px">
+      <a aria-label="Zadzwoń" class="contact-link" href="tel:+48600123456" mat-button>
         <mat-icon class="mat-icon">phone</mat-icon>
         +48 600 123 456
       </a>
       <mat-divider [vertical]="true"></mat-divider>
-      <a class="contact-link" href="mailto:photopiggy@gmail.com" mat-button>
+      <a aria-label="Wyślij e-mail" class="contact-link" href="mailto:photopiggy@gmail.com" mat-button>
         <mat-icon class="mat-icon">mail</mat-icon>
         photopiggy@gmail.com
       </a>
@@ -21,7 +21,7 @@
       <span>sb-nd 10:00-16:00</span>
     </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="center center">
+  <div class="padding" fxLayout="row" fxLayoutAlign="center center">
     <span>Znajdź nas na:</span>
     <button aria-label="Znajdź nas na Facebooku" mat-icon-button>
       <fa-icon [icon]="facebook" fxLayoutAlign="center center" size="2x"></fa-icon>

@@ -1,6 +1,7 @@
 .app-footer {
   font-size: 12px;
   line-height: normal;
+  padding: 0;
 }
 
 .mat-icon {
@@ -25,4 +26,8 @@
 
 .mat-divider-vertical {
   border-right-color: white;
+}
+
+.padding {
+  padding: 0 10px;
 }

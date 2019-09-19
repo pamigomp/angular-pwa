@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from './services/category/category.service';
 import { CategoryModel } from './models/category.model';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +13,13 @@ import { CategoryModel } from './models/category.model';
 export class AppComponent implements OnInit {
   categories: CategoryModel[];
 
-  constructor(private categoryService: CategoryService) {
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      share()
+    );
+
+  constructor(private categoryService: CategoryService, private breakpointObserver: BreakpointObserver) {
   }
 
   ngOnInit() {

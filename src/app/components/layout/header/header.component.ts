@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
+import { Observable } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map, share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -7,8 +10,19 @@ import { AuthService } from '../../../services/auth/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  @Output() drawerToggle = new EventEmitter<boolean>();
 
-  constructor(public authService: AuthService) {
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      share()
+    );
+
+  constructor(public authService: AuthService, private breakpointObserver: BreakpointObserver) {
+  }
+
+  drawerOpen() {
+    this.drawerToggle.emit(true);
   }
 
   ngOnInit() {

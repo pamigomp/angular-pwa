@@ -1,8 +1,8 @@
 <div class="app-container" fxLayout="column">
-  <app-header></app-header>
+  <app-header (drawerToggle)="drawer.toggle()"></app-header>
 
-  <mat-sidenav-container fxFlex="1">
-    <mat-sidenav fxLayout="column" mode="side" opened fxHide.lt-lg="true">
+  <mat-sidenav-container fxFlex="1 1 auto">
+    <mat-sidenav #drawer [mode]="(isHandset$ | async) ? 'over' : 'side'" opened class="sidenav">
       <h4 mat-subheader>Kategorie:</h4>
       <mat-nav-list>
         <a *ngFor="let category of categories" [routerLink]="['/categories', category.name]"
