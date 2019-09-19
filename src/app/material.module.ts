@@ -6,12 +6,16 @@ import {
   MatButtonToggleModule,
   MatCardModule,
   MatCheckboxModule,
+  MatDatepickerModule,
   MatDialogModule,
   MatExpansionModule,
+  MatGridListModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatRadioModule,
@@ -19,8 +23,12 @@ import {
   MatSidenavModule,
   MatSlideToggleModule,
   MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTreeModule
 } from '@angular/material';
 
 @NgModule({
@@ -43,7 +51,15 @@ import {
     MatProgressBarModule,
     MatRadioModule,
     MatProgressSpinnerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatGridListModule,
+    MatTreeModule,
+    MatStepperModule
   ],
   exports: [
     MatButtonModule,
@@ -64,7 +80,15 @@ import {
     MatProgressBarModule,
     MatRadioModule,
     MatProgressSpinnerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatGridListModule,
+    MatTreeModule,
+    MatStepperModule
   ],
   providers: [{
     provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,

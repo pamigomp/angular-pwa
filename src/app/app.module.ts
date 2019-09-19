@@ -31,6 +31,8 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CategoryComponent } from './components/category/category.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { AddressFormComponent } from './components/cart/address-form/address-form.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -51,7 +53,8 @@ export function tokenGetter() {
     CartComponent,
     CategoryComponent,
     ProductComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddressFormComponent
   ],
   imports: [
     AppRoutingModule,
@@ -72,6 +75,7 @@ export function tokenGetter() {
         blacklistedRoutes: ['http://localhost:8080/api/v1/auth']
       }
     }),
+    LayoutModule
   ],
   providers: [ConfigService, PushNotificationService, CheckForUpdateService, AuthService, AuthGuard, {
     provide: HTTP_INTERCEPTORS,
