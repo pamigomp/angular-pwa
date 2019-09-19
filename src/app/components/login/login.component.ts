@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,24 +10,43 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  username: string;
-  password: string;
+  loginForm: FormGroup;
   error: string;
   returnUrl: string;
+  loading = false;
+  submitted = false;
 
-  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(
+    private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
   }
 
-  submit() {
-    this.authService.signInCustomerLocal(this.username, this.password)
+  login() {
+    this.submitted = true;
+
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.authService.signInCustomerLocal(this.loginForm.controls.email.value, this.loginForm.controls.password.value)
       .pipe(first())
       .subscribe(
         result => this.router.navigate([this.returnUrl]),
-        err => this.error = 'Could not authenticate'
+        err => {
+          this.error = `Could not authenticate. ${err}`;
+          this.loading = false;
+        }
       );
   }
 
   ngOnInit() {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/home']);
+    }
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
     this.activatedRoute.queryParams.subscribe(params => {
       this.returnUrl = params.returnUrl || '/home';
     });

@@ -1,0 +1,19 @@
+.login-container {
+  margin: 16px;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+.error {
+  width: 100%;
+  color: red;
+}

@@ -1,16 +1,37 @@
-<div fxLayoutAlign="center center">
-  <h4 *ngIf="error">{{error}}</h4>
-  <form (ngSubmit)="submit()">
-    <div class="form-group col-3">
-      <label for="username">Username</label>
-      <input [(ngModel)]="username" class="form-control" id="username" name="username" type="text"/>
-    </div>
-    <div class="form-group col-3">
-      <label for="password">Password</label>
-      <input [(ngModel)]="password" class="form-control" id="password" name="password" type="password"/>
-    </div>
-    <div class="form-group col-3">
-      <button class="btn btn-primary" type="submit">Login</button>
-    </div>
-  </form>
+<div class="login-container">
+  <mat-card>
+    <mat-card-title fxLayoutAlign="center center">Logowanie</mat-card-title>
+    <mat-card-content fxLayoutAlign="center center">
+      <form (ngSubmit)="login()" [formGroup]="loginForm">
+        <mat-form-field>
+          <mat-label>E-mail</mat-label>
+          <input [ngClass]="{ 'is-invalid': submitted && loginForm.controls.email.errors }" formControlName="email"
+                 id="email" matInput name="email" placeholder="E-mail" type="text">
+          <div *ngIf="submitted && loginForm.controls.email.errors" class="invalid-feedback">
+            <div *ngIf="loginForm.controls.email.errors.required">E-mail jest wymagany</div>
+          </div>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Hasło</mat-label>
+          <input [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }"
+                 formControlName="password"
+                 id="password" matInput name="password" placeholder="Hasło" type="password">
+          <div *ngIf="submitted && loginForm.controls.password.errors" class="invalid-feedback">
+            <div *ngIf="loginForm.controls.password.errors.required">Hasło jest wymagane</div>
+          </div>
+        </mat-form-field>
+
+        <p *ngIf="error" class="error">
+          {{ error }}
+        </p>
+
+        <div fxLayoutAlign="center center">
+          <button [disabled]="loading" color="primary" mat-raised-button type="submit">
+            <mat-spinner *ngIf="loading"></mat-spinner>
+            Zaloguj
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>
