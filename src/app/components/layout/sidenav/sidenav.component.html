@@ -1,5 +1,12 @@
-<mat-sidenav-container>
-  <mat-sidenav fxLayout="column" mode="side" opened>Sidenav</mat-sidenav>
+<mat-sidenav-container fxFlex="1 1 auto">
+  <mat-sidenav #drawer [mode]="(isHandset$ | async) ? 'over' : 'side'" class="sidenav" opened>
+    <h4 mat-subheader>Kategorie:</h4>
+    <mat-nav-list>
+      <a *ngFor="let category of categories" [routerLink]="['/categories', category.name]"
+         [state]="{ data: {category: category}}" mat-list-item
+         routerLinkActive="active">{{category.name}}</a>
+    </mat-nav-list>
+  </mat-sidenav>
 
   <mat-sidenav-content>
     <router-outlet></router-outlet>
