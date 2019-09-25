@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         result => this.router.navigate([this.returnUrl]),
         err => {
-          this.error = `Could not authenticate. ${err}`;
+          this.error = `Could not authenticate. ${err.error.message}`;
           this.loading = false;
         }
       );

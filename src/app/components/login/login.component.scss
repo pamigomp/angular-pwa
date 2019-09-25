@@ -5,7 +5,6 @@
 :host {
   display: flex;
   justify-content: center;
-
 }
 
 .mat-form-field {
@@ -16,4 +15,8 @@
 .error {
   width: 100%;
   color: red;
+}
+
+mat-spinner {
+  margin: 5px;
 }
