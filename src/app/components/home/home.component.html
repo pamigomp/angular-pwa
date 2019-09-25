@@ -25,9 +25,8 @@
 </mat-carousel>
 
 <div fxLayout="row wrap" fxLayoutAlign="space-between start">
-  <mat-card *ngFor="let category of categories">
-    <img alt="Zdjęcie kategorii {{category.name}}" mat-card-image
-         src="../../../assets/categories/{{category.name}}.jpg">
+  <mat-card *ngFor="let category of categories" fxLayout="column" fxLayoutAlign="space-between center">
+    <img alt="Zdjęcie kategorii {{category.name}}" mat-card-image src="../../../assets/categories/{{category.name}}.jpg">
     <mat-card-content>
       <p>
         <strong>{{category.name}}</strong> od 15,00zł
