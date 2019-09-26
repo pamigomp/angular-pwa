@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -33,6 +33,9 @@ import { ProductComponent } from './components/product/product.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AddressFormComponent } from './components/cart/address-form/address-form.component';
+import localePl from '@angular/common/locales/pl';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localePl);
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -81,6 +84,9 @@ export function tokenGetter() {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
+  }, {
+    provide: LOCALE_ID,
+    useValue: 'pl-PL'
   }],
   bootstrap: [AppComponent]
 })

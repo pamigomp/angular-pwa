@@ -43,6 +43,15 @@ export class AuthService {
     }
   }
 
+  getId(): string {
+    const accessToken = this.getToken();
+    if (accessToken) {
+      return helper.decodeToken(accessToken).id;
+    } else {
+      return null;
+    }
+  }
+
   signInCustomerLocal(email: string, password: string): Observable<boolean> {
     return this.httpClient.post<{ user: AuthResponse }>(`${this.SERVER_API_URL}/signin/customer/local`, {
       email,
@@ -52,7 +61,7 @@ export class AuthService {
     );
   }
 
-  signUpCustomerLocal(newCustomer: CustomerModel) {
+  signUpCustomerLocal(newCustomer: CustomerModel): Observable<boolean> {
     return this.httpClient.post<{ user: AuthResponse }>(`${this.SERVER_API_URL}/signup/customer/local`, newCustomer).pipe(
       map(this.saveToken())
     );
@@ -73,7 +82,7 @@ export class AuthService {
     );
   }
 
-  signUpEmployeeLocal(newEmployee: EmployeeModel) {
+  signUpEmployeeLocal(newEmployee: EmployeeModel): Observable<boolean> {
     return this.httpClient.post<{ user: AuthResponse }>(`${this.SERVER_API_URL}/signup/employee/local`, newEmployee)
       .pipe(
         map(this.saveToken())
