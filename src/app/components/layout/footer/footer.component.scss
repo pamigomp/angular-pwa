@@ -1,7 +1,26 @@
+@import './../../../../mixins.scss';
+
 .app-footer {
+  display: flex;
   font-size: 12px;
   line-height: normal;
   padding: 0;
+
+  .flex-section {
+    flex: 1 1 33%;
+  }
+
+  @include for-phone-only() {
+    &.mat-toolbar-single-row {
+      height: auto;
+      flex-direction: column;
+      padding: 20px 0;
+    }
+
+   .flex-section {
+     flex: initial;
+   } 
+  }
 }
 
 .mat-icon {

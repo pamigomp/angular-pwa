@@ -33,6 +33,7 @@ import { ProductComponent } from './components/product/product.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AddressFormComponent } from './components/cart/address-form/address-form.component';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -68,6 +69,7 @@ export function tokenGetter() {
     MaterialModule,
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    DeviceDetectorModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter,

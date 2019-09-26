@@ -1,4 +1,5 @@
-<div class="app-container" fxLayout="column">
+<!-- Layout for non-mobile view -->
+<div class="app-container" fxLayout="column" *ngIf="!isMobile">
   <app-header (drawerToggle)="drawer.toggle()"></app-header>
 
   <mat-sidenav-container fxFlex="1 1 auto">
@@ -18,3 +19,26 @@
 
   <app-footer></app-footer>
 </div>
+
+<!-- Layout for mobile view -->
+<mat-sidenav-container fxFlex="1 1 auto" *ngIf="isMobile">
+  <mat-sidenav #drawer [mode]="(isHandset$ | async) ? 'over' : 'side'" class="sidenav">
+    <h4 mat-subheader>Kategorie:</h4>
+    <mat-nav-list>
+      <a *ngFor="let category of categories" [routerLink]="['/categories', category.name]"
+          [state]="{ data: {category: category}}" mat-list-item
+          routerLinkActive="active">{{category.name}}</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-header (drawerToggle)="drawer.toggle()"></app-header>
+
+    <div class="app-container" fxLayout="column">
+      <router-outlet></router-outlet>
+    </div>
+
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
