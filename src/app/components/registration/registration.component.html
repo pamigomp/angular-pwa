@@ -64,12 +64,12 @@
                  formControlName="phone" id="phone" matInput name="phone" placeholder="Telefon">
         </mat-form-field>
 
-        <p *ngIf="error" class="error">
+        <p *ngIf="error" class="error full-width">
           {{ error }}
         </p>
 
         <div fxLayoutAlign="center center">
-          <mat-spinner diameter="25" color="accent" *ngIf="loading"></mat-spinner>
+          <mat-spinner *ngIf="loading" color="accent" diameter="25"></mat-spinner>
           <button [disabled]="loading" color="primary" mat-raised-button type="submit">
             Zarejstruj
           </button>

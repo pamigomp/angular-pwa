@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { CustomerService } from '../../services/customer/customer.service';
@@ -6,6 +6,12 @@ import { OrderService } from '../../services/order/order.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { OrderModel } from '../../models/order.model';
 import { CustomerModel } from '../../models/customer.model';
+import { StatusEnum } from '../../enums/status.enum';
+import { PaymentMethodEnum } from '../../enums/payment-method.enum';
+import { ShippingService } from '../../services/shipping/shipping.service';
+import { ShippingModel } from '../../models/shipping.model';
+import { ShippingMethodEnum } from '../../enums/shipping-method.enum';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-profile',
@@ -17,11 +23,38 @@ export class ProfileComponent implements OnInit {
   error: string;
   loading = false;
   submitted = false;
-  displayedColumns: string[] = ['paymentStatus', 'totalPrice', 'shippingDate', 'additionalInformation', 'shippingId', 'status', 'paymentMethod'];
-  orders: OrderModel[];
+  displayedColumns: string[] = ['paymentStatus', 'totalPrice', 'shippingDate', 'shippingId', 'status', 'paymentMethod', 'additionalInformation'];
+  dataSource: MatTableDataSource<OrderModel>;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   private customerId: string;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private orderService: OrderService, private customerService: CustomerService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private orderService: OrderService,
+    private customerService: CustomerService,
+    private shippingService: ShippingService) {
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  getShippingMethod(shippingMethod) {
+    return ShippingMethodEnum[shippingMethod];
+  }
+
+  getPaymentMethod(paymentMethod) {
+    return PaymentMethodEnum[paymentMethod];
+  }
+
+  getStatus(status) {
+    return StatusEnum[status];
   }
 
   update() {
@@ -75,11 +108,14 @@ export class ProfileComponent implements OnInit {
     });
 
     this.orderService.getAllOrdersForCustomerWithId(this.customerId).subscribe((orders: OrderModel[]) => {
-      this.orders = orders;
+      orders.forEach((order: OrderModel) => {
+        return this.shippingService.getShipping(order.shippingId).subscribe((shipping: ShippingModel) => {
+          order.shippingMethod = shipping.method;
+        });
+      });
+      this.dataSource = new MatTableDataSource(orders);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
-  }
-
-  getShippingTitle(shippingId: string) {
-    return
   }
 }

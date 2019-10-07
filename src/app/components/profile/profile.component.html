@@ -1,7 +1,5 @@
-<mat-tab-group>
+<mat-tab-group class="full-width">
   <mat-tab label="Dane osobowe">
-
-
     <div class="profile-container">
       <mat-card>
         <mat-card-content fxLayoutAlign="center center">
@@ -55,12 +53,12 @@
               <input formControlName="phone" id="phone" matInput name="phone" placeholder="Telefon">
             </mat-form-field>
 
-            <p *ngIf="error" class="error">
+            <p *ngIf="error" class="error full-width">
               {{ error }}
             </p>
 
             <div fxLayoutAlign="center center">
-              <mat-spinner diameter="25" color="accent" *ngIf="loading"></mat-spinner>
+              <mat-spinner *ngIf="loading" color="accent" diameter="25"></mat-spinner>
               <button [disabled]="loading" color="primary" mat-raised-button type="submit">
                 Aktualizuj
               </button>
@@ -69,46 +67,56 @@
         </mat-card-content>
       </mat-card>
     </div>
-
-
   </mat-tab>
+
   <mat-tab label="Historia zamówień">
+    <div class="profile-container">
+      <mat-card>
+        <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+          <mat-form-field>
+            <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Szukaj">
+          </mat-form-field>
+          <div class="mat-elevation-z8 full-width">
+            <mat-table [dataSource]="dataSource" matSort>
+              <ng-container matColumnDef="paymentStatus">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Status płatności</mat-header-cell>
+                <mat-cell
+                  *matCellDef="let element"> {{element.paymentStatus ? 'Zapłacono' : 'Nie zapłacono'}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="totalPrice">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Cena całkowita</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.totalPrice | currency:'PLN'}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="shippingDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Data wysyłki</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.shippingDate | date:'medium'}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="shippingId">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Rodzaj dostawy</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{getShippingMethod(element.shippingMethod)}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{getStatus(element.status)}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="paymentMethod">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Metoda płatności</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{getPaymentMethod(element.paymentMethod)}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="additionalInformation">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Dodatkowe informacje</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.additionalInformation}} </mat-cell>
+              </ng-container>
 
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
 
-    <mat-table [dataSource]="orders" class="mat-elevation-z8">
-      <ng-container matColumnDef="paymentStatus">
-        <mat-header-cell *matHeaderCellDef>Status płatności</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.paymentStatus ? 'Zapłacono' : 'Nie zapłacono'}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="totalPrice">
-        <mat-header-cell *matHeaderCellDef>Cena całkowita</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.totalPrice | currency:'PLN'}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="shippingDate">
-        <mat-header-cell *matHeaderCellDef>Data wysyłki</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.shippingDate | date:'medium'}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="additionalInformation">
-        <mat-header-cell *matHeaderCellDef>Dodatkowe informacje</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.additionalInformation}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="shippingId">
-        <mat-header-cell *matHeaderCellDef>Rodzaj dostawy</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{getShippingTitle(element.shippingId)}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="paymentMethod">
-        <mat-header-cell *matHeaderCellDef>Metoda płatności</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.paymentMethod}} </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-
-
+            <mat-paginator [pageSizeOptions]="[1, 5, 10, 25, 50, 100]" pageSize="10"
+                           showFirstLastButtons></mat-paginator>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </mat-tab>
 </mat-tab-group>

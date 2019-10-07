@@ -13,11 +13,11 @@ import { MaterialModule } from './material.module';
 import { PushNotificationComponent } from './components/push-notification/push-notification.component';
 import { UpdateNotificationComponent } from './components/update-notification/update-notification.component';
 import { JwtModule } from '@auth0/angular-jwt';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './services/auth.guard';
 import { AuthService } from './services/auth/auth.service';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TokenInterceptor } from './token.interceptor';
+import { TokenInterceptor } from './services/token.interceptor';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
@@ -35,6 +35,9 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { AddressFormComponent } from './components/cart/address-form/address-form.component';
 import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
+import { MatPaginatorIntl } from '@angular/material';
+import { PaginatorIntlService } from './services/paginator-intl.service';
+
 registerLocaleData(localePl);
 
 export function tokenGetter() {
@@ -80,14 +83,22 @@ export function tokenGetter() {
     }),
     LayoutModule
   ],
-  providers: [ConfigService, PushNotificationService, CheckForUpdateService, AuthService, AuthGuard, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  }, {
-    provide: LOCALE_ID,
-    useValue: 'pl-PL'
-  }],
+  providers: [
+    ConfigService,
+    PushNotificationService,
+    CheckForUpdateService,
+    AuthService,
+    AuthGuard, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }, {
+      provide: LOCALE_ID,
+      useValue: 'pl-PL'
+    }, {
+      provide: MatPaginatorIntl,
+      useClass: PaginatorIntlService
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
