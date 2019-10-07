@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
@@ -33,7 +33,7 @@ export class RegistrationComponent implements OnInit {
       .subscribe(
         result => this.router.navigate([this.returnUrl]),
         err => {
-          this.error = `Could not register. ${err.error.message}`;
+          this.error = `Nastąpił błąd podczas procesu rejestrowania. ${err.error.message}`;
           this.loading = false;
         }
       );
@@ -55,7 +55,7 @@ export class RegistrationComponent implements OnInit {
       city: [''],
       phone: ['']
     });
-    this.activatedRoute.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.returnUrl = params.returnUrl || '/home';
     });
   }

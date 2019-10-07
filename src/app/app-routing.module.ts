@@ -8,7 +8,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { CategoryComponent } from './components/category/category.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},

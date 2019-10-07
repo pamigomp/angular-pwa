@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         result => this.router.navigate([this.returnUrl]),
         err => {
-          this.error = `Could not authenticate. ${err.error.message}`;
+          this.error = `Nastąpił błąd podczas procesu logowania. ${err.error.message}`;
           this.loading = false;
         }
       );
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
-    this.activatedRoute.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.returnUrl = params.returnUrl || '/home';
     });
   }

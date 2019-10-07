@@ -1,0 +1,36 @@
+.profile-container {
+  margin: 16px;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-column-paymentStatus {
+  flex: 0 0 10%;
+}
+
+.mat-column-totalPrice {
+  flex: 0 0 10%;
+}
+
+.mat-column-shippingDate {
+  flex: 0 0 10%;
+}
+
+.mat-column-shippingId {
+  flex: 0 0 15%;
+}
+
+.mat-column-status {
+  flex: 0 0 15%;
+}
+
+.mat-column-paymentMethod {
+  flex: 0 0 15%;
+}
+
+.mat-column-additionalInformation {
+  flex: 0 0 20%;
+}
