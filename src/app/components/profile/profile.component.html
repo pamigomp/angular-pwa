@@ -1,1 +1,122 @@
-<p>profile works!</p>
+<mat-tab-group class="full-width">
+  <mat-tab label="Dane osobowe">
+    <div class="profile-container">
+      <mat-card>
+        <mat-card-content fxLayoutAlign="center center">
+          <form (ngSubmit)="update()" [formGroup]="profileForm">
+            <mat-form-field>
+              <mat-label>E-mail</mat-label>
+              <input formControlName="email" id="email" matInput name="email" placeholder="E-mail">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Hasło</mat-label>
+              <input formControlName="password" id="password" matInput name="password" placeholder="Hasło"
+                     type="password">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Imię</mat-label>
+              <input formControlName="firstName" id="firstName" matInput name="firstName" placeholder="Imię">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Nazwisko</mat-label>
+              <input formControlName="lastName" id="lastName" matInput name="lastName" placeholder="Nazwisko">
+            </mat-form-field>
+            <div>
+              <label>Płeć</label>
+              <mat-radio-group formControlName="gender" fxLayoutAlign="start center" fxLayoutGap="30px" id="gender"
+                               name="gender">
+                <mat-radio-button value="M">Mężczyzna</mat-radio-button>
+                <mat-radio-button value="F">Kobieta</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <mat-form-field>
+              <mat-label>Data urodzenia</mat-label>
+              <input [matDatepicker]="picker" formControlName="dob" id="dob" matInput name="dob"
+                     placeholder="Wybierz datę">
+              <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Ulica</mat-label>
+              <input formControlName="street" id="street" matInput name="street" placeholder="Adres">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Kod pocztowy</mat-label>
+              <input formControlName="postalCode" id="postalCode" matInput name="postalCode" placeholder="Kod pocztowy">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Miejscowość</mat-label>
+              <input formControlName="city" id="city" matInput name="city" placeholder="Miejscowość">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Telefon</mat-label>
+              <input formControlName="phone" id="phone" matInput name="phone" placeholder="Telefon">
+            </mat-form-field>
+
+            <p *ngIf="error" class="error full-width">
+              {{ error }}
+            </p>
+
+            <div fxLayoutAlign="center center">
+              <mat-spinner *ngIf="loading" color="accent" diameter="25"></mat-spinner>
+              <button [disabled]="loading" color="primary" mat-raised-button type="submit">
+                Aktualizuj
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Historia zamówień">
+    <div class="profile-container">
+      <mat-card>
+        <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+          <mat-form-field>
+            <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Szukaj">
+          </mat-form-field>
+          <div class="mat-elevation-z8 full-width">
+            <mat-table [dataSource]="dataSource" matSort>
+              <ng-container matColumnDef="paymentStatus">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Status płatności</mat-header-cell>
+                <mat-cell
+                  *matCellDef="let element"> {{element.paymentStatus ? 'Zapłacono' : 'Nie zapłacono'}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="totalPrice">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Cena całkowita</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.totalPrice | currency:'PLN'}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="shippingDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Data wysyłki</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.shippingDate | date:'medium'}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="shippingId">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Rodzaj dostawy</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{getShippingMethod(element.shippingMethod)}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{getStatus(element.status)}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="paymentMethod">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Metoda płatności</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{getPaymentMethod(element.paymentMethod)}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="additionalInformation">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Dodatkowe informacje</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.additionalInformation}} </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+
+            <mat-paginator [pageSizeOptions]="[1, 5, 10, 25, 50, 100]" pageSize="10"
+                           showFirstLastButtons></mat-paginator>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+</mat-tab-group>

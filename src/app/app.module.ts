@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -13,11 +13,11 @@ import { MaterialModule } from './material.module';
 import { PushNotificationComponent } from './components/push-notification/push-notification.component';
 import { UpdateNotificationComponent } from './components/update-notification/update-notification.component';
 import { JwtModule } from '@auth0/angular-jwt';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './services/auth.guard';
 import { AuthService } from './services/auth/auth.service';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TokenInterceptor } from './token.interceptor';
+import { TokenInterceptor } from './services/token.interceptor';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
@@ -33,7 +33,14 @@ import { ProductComponent } from './components/product/product.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AddressFormComponent } from './components/cart/address-form/address-form.component';
+import localePl from '@angular/common/locales/pl';
+import { registerLocaleData } from '@angular/common';
+import { MatPaginatorIntl } from '@angular/material';
+import { PaginatorIntlService } from './services/paginator-intl.service';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+
+
+registerLocaleData(localePl);
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -79,11 +86,22 @@ export function tokenGetter() {
     }),
     LayoutModule
   ],
-  providers: [ConfigService, PushNotificationService, CheckForUpdateService, AuthService, AuthGuard, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  }],
+  providers: [
+    ConfigService,
+    PushNotificationService,
+    CheckForUpdateService,
+    AuthService,
+    AuthGuard, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }, {
+      provide: LOCALE_ID,
+      useValue: 'pl-PL'
+    }, {
+      provide: MatPaginatorIntl,
+      useClass: PaginatorIntlService
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
