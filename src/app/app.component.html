@@ -1,9 +1,15 @@
 <!-- Layout for non-mobile view -->
-<div class="app-container" fxLayout="column" *ngIf="!isMobile">
+<div *ngIf="!isMobile" class="app-container" fxLayout="column">
   <app-header (drawerToggle)="drawer.toggle()"></app-header>
 
   <mat-sidenav-container fxFlex="1 1 auto">
     <mat-sidenav #drawer [mode]="(isHandset$ | async) ? 'over' : 'side'" class="sidenav" opened>
+      <div class="padding">
+        <mat-form-field fxHide.gt-sm="true">
+          <mat-icon matPrefix>search</mat-icon>
+          <input class="search-input" matInput placeholder="Szukaj..." type="search">
+        </mat-form-field>
+      </div>
       <h4 mat-subheader>Kategorie:</h4>
       <mat-nav-list>
         <a *ngFor="let category of categories" [routerLink]="['/categories', category.name]"
@@ -21,13 +27,19 @@
 </div>
 
 <!-- Layout for mobile view -->
-<mat-sidenav-container fxFlex="1 1 auto" *ngIf="isMobile">
+<mat-sidenav-container *ngIf="isMobile" fxFlex="1 1 auto">
   <mat-sidenav #drawer [mode]="(isHandset$ | async) ? 'over' : 'side'" class="sidenav">
+    <div class="padding">
+      <mat-form-field>
+        <mat-icon matPrefix>search</mat-icon>
+        <input class="search-input" matInput placeholder="Szukaj..." type="search">
+      </mat-form-field>
+    </div>
     <h4 mat-subheader>Kategorie:</h4>
     <mat-nav-list>
       <a *ngFor="let category of categories" [routerLink]="['/categories', category.name]"
-          [state]="{ data: {category: category}}" mat-list-item
-          routerLinkActive="active">{{category.name}}</a>
+         [state]="{ data: {category: category}}" mat-list-item
+         routerLinkActive="active">{{category.name}}</a>
     </mat-nav-list>
   </mat-sidenav>
 

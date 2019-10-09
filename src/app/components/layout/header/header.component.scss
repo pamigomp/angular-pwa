@@ -8,18 +8,6 @@
   &.mat-toolbar-single-row {
     height: auto;
   }
-
-  .phone-hidden {
-    @include for-phone-only() {
-      display: none;
-    }
-  }
-
-  .header-btns {
-    display: flex;
-    flex-flow: row-reverse wrap;
-    flex-grow: 1;
-  }
 }
 
 .mat-icon {

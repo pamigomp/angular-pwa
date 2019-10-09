@@ -21,6 +21,10 @@ export class HeaderComponent implements OnInit {
   constructor(public authService: AuthService, private breakpointObserver: BreakpointObserver) {
   }
 
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated;
+  }
+
   drawerOpen() {
     this.drawerToggle.emit(true);
   }
@@ -30,9 +34,5 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-  }
-
-  isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
   }
 }

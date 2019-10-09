@@ -26,7 +26,7 @@ export class TokenInterceptor implements HttpInterceptor {
       'Content-Type': 'application/json',
       Accept: 'application/json'
     };
-    if (this.authService.isAuthenticated()) {
+    if (this.authService.isAuthenticated) {
       headers.Authorization = `Bearer ${this.authService.getToken()}`;
     }
     request = request.clone({

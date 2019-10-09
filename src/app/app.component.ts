@@ -27,13 +27,13 @@ export class AppComponent implements OnInit {
   ) {
   }
 
+  get isMobile(): boolean {
+    return this.device.isMobile();
+  }
+
   ngOnInit() {
     this.categoryService.getAllCategories().subscribe((categories: CategoryModel[]) => {
       this.categories = categories;
     });
-  }
-
-  get isMobile(): boolean {
-    return this.device.isMobile();
   }
 }

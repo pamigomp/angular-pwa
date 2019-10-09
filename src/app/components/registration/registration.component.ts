@@ -40,7 +40,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.authService.isAuthenticated()) {
+    if (this.authService.isAuthenticated) {
       this.router.navigate(['/home']);
     }
     this.registrationForm = this.formBuilder.group({
