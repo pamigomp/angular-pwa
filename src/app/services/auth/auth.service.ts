@@ -21,17 +21,17 @@ export class AuthService {
     this.SERVER_API_URL = this.configService.get('API_URL');
   }
 
-  getToken(): string {
-    return localStorage.getItem(this.accessTokenKey);
-  }
-
-  isAuthenticated(): boolean {
+  get isAuthenticated(): boolean {
     const accessToken = this.getToken();
     return accessToken && !helper.isTokenExpired(accessToken);
   }
 
-  isAdmin(): boolean {
+  get isAdmin(): boolean {
     return this.getRole() === 'Admin';
+  }
+
+  getToken(): string {
+    return localStorage.getItem(this.accessTokenKey);
   }
 
   getRole(): string {

@@ -1,8 +1,10 @@
-<mat-toolbar class="mat-primary app-footer" fxLayout="row" fxLayoutAlign="space-between center">
-  <div class="padding" fxLayout="row wrap">
+<mat-toolbar class="mat-primary app-footer" fxLayout.gt-xs="row" fxLayout.xs="column"
+             fxLayoutAlign.gt-xs="space-between center">
+  <div class="padding" fxFlex.xs="1 1 33%" fxLayout="row wrap">
     <span>Foto Piggy {{currentYear}}.</span><span> Wszelkie prawa zastrzeżone</span>
   </div>
-  <div class="padding full-height" fxHide.lt-md="true" fxLayout="column" fxLayoutAlign="space-evenly start">
+  <div class="padding full-height" fxFlex.xs="1 1 33%" fxHide.lt-md="true" fxLayout="column"
+       fxLayoutAlign="space-evenly start">
     <span>Dział obsługi klienta</span>
     <div fxLayoutAlign="start stretch" fxLayoutGap="8px">
       <a aria-label="Zadzwoń" class="contact-link" href="tel:+48600123456" mat-button>
@@ -21,7 +23,7 @@
       <span>sb-nd 10:00-16:00</span>
     </div>
   </div>
-  <div class="padding" fxLayout="row" fxLayoutAlign="center center">
+  <div class="padding" fxFlex.xs="1 1 33%" fxLayout="row" fxLayoutAlign="center center">
     <span>Znajdź nas na:</span>
     <button aria-label="Znajdź nas na Facebooku" mat-icon-button>
       <fa-icon [icon]="facebook" fxLayoutAlign="center center" size="2x"></fa-icon>

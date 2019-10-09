@@ -7,10 +7,10 @@
     type="button">
     <mat-icon aria-label="Ikona rozwinięcia bocznego menu">menu</mat-icon>
   </button>
-  <a aria-label="Strona główna" class="padding" routerLink="/">
+  <a aria-label="Strona główna" class="padding" fxHide.xs="true" routerLink="/">
     <img alt="Photo piggy logo" height="40" src="../../../../assets/logo_with_title.png">
   </a>
-  <div class="padding full-height" fxHide.lt-md="true" fxLayout="column" fxLayoutAlign="space-evenly start">
+  <div class="padding full-height" fxHide.lt-lg="true" fxLayout="column" fxLayoutAlign="space-evenly start">
     <span>Skontaktuj się z nami</span>
     <div fxLayoutAlign="start stretch" fxLayoutGap="8px">
       <a aria-label="Zadzwoń" class="contact-link" href="tel:+48600123456" mat-button>
@@ -29,40 +29,40 @@
       <span>sb-nd 10:00-16:00</span>
     </div>
   </div>
-  <span fxFlex="1 1 auto"></span>
+  <span fxFlex="1 1 auto" fxHide.xs="true"></span>
   <mat-form-field class="padding" fxHide.lt-md="true" fxLayoutAlign="end center">
     <mat-icon matPrefix>search</mat-icon>
     <input class="search-input" matInput placeholder="Szukaj..." type="search">
   </mat-form-field>
-  <div fxLayout="row" fxLayoutAlign="end center">
+  <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
     <div fxLayoutAlign="center">
       <a aria-label="Przycisk twój koszyk" mat-button routerLink="/cart">
         <mat-icon>shopping_cart</mat-icon>
-        Twój koszyk
+        <span fxHide.xs="true">Twój koszyk</span>
       </a>
     </div>
-    <div *ngIf="isAuthenticated()" fxLayoutAlign="center">
-      <a aria-label="Przycisk twoj profil" mat-button routerLink="/profile">
+    <div *ngIf="isAuthenticated" fxLayoutAlign="center">
+      <a aria-label="Przycisk twój profil" mat-button routerLink="/profile">
         <mat-icon>person</mat-icon>
-        Twój profil
+        <span fxHide.xs="true">Twój profil</span>
       </a>
     </div>
-    <div *ngIf="!isAuthenticated()" fxLayoutAlign="center">
+    <div *ngIf="!isAuthenticated" fxLayoutAlign="center">
       <a aria-label="Przycisk zaloguj się" mat-button routerLink="/login">
         <mat-icon>person</mat-icon>
-        Zaloguj się
+        <span fxHide.xs="true">Zaloguj się</span>
       </a>
     </div>
-    <div *ngIf="!isAuthenticated()" fxLayoutAlign="center">
+    <div *ngIf="!isAuthenticated" fxLayoutAlign="center">
       <a aria-label="Przycisk zarejestruj się" mat-button routerLink="/register">
         <mat-icon>person_add</mat-icon>
-        Zarejestruj się
+        <span fxHide.xs="true">Zarejestruj się</span>
       </a>
     </div>
-    <div *ngIf="isAuthenticated()" fxLayoutAlign="center">
+    <div *ngIf="isAuthenticated" fxLayoutAlign="center">
       <a (click)="logout()" aria-label="Przycisk wyloguj się" mat-button routerLink="/home">
         <mat-icon>exit_to_app</mat-icon>
-        Wyloguj się
+        <span fxHide.xs="true">Wyloguj się</span>
       </a>
     </div>
   </div>

@@ -1,13 +1,23 @@
+@import './../../../../mixins.scss';
+
 .app-header {
   font-size: 14px;
   line-height: normal;
   padding: 0;
+
+  &.mat-toolbar-single-row {
+    height: auto;
+  }
 }
 
 .mat-icon {
   font-size: unset;
   height: unset;
   width: unset;
+
+  @include for-phone-only() {
+    font-size: 24px;
+  }
 }
 
 .mat-button {

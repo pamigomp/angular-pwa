@@ -1,5 +1,6 @@
 .app-container {
   min-height: 100vh;
+  overflow: auto;
 }
 
 .active {
@@ -12,5 +13,13 @@
 
 h4 {
   margin: 0;
-  padding-bottom: 0;
+  padding: 0 16px;
+}
+
+.padding {
+  padding: 10px 10px 0 10px;
+}
+
+mat-form-field {
+  min-width: unset;
 }

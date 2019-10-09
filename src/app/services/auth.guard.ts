@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authService.isAuthenticated()) {
+    if (this.authService.isAuthenticated) {
       const roles: string[] = next.data.roles;
       if (roles && roles.length) {
         if (roles.includes(this.authService.getRole())) {

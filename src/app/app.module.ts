@@ -37,6 +37,8 @@ import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 import { MatPaginatorIntl } from '@angular/material';
 import { PaginatorIntlService } from './services/paginator-intl.service';
+import { DeviceDetectorModule } from 'ngx-device-detector';
+
 
 registerLocaleData(localePl);
 
@@ -74,6 +76,7 @@ export function tokenGetter() {
     MaterialModule,
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    DeviceDetectorModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter,

@@ -4,6 +4,7 @@ import { CategoryModel } from './models/category.model';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,15 @@ export class AppComponent implements OnInit {
       share()
     );
 
-  constructor(private categoryService: CategoryService, private breakpointObserver: BreakpointObserver) {
+  constructor(
+    private categoryService: CategoryService,
+    private breakpointObserver: BreakpointObserver,
+    private device: DeviceDetectorService
+  ) {
+  }
+
+  get isMobile(): boolean {
+    return this.device.isMobile();
   }
 
   ngOnInit() {

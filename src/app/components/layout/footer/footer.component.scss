@@ -1,7 +1,17 @@
+@import './../../../../mixins.scss';
+
 .app-footer {
+  display: flex;
   font-size: 14px;
   line-height: normal;
   padding: 0;
+
+  @include for-phone-only() {
+    &.mat-toolbar-single-row {
+      height: auto;
+      padding: 10px 0;
+    }
+  }
 }
 
 .mat-icon {
