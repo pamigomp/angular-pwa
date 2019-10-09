@@ -34,3 +34,12 @@
 .mat-column-additionalInformation {
   flex: 0 0 20%;
 }
+
+mat-table {
+  overflow: auto;
+}
+
+.mat-row, .mat-header-row {
+  min-width: 1280px;
+  width: 100%;
+}
