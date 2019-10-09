@@ -6,7 +6,7 @@
         <mat-form-field>
           <mat-label>E-mail</mat-label>
           <input [ngClass]="{ 'is-invalid': submitted && loginForm.controls.email.errors }" formControlName="email"
-                 id="email" matInput name="email" placeholder="E-mail" type="text">
+                 id="email" matInput name="email" placeholder="E-mail" type="email">
           <mat-error *ngIf="submitted && loginForm.controls.email.errors?.required">E-mail jest wymagany</mat-error>
         </mat-form-field>
         <mat-form-field>
