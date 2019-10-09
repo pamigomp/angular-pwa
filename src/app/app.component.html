@@ -39,7 +39,7 @@
     <mat-nav-list>
       <a *ngFor="let category of categories" [routerLink]="['/categories', category.name]"
          [state]="{ data: {category: category}}" mat-list-item
-         routerLinkActive="active">{{category.name}}</a>
+         routerLinkActive="active" (click)="drawer.close()">{{category.name}}</a>
     </mat-nav-list>
   </mat-sidenav>
 
