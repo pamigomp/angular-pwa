@@ -45,6 +45,6 @@ export class SearchComponent implements OnInit {
   }
 
   isCollectionEmpty(): boolean {
-    return this.products.collection.length === 0;
+    return this.products.collection && this.products.collection.length === 0;
   }
 }

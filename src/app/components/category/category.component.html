@@ -1,1 +1,30 @@
-<p>category works!</p>
+<div class="category-container">
+  <mat-card>
+    <mat-card-title fxLayoutAlign="start center">{{categoryName}}</mat-card-title>
+    <mat-card-content fxLayout="row wrap" fxLayoutAlign="space-between start">
+      <mat-card *ngFor="let product of products.collection" class="product-card" fxLayout="column"
+                fxLayoutAlign="space-between center">
+        <mat-card-header>
+          <mat-card-title>{{product.title}}</mat-card-title>
+        </mat-card-header>
+        <img *ngIf="product.imgUrl" [src]="product.imgUrl" alt="Zdjęcie produktu {{product.title}}" mat-card-image>
+        <mat-card-content class="product-card-content" fxFlex="1 1 auto" fxLayout="column"
+                          fxLayoutAlign="center space-between">
+          <p class="truncate">
+            {{product.description}}
+          </p>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="price">{{product.salePriceGross | currency:'PLN'}}</span>
+            <a aria-label="Dodaj produkt do koszyka" mat-button>
+              <mat-icon>add_shopping_cart</mat-icon>
+              <span>Dodaj do koszyka</span>
+            </a>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <span *ngIf="isCollectionEmpty()">Brak produktów!</span>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

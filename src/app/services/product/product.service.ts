@@ -46,9 +46,10 @@ export class ProductService {
     );
   }
 
-  getAllProductsForCategoryWithId(categoryId: string): Observable<ProductModel[]> {
-    return this.httpClient.get<ProductModel[]>(`${this.SERVER_API_URL}/categories/${categoryId}/products`).pipe(
-      map(data => data.map(item => new ProductModel().deserialize(item))),
+  getAllProductsForCategoryWithId(categoryId: string, query: ProductQueryParamsModel): Observable<PaginatedProductModel> {
+    const queryParams = objectToQuerystring(query);
+    return this.httpClient.get<PaginatedProductModel>(`${this.SERVER_API_URL}/categories/${categoryId}/products${queryParams}`).pipe(
+      map(data => new PaginatedProductModel().deserialize(data)),
       catchError((err: ErrorResponse) => throwError(err.message))
     );
   }

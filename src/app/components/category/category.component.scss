@@ -1,0 +1,36 @@
+.category-container {
+  margin: 16px;
+}
+
+mat-card.product-card {
+  width: 20%;
+  height: 470px;
+  margin: 15px;
+
+  > mat-card-header {
+    height: 80px;
+  }
+
+  > img {
+    width: 100%;
+    margin: 0;
+  }
+
+  > .product-card-content {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price {
+  font-size: large;
+  font-weight: bold;
+}

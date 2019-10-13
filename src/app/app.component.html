@@ -7,14 +7,14 @@
       <div class="padding">
         <mat-form-field fxHide.gt-sm="true">
           <mat-icon matPrefix>search</mat-icon>
-          <input class="search-input" matInput placeholder="Szukaj..." type="search" (search)="getSearchResult()" [(ngModel)]="searchQuery">
+          <input (search)="getSearchResult()" [(ngModel)]="searchQuery" class="search-input" matInput placeholder="Szukaj..."
+                 type="search">
         </mat-form-field>
       </div>
       <h4 mat-subheader>Kategorie:</h4>
       <mat-nav-list>
-        <a *ngFor="let category of categories" [routerLink]="['/categories', category.name]"
-           [state]="{ data: {category: category}}" mat-list-item
-           routerLinkActive="active">{{category.name}}</a>
+        <a *ngFor="let category of categories" [queryParams]="{ id: category._id}"
+           [routerLink]="['/categories', category.name]" mat-list-item routerLinkActive="active">{{category.name}}</a>
       </mat-nav-list>
     </mat-sidenav>
 
@@ -32,14 +32,15 @@
     <div class="padding">
       <mat-form-field>
         <mat-icon matPrefix>search</mat-icon>
-        <input class="search-input" matInput placeholder="Szukaj..." type="search" (search)="getSearchResult()" [(ngModel)]="searchQuery">
+        <input (search)="getSearchResult()" [(ngModel)]="searchQuery" class="search-input" matInput placeholder="Szukaj..."
+               type="search">
       </mat-form-field>
     </div>
     <h4 mat-subheader>Kategorie:</h4>
     <mat-nav-list>
-      <a *ngFor="let category of categories" [routerLink]="['/categories', category.name]"
-         [state]="{ data: {category: category}}" mat-list-item
-         routerLinkActive="active" (click)="drawer.close()">{{category.name}}</a>
+      <a (click)="drawer.close()" *ngFor="let category of categories"
+         [queryParams]="{ id: category._id}" [routerLink]="['/categories', category.name]" mat-list-item
+         routerLinkActive="active">{{category.name}}</a>
     </mat-nav-list>
   </mat-sidenav>
 
