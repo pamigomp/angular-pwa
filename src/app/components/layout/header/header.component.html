@@ -31,7 +31,8 @@
   <span fxFlex="1 1 auto" fxHide.xs="true"></span>
   <mat-form-field class="padding" fxHide.lt-md="true" fxLayoutAlign="end center">
     <mat-icon matPrefix>search</mat-icon>
-    <input class="search-input" matInput placeholder="Szukaj..." type="search" (search)="getSearchResult()" [(ngModel)]="searchQuery">
+    <input (search)="getSearchResult()" [(ngModel)]="searchQuery" class="search-input" matInput placeholder="Szukaj..."
+           type="search">
   </mat-form-field>
   <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
     <div fxLayoutAlign="center">
