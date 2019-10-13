@@ -7,7 +7,7 @@
       <div class="padding">
         <mat-form-field fxHide.gt-sm="true">
           <mat-icon matPrefix>search</mat-icon>
-          <input class="search-input" matInput placeholder="Szukaj..." type="search">
+          <input class="search-input" matInput placeholder="Szukaj..." type="search" (search)="getSearchResult()" [(ngModel)]="searchQuery">
         </mat-form-field>
       </div>
       <h4 mat-subheader>Kategorie:</h4>
@@ -32,7 +32,7 @@
     <div class="padding">
       <mat-form-field>
         <mat-icon matPrefix>search</mat-icon>
-        <input class="search-input" matInput placeholder="Szukaj..." type="search">
+        <input class="search-input" matInput placeholder="Szukaj..." type="search" (search)="getSearchResult()" [(ngModel)]="searchQuery">
       </mat-form-field>
     </div>
     <h4 mat-subheader>Kategorie:</h4>

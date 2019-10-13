@@ -9,6 +9,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './services/auth.guard';
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: {roles: ['Customer']}},
   {path: 'categories/:name', component: CategoryComponent},
   {path: 'products/:id', component: ProductComponent},
+  {path: 'search', component: SearchComponent},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '/404'}
 ];

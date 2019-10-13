@@ -5,6 +5,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 export class AppComponent implements OnInit {
   categories: CategoryModel[];
+  searchQuery: string;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -23,7 +25,8 @@ export class AppComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private breakpointObserver: BreakpointObserver,
-    private device: DeviceDetectorService
+    private device: DeviceDetectorService,
+    private router: Router
   ) {
   }
 
@@ -35,5 +38,9 @@ export class AppComponent implements OnInit {
     this.categoryService.getAllCategories().subscribe((categories: CategoryModel[]) => {
       this.categories = categories;
     });
+  }
+
+  getSearchResult(): void {
+    this.router.navigate(['/search'], {queryParams: {query: this.searchQuery}});
   }
 }

@@ -38,6 +38,7 @@ import { registerLocaleData } from '@angular/common';
 import { MatPaginatorIntl } from '@angular/material';
 import { PaginatorIntlService } from './services/paginator-intl.service';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { SearchComponent } from './components/search/search.component';
 
 
 registerLocaleData(localePl);
@@ -62,7 +63,8 @@ export function tokenGetter() {
     CategoryComponent,
     ProductComponent,
     ProfileComponent,
-    AddressFormComponent
+    AddressFormComponent,
+    SearchComponent
   ],
   imports: [
     AppRoutingModule,

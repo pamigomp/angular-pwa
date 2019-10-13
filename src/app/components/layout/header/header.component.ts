@@ -3,6 +3,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map, share } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +12,7 @@ import { map, share } from 'rxjs/operators';
 })
 export class HeaderComponent implements OnInit {
   @Output() drawerToggle = new EventEmitter<boolean>();
+  searchQuery: string;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -18,7 +20,10 @@ export class HeaderComponent implements OnInit {
       share()
     );
 
-  constructor(public authService: AuthService, private breakpointObserver: BreakpointObserver) {
+  constructor(
+    public authService: AuthService,
+    private breakpointObserver: BreakpointObserver,
+    private router: Router) {
   }
 
   get isAuthenticated(): boolean {
@@ -34,5 +39,9 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  getSearchResult(): void {
+    this.router.navigate(['/search'], {queryParams: {query: this.searchQuery}});
   }
 }

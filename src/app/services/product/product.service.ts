@@ -5,6 +5,9 @@ import { Observable, throwError } from 'rxjs';
 import { ProductModel } from '../../models/product.model';
 import { catchError, map } from 'rxjs/operators';
 import { CustomResponse, ErrorResponse } from '../../models/response.model';
+import { ProductQueryParamsModel } from '../../models/product-query-params.model';
+import { objectToQuerystring } from '../../common/common';
+import { PaginatedProductModel } from '../../models/paginated-product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +17,14 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient, private configService: ConfigService) {
     this.SERVER_API_URL = this.configService.get('API_URL');
+  }
+
+  getAllProducts(query: ProductQueryParamsModel): Observable<PaginatedProductModel> {
+    const queryParams = objectToQuerystring(query);
+    return this.httpClient.get<PaginatedProductModel>(`${this.SERVER_API_URL}/products${queryParams}`).pipe(
+      map(data => new PaginatedProductModel().deserialize(data)),
+      catchError((err: ErrorResponse) => throwError(err.message))
+    );
   }
 
   getProduct(id: string): Observable<ProductModel> {
