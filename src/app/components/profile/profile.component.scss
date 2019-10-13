@@ -1,10 +1,11 @@
-.profile-container {
+.personal-info-container {
   margin: 16px;
-}
-
-:host {
   display: flex;
   justify-content: center;
+}
+
+.order-history-container {
+  margin: 16px;
 }
 
 .mat-column-paymentStatus {

@@ -68,7 +68,10 @@ export class ProfileComponent implements OnInit {
     this.customerService.updateCustomer(this.profileForm.value)
       .pipe(first())
       .subscribe(
-        result => console.log('Successfully updated'),
+        result => {
+          console.log('Successfully updated');
+          this.loading = false;
+        },
         err => {
           this.error = `Nastąpił błąd podczas aktualizowania danych osobowych. ${err.error.message}`;
           this.loading = false;
@@ -81,7 +84,6 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.formBuilder.group({
       _id: [this.customerId],
       email: ['', Validators.required],
-      password: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       gender: [''],
@@ -95,7 +97,6 @@ export class ProfileComponent implements OnInit {
       this.profileForm = this.formBuilder.group({
         _id: [this.customerId],
         email: [customer.email, Validators.required],
-        password: [customer.password, Validators.required],
         firstName: [customer.firstName, Validators.required],
         lastName: [customer.lastName, Validators.required],
         gender: [customer.gender],

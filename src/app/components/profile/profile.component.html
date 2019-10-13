@@ -1,17 +1,12 @@
 <mat-tab-group class="full-width">
   <mat-tab label="Dane osobowe">
-    <div class="profile-container">
+    <div class="personal-info-container">
       <mat-card>
         <mat-card-content fxLayoutAlign="center center">
           <form (ngSubmit)="update()" [formGroup]="profileForm">
             <mat-form-field>
               <mat-label>E-mail</mat-label>
               <input formControlName="email" id="email" matInput name="email" placeholder="E-mail" type="email">
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Hasło</mat-label>
-              <input formControlName="password" id="password" matInput name="password" placeholder="Hasło"
-                     type="password">
             </mat-form-field>
             <mat-form-field>
               <mat-label>Imię</mat-label>
@@ -70,7 +65,7 @@
   </mat-tab>
 
   <mat-tab label="Historia zamówień">
-    <div class="profile-container">
+    <div class="order-history-container">
       <mat-card>
         <mat-card-content fxLayout="column" fxLayoutAlign="center center">
           <mat-form-field>
