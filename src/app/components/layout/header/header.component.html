@@ -2,10 +2,9 @@
   <button
     (click)="drawerOpen()"
     *ngIf="isHandset$ | async"
-    aria-label="Toggle sidenav"
-    mat-icon-button
-    type="button">
-    <mat-icon aria-label="Ikona rozwinięcia bocznego menu">menu</mat-icon>
+    aria-label="Rozwiń boczne menu"
+    mat-icon-button>
+    <mat-icon>menu</mat-icon>
   </button>
   <a aria-label="Strona główna" class="padding" fxHide.xs="true" routerLink="/">
     <img alt="Photo piggy logo" height="40" src="../../../../assets/logo_with_title.png">

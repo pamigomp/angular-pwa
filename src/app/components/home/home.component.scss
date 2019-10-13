@@ -6,11 +6,11 @@ mat-card {
   width: 275px;
   height: 275px;
   margin: 15px;
-}
 
-img {
-  padding: 15px;
-  width: 100%;
-  max-height: 230px;
-  max-width: 180px
+  > img {
+    padding: 15px;
+    width: 100%;
+    max-height: 230px;
+    max-width: 180px
+  }
 }

@@ -1,1 +1,29 @@
-<p>search works!</p>
+<div class="search-container">
+  <mat-card>
+    <mat-card-title fxLayoutAlign="start center">Wyniki wyszukiwania (<span class="search-query">"{{searchQuery}}"</span>)</mat-card-title>
+    <mat-card-content fxLayout="row wrap" fxLayoutAlign="space-between start">
+      <mat-card class="product-card" *ngFor="let product of products.collection" fxLayout="column"
+                fxLayoutAlign="space-between center">
+        <mat-card-header>
+          <mat-card-title>{{product.title}}</mat-card-title>
+        </mat-card-header>
+        <img *ngIf="product.imgUrl" mat-card-image [src]="product.imgUrl" alt="Zdjęcie produktu {{product.title}}">
+        <mat-card-content fxFlex="1 1 auto" fxLayout="column" fxLayoutAlign="center space-between" class="product-card-content">
+          <p class="truncate">
+            {{product.description}}
+          </p>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="price">{{product.salePriceGross | currency:'PLN'}}</span>
+            <a aria-label="Dodaj produkt do koszyka" mat-button>
+              <mat-icon>add_shopping_cart</mat-icon>
+              <span>Dodaj do koszyka</span>
+            </a>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <span *ngIf="isCollectionEmpty()">Brak wyników!</span>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
