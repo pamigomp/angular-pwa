@@ -6,6 +6,9 @@ import { ProductQueryParamsModel } from '../../models/product-query-params.model
 import { ImageService } from '../../services/image/image.service';
 import { ProductModel } from '../../models/product.model';
 import { ImageModel } from '../../models/image.model';
+import { PageEvent } from '@angular/material';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -25,26 +28,41 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.searchQuery = params.query;
-      const queryParams: ProductQueryParamsModel = {
-        search: this.searchQuery,
-        sortBy: 'title',
-        sortDir: '1',
-        page: 1,
-        limit: 10
-      };
-      this.productService.getAllProducts(queryParams)
-        .subscribe((searchResult: PaginatedProductModel) => {
-          searchResult.collection.length && searchResult.collection.forEach((product: ProductModel, index: number) => {
-            this.imageService.getAllImagesForProductWithId(product._id).subscribe((images: ImageModel[]) => {
-              searchResult.collection[index].imgUrl = images[0].url;
-            });
-          });
-          this.products = searchResult;
-        });
+      this.getProducts();
     });
   }
 
   isCollectionEmpty(): boolean {
     return this.products.collection && this.products.collection.length === 0;
+  }
+
+  changePage($event: PageEvent): void {
+    const page = $event.pageIndex + 1;
+    this.getProducts(page, $event.pageSize);
+  }
+
+  getProducts(page: number = 1, limit: number = 10): void {
+    const queryParams: ProductQueryParamsModel = {
+      search: this.searchQuery,
+      sortBy: 'title',
+      sortDir: '1',
+      page,
+      limit
+    };
+    this.productService.getAllProducts(queryParams)
+      .pipe(
+        catchError((err: string) => {
+          this.products.collection = [];
+          return throwError(err);
+        })
+      )
+      .subscribe((searchResult: PaginatedProductModel) => {
+        searchResult.collection.length && searchResult.collection.forEach((product: ProductModel, index: number) => {
+          this.imageService.getAllImagesForProductWithId(product._id).subscribe((images: ImageModel[]) => {
+            searchResult.collection[index].imgUrl = images[0].url;
+          });
+        });
+        this.products = searchResult;
+      });
   }
 }

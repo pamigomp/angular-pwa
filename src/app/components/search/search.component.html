@@ -1,17 +1,16 @@
 <div class="search-container">
   <mat-card>
-    <mat-card-title fxLayoutAlign="start center">Wyniki wyszukiwania (<span class="search-query">"{{searchQuery}}
-      "</span>)
+    <mat-card-title fxLayoutAlign="start center">Wyniki wyszukiwania (<span class="search-query">"{{searchQuery}}"</span>)
     </mat-card-title>
-    <mat-card-content fxLayout="row wrap" fxLayoutAlign="space-between start">
+    <mat-card-content fxLayout.gt-xs="row wrap" fxLayout.lt-sm="column" fxLayoutAlign.gt-xs="space-between start"
+                      fxLayoutAlign.lt-sm="center center">
       <mat-card *ngFor="let product of products.collection" class="product-card" fxLayout="column"
                 fxLayoutAlign="space-between center">
         <mat-card-header>
           <mat-card-title>{{product.title}}</mat-card-title>
         </mat-card-header>
         <img *ngIf="product.imgUrl" [src]="product.imgUrl" alt="Zdjęcie produktu {{product.title}}" mat-card-image>
-        <mat-card-content class="product-card-content" fxFlex="1 1 auto" fxLayout="column"
-                          fxLayoutAlign="center space-between">
+        <mat-card-content class="product-card-content" fxLayout="column" fxLayoutAlign="center space-between">
           <p class="truncate">
             {{product.description}}
           </p>
@@ -26,6 +25,14 @@
       </mat-card>
       <span *ngIf="isCollectionEmpty()">Brak wyników!</span>
     </mat-card-content>
+    <mat-card-footer>
+      <mat-paginator (page)="changePage($event)"
+                     [length]="products.total"
+                     [pageSizeOptions]="[5, 10, 25, 100]"
+                     [pageSize]="products.size"
+                     showFirstLastButtons>
+      </mat-paginator>
+    </mat-card-footer>
   </mat-card>
 </div>
 

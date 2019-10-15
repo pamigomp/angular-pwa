@@ -9,6 +9,7 @@ import { ImageModel } from '../../models/image.model';
 import { CategoryService } from '../../services/category/category.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-category',
@@ -18,6 +19,7 @@ import { throwError } from 'rxjs';
 export class CategoryComponent implements OnInit {
   products: PaginatedProductModel = {} as PaginatedProductModel;
   categoryName: string;
+  categoryId: string;
 
   constructor(
     private categoryService: CategoryService,
@@ -31,31 +33,41 @@ export class CategoryComponent implements OnInit {
       this.categoryName = params.name;
     });
     this.activatedRoute.queryParams.subscribe((params: Params) => {
-      const queryParams: ProductQueryParamsModel = {
-        sortBy: 'title',
-        sortDir: '1',
-        page: 1,
-        limit: 10
-      };
-      this.productService.getAllProductsForCategoryWithId(params.id, queryParams)
-        .pipe(
-          catchError((err: string) => {
-            this.products.collection = [];
-            return throwError(err);
-          })
-        )
-        .subscribe((paginatedProducts: PaginatedProductModel) => {
-          paginatedProducts.collection.length && paginatedProducts.collection.forEach((product: ProductModel, index: number) => {
-            this.imageService.getAllImagesForProductWithId(product._id).subscribe((images: ImageModel[]) => {
-              paginatedProducts.collection[index].imgUrl = images[0].url;
-            });
-          });
-          this.products = paginatedProducts;
-        });
+      this.categoryId = params.id;
+      this.getProducts(params.id);
     });
   }
 
   isCollectionEmpty(): boolean {
     return this.products.collection && this.products.collection.length === 0;
+  }
+
+  changePage($event: PageEvent): void {
+    const page = $event.pageIndex + 1;
+    this.getProducts(this.categoryId, page, $event.pageSize);
+  }
+
+  getProducts(categoryId: string, page: number = 1, limit: number = 10): void {
+    const queryParams: ProductQueryParamsModel = {
+      sortBy: 'title',
+      sortDir: '1',
+      page,
+      limit
+    };
+    this.productService.getAllProductsForCategoryWithId(categoryId, queryParams)
+      .pipe(
+        catchError((err: string) => {
+          this.products.collection = [];
+          return throwError(err);
+        })
+      )
+      .subscribe((paginatedProducts: PaginatedProductModel) => {
+        paginatedProducts.collection.length && paginatedProducts.collection.forEach((product: ProductModel, index: number) => {
+          this.imageService.getAllImagesForProductWithId(product._id).subscribe((images: ImageModel[]) => {
+            paginatedProducts.collection[index].imgUrl = images[0].url;
+          });
+        });
+        this.products = paginatedProducts;
+      });
   }
 }

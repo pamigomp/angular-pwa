@@ -24,7 +24,8 @@
   </mat-carousel-slide>
 </mat-carousel>
 
-<div fxLayout="row wrap" fxLayoutAlign="space-between start">
+<div fxLayout.gt-xs="row wrap" fxLayout.lt-sm="column" fxLayoutAlign.gt-xs="space-between start"
+     fxLayoutAlign.lt-sm="center center">
   <mat-card *ngFor="let category of categories" fxLayout="column" fxLayoutAlign="space-between center">
     <img alt="Zdjęcie kategorii {{category.name}}" mat-card-image
          src="../../../assets/categories/{{category.name}}.jpg">
