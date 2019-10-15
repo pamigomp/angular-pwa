@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map, share } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-header',
@@ -23,11 +24,16 @@ export class HeaderComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private breakpointObserver: BreakpointObserver,
+    private device: DeviceDetectorService,
     private router: Router) {
   }
 
   get isAuthenticated(): boolean {
     return this.authService.isAuthenticated;
+  }
+
+  get isMobile(): boolean {
+    return this.device.isMobile();
   }
 
   drawerOpen() {
