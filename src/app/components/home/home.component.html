@@ -24,14 +24,14 @@
   </mat-carousel-slide>
 </mat-carousel>
 
-<div fxLayout.gt-xs="row wrap" fxLayout.lt-sm="column" fxLayoutAlign.gt-xs="space-between start"
+<div fxLayout.gt-xs="row wrap" fxLayout.lt-sm="column" fxLayoutAlign.gt-xs="space-around start"
      fxLayoutAlign.lt-sm="center center">
   <mat-card *ngFor="let category of categories" fxLayout="column" fxLayoutAlign="space-between center">
     <img alt="Zdjęcie kategorii {{category.name}}" mat-card-image
          src="../../../assets/categories/{{category.name}}.jpg">
     <mat-card-footer fxLayout="column" fxLayoutAlign="center center">
       <strong>{{category.name}}</strong> od {{15 | currency:'PLN'}}
-      <a mat-button [queryParams]="{ id: category._id}" [routerLink]="['/categories', category.name]">Sprawdź
+      <a [queryParams]="{ id: category._id}" [routerLink]="['/categories', category.name]" mat-button>Sprawdź
         <mat-icon>double_arrow</mat-icon>
       </a>
     </mat-card-footer>
