@@ -69,7 +69,7 @@ export class ProfileComponent implements OnInit {
       .pipe(first())
       .subscribe(
         result => {
-          console.log('Successfully updated');
+          console.log('[App] Successfully updated');
           this.loading = false;
         },
         err => {

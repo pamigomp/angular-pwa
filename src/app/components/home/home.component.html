@@ -29,10 +29,11 @@
   <mat-card *ngFor="let category of categories" fxLayout="column" fxLayoutAlign="space-between center">
     <img alt="Zdjęcie kategorii {{category.name}}" mat-card-image
          src="../../../assets/categories/{{category.name}}.jpg">
-    <mat-card-content>
-      <p>
-        <strong>{{category.name}}</strong> od 15,00zł
-      </p>
-    </mat-card-content>
+    <mat-card-footer fxLayout="column" fxLayoutAlign="center center">
+      <strong>{{category.name}}</strong> od {{15 | currency:'PLN'}}
+      <a mat-button [queryParams]="{ id: category._id}" [routerLink]="['/categories', category.name]">Sprawdź
+        <mat-icon>double_arrow</mat-icon>
+      </a>
+    </mat-card-footer>
   </mat-card>
 </div>
