@@ -9,6 +9,7 @@ import { ImageModel } from '../../models/image.model';
 import { PageEvent } from '@angular/material';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { SortOptionModel } from '../../models/sort-option.model';
 
 @Component({
   selector: 'app-search',
@@ -18,6 +19,31 @@ import { throwError } from 'rxjs';
 export class SearchComponent implements OnInit {
   searchQuery: string;
   products: PaginatedProductModel = {} as PaginatedProductModel;
+  selectedSortOption = 'Nazwa: A-Z';
+  selectedPage = 0;
+  selectedPageSize = 5;
+  sortOptions: SortOptionModel[] = [{
+    sortBy: 'salePriceGross',
+    sortDir: 'asc',
+    title: 'Cena: od najniższej'
+  }, {
+    sortBy: 'salePriceGross',
+    sortDir: 'desc',
+    title: 'Cena: od najwyższej'
+  }, {
+    sortBy: 'title',
+    sortDir: 'asc',
+    title: 'Nazwa: A-Z'
+  }, {
+    sortBy: 'title',
+    sortDir: 'desc',
+    title: 'Nazwa: Z-A'
+  }, {
+    sortBy: 'rate',
+    sortDir: 'desc',
+    title: 'Ocena: od najlepszej',
+    disabled: true
+  }];
 
   constructor(
     private productService: ProductService,
@@ -37,17 +63,27 @@ export class SearchComponent implements OnInit {
   }
 
   changePage($event: PageEvent): void {
-    const page = $event.pageIndex + 1;
-    this.getProducts(page, $event.pageSize);
+    this.selectedPage = $event.pageIndex;
+    this.selectedPageSize = $event.pageSize;
+    this.getProducts();
   }
 
-  getProducts(page: number = 1, limit: number = 10): void {
+  changeSortOption(): void {
+    this.getProducts();
+  }
+
+  getSelectedSortOptionProps(): SortOptionModel {
+    return this.sortOptions.find((sortOption: SortOptionModel) => sortOption.title === this.selectedSortOption);
+  }
+
+  getProducts(): void {
+    const selectedOptionProps = this.getSelectedSortOptionProps();
     const queryParams: ProductQueryParamsModel = {
       search: this.searchQuery,
-      sortBy: 'title',
-      sortDir: '1',
-      page,
-      limit
+      sortBy: selectedOptionProps.sortBy,
+      sortDir: selectedOptionProps.sortDir,
+      page: this.selectedPage + 1,
+      limit: this.selectedPageSize
     };
     this.productService.getAllProducts(queryParams)
       .pipe(

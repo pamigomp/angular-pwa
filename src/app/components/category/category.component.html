@@ -1,18 +1,21 @@
 <div class="category-container">
   <mat-card>
     <mat-card-title fxLayoutAlign="start center">{{categoryName}}</mat-card-title>
-    <mat-card-subtitle fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between start" fxLayoutAlign.lt-sm="start start">
+    <mat-card-subtitle fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between start"
+                       fxLayoutAlign.lt-sm="start start">
       <div class="sort-by">
         <mat-form-field>
-          <mat-select [(ngModel)]="selectedSortOption" (selectionChange)="changeSortOption()">
-            <mat-option *ngFor="let option of sortOptions" [disabled]="option.disabled" [value]="option.title">{{option.title}}</mat-option>
+          <mat-select (selectionChange)="changeSortOption()" [(ngModel)]="selectedSortOption">
+            <mat-option *ngFor="let option of sortOptions" [disabled]="option.disabled"
+                        [value]="option.title">{{option.title}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-      <mat-paginator fxHide.lt-sm="true" (page)="changePage($event)"
+      <mat-paginator (page)="changePage($event)"
                      [length]="products.total"
                      [pageSizeOptions]="[5, 10, 15, 25, 50, 100]"
                      [pageSize]="products.size"
+                     fxHide.lt-sm="true"
                      showFirstLastButtons>
       </mat-paginator>
     </mat-card-subtitle>
