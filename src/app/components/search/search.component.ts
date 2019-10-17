@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PaginatedProductModel } from '../../models/paginated-product.model';
 import { ProductService } from '../../services/product/product.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProductQueryParamsModel } from '../../models/product-query-params.model';
 import { ImageService } from '../../services/image/image.service';
 import { ProductModel } from '../../models/product.model';
@@ -48,7 +48,8 @@ export class SearchComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private imageService: ImageService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -100,5 +101,9 @@ export class SearchComponent implements OnInit {
         });
         this.products = searchResult;
       });
+  }
+
+  openProductPage(product: ProductModel): void {
+    this.router.navigate(['/products', product._id]);
   }
 }

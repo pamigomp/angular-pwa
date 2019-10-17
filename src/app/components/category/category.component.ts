@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PaginatedProductModel } from '../../models/paginated-product.model';
 import { ProductService } from '../../services/product/product.service';
 import { ImageService } from '../../services/image/image.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProductQueryParamsModel } from '../../models/product-query-params.model';
 import { ProductModel } from '../../models/product.model';
 import { ImageModel } from '../../models/image.model';
@@ -51,7 +51,8 @@ export class CategoryComponent implements OnInit {
     private categoryService: CategoryService,
     private productService: ProductService,
     private imageService: ImageService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -105,5 +106,9 @@ export class CategoryComponent implements OnInit {
         });
         this.products = paginatedProducts;
       });
+  }
+
+  openProductPage(product: ProductModel): void {
+    this.router.navigate(['/products', product._id]);
   }
 }

@@ -24,10 +24,11 @@
                       fxLayoutAlign.lt-sm="center center">
       <mat-card *ngFor="let product of products.collection" class="product-card" fxLayout="column"
                 fxLayoutAlign="space-between center">
-        <mat-card-header>
+        <mat-card-header (click)="openProductPage(product)" class="pointer">
           <mat-card-title>{{product.title}}</mat-card-title>
         </mat-card-header>
-        <img *ngIf="product.imgUrl" [src]="product.imgUrl" alt="Zdjęcie produktu {{product.title}}" mat-card-image>
+        <img (click)="openProductPage(product)" *ngIf="product.imgUrl" [src]="product.imgUrl" alt="Zdjęcie produktu {{product.title}}"
+             class="pointer" mat-card-image>
         <mat-card-content class="product-card-content" fxLayout="column" fxLayoutAlign="center space-between">
           <p class="truncate">
             {{product.description}}
