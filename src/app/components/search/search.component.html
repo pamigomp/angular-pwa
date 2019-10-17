@@ -27,15 +27,15 @@
         <mat-card-header (click)="openProductPage(product)" class="pointer">
           <mat-card-title>{{product.title}}</mat-card-title>
         </mat-card-header>
-        <img (click)="openProductPage(product)" *ngIf="product.imgUrl" [src]="product.imgUrl" alt="Zdjęcie produktu {{product.title}}"
-             class="pointer" mat-card-image>
+        <img (click)="openProductPage(product)" *ngIf="product.imgUrl" [src]="product.imgUrl"
+             alt="Zdjęcie produktu {{product.title}}" class="pointer" mat-card-image>
         <mat-card-content class="product-card-content" fxLayout="column" fxLayoutAlign="center space-between">
           <p class="truncate">
             {{product.description}}
           </p>
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <span class="price">{{product.salePriceGross | currency:'PLN'}}</span>
-            <a aria-label="Dodaj produkt do koszyka" mat-button>
+            <a (click)="addToCart(product)" aria-label="Dodaj produkt do koszyka" mat-button>
               <mat-icon>add_shopping_cart</mat-icon>
               <span>Dodaj do koszyka</span>
             </a>

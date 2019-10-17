@@ -106,4 +106,10 @@ export class SearchComponent implements OnInit {
   openProductPage(product: ProductModel): void {
     this.router.navigate(['/products', product._id]);
   }
+
+  addToCart(product: ProductModel): void {
+    const cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || [];
+    cartProducts.push(product);
+    localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+  }
 }
