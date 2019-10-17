@@ -23,7 +23,6 @@ import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { HeaderComponent } from './components/layout/header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SidenavComponent } from './components/layout/sidenav/sidenav.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CartComponent } from './components/cart/cart.component';
@@ -57,7 +56,6 @@ export function tokenGetter() {
     NotFoundComponent,
     PushNotificationComponent,
     RegistrationComponent,
-    SidenavComponent,
     UpdateNotificationComponent,
     CartComponent,
     CategoryComponent,
