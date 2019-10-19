@@ -37,10 +37,38 @@
   </mat-form-field>
   <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
     <div fxLayoutAlign="center">
-      <a aria-label="Przycisk twój koszyk" mat-button routerLink="/cart">
-        <mat-icon>shopping_cart</mat-icon>
+      <a [matMenuTriggerFor]="cartList" aria-label="Przycisk twój koszyk" mat-button>
+        <mat-icon [matBadgeDescription]="'Ilość produktów dodanych do koszyka'" [matBadgeHidden]="getCartProductCount() === 0"
+                  [matBadgeOverlap]="false" [matBadgePosition]="'above before'"
+                  [matBadgeSize]="'medium'" [matBadge]="getCartProductCount().toString()"
+                  matBadgeColor="warn">shopping_cart
+        </mat-icon>
         <span fxHide.xs="true">Twój koszyk</span>
       </a>
+      <mat-menu #cartList="matMenu">
+        <mat-list>
+          <mat-list-item *ngIf="getCartProductCount() === 0">
+            <small>Koszyk jest pusty</small>
+          </mat-list-item>
+          <mat-list-item *ngFor="let product of getCartProducts()">
+            <small>{{product.title}}</small>
+            <small>
+              <strong>{{product.salePriceGross | currency:'PLN'}}</strong>
+            </small>
+          </mat-list-item>
+          <mat-divider *ngIf="getCartProductCount() !== 0" class="divider"></mat-divider>
+          <mat-list-item *ngIf="getCartProductCount() !== 0">
+            <small>Razem:</small>
+            <small>
+              <strong>{{getTotalPrice() | currency:'PLN'}}</strong>
+            </small>
+          </mat-list-item>
+        </mat-list>
+        <mat-divider class="divider"></mat-divider>
+        <div fxLayoutAlign="center center">
+          <a mat-flat-button routerLink="/cart"><strong>Przejdź do koszyka</strong></a>
+        </div>
+      </mat-menu>
     </div>
     <div *ngIf="isAuthenticated" fxLayoutAlign="center">
       <a aria-label="Przycisk twój profil" mat-button routerLink="/profile">

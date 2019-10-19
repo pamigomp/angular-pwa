@@ -11,6 +11,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { PageEvent } from '@angular/material';
 import { SortOptionModel } from '../../models/sort-option.model';
+import { CartService } from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-category',
@@ -51,6 +52,7 @@ export class CategoryComponent implements OnInit {
     private categoryService: CategoryService,
     private productService: ProductService,
     private imageService: ImageService,
+    private cartService: CartService,
     private activatedRoute: ActivatedRoute,
     private router: Router) {
   }
@@ -113,8 +115,10 @@ export class CategoryComponent implements OnInit {
   }
 
   addToCart(product: ProductModel): void {
-    const cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || [];
-    cartProducts.push(product);
-    localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+    this.cartService.addToCart(product);
+  }
+
+  isProductAddedToCart(product: ProductModel): boolean {
+    return this.cartService.isProductAddedToCart(product);
   }
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatBadgeModule,
   MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
@@ -59,7 +60,8 @@ import {
     MatSortModule,
     MatGridListModule,
     MatTreeModule,
-    MatStepperModule
+    MatStepperModule,
+    MatBadgeModule
   ],
   exports: [
     MatButtonModule,
@@ -88,7 +90,8 @@ import {
     MatSortModule,
     MatGridListModule,
     MatTreeModule,
-    MatStepperModule
+    MatStepperModule,
+    MatBadgeModule
   ],
   providers: [{
     provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,

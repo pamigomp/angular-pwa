@@ -34,9 +34,11 @@
           </p>
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <span class="price">{{product.salePriceGross | currency:'PLN'}}</span>
-            <a (click)="addToCart(product)" aria-label="Dodaj produkt do koszyka" mat-button>
+            <a (click)="addToCart(product)" [disabled]="isProductAddedToCart(product)"
+               aria-label="Dodaj produkt do koszyka" mat-button>
               <mat-icon>add_shopping_cart</mat-icon>
-              <span>Dodaj do koszyka</span>
+              <span *ngIf="!isProductAddedToCart(product)">Dodaj do koszyka</span>
+              <span *ngIf="isProductAddedToCart(product)">Dodano do koszyka</span>
             </a>
           </div>
         </mat-card-content>

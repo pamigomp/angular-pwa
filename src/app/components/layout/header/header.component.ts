@@ -5,6 +5,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map, share } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { ProductModel } from '../../../models/product.model';
+import { CartService } from '../../../services/cart/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +25,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    public cartService: CartService,
     private breakpointObserver: BreakpointObserver,
     private device: DeviceDetectorService,
     private router: Router) {
@@ -49,5 +52,18 @@ export class HeaderComponent implements OnInit {
 
   getSearchResult(): void {
     this.router.navigate(['/search'], {queryParams: {query: this.searchQuery}});
+  }
+
+  getCartProductCount(): number {
+    const cartProducts: ProductModel[] = this.getCartProducts();
+    return cartProducts.length;
+  }
+
+  getCartProducts(): ProductModel[] {
+    return this.cartService.getAllProductsAddedToCart();
+  }
+
+  getTotalPrice(): number {
+    return this.cartService.getCartTotalPrice();
   }
 }

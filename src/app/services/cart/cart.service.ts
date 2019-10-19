@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ConfigService } from '../config/config.service';
 import { CustomResponse, ErrorResponse } from '../../models/response.model';
+import { ProductModel } from '../../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,36 @@ export class CartService {
     return this.httpClient.delete<CustomResponse>(`${this.SERVER_API_URL}/customers/${customerId}/cart`).pipe(
       catchError((err: CustomResponse | ErrorResponse) => throwError(err.message))
     );
+  }
+
+  addToCart(product: ProductModel): void {
+    const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
+    if (!cartProducts.has(JSON.stringify(product))) {
+      cartProducts.add(JSON.stringify(product));
+    }
+    localStorage.setItem('cartProducts', JSON.stringify(Array.from(cartProducts)));
+  }
+
+  isProductAddedToCart(product: ProductModel): boolean {
+    const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
+    return cartProducts.has(JSON.stringify(product));
+  }
+
+  getAllProductsAddedToCart(): ProductModel[] {
+    const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
+    const products: ProductModel[] = [];
+    cartProducts.forEach((product: string) => {
+      products.push(JSON.parse(product));
+    });
+    return products;
+  }
+
+  getCartTotalPrice(): number {
+    const products: ProductModel[] = this.getAllProductsAddedToCart();
+    let total = 0;
+    products.forEach((product: ProductModel) => {
+      total += product.salePriceGross;
+    });
+    return total;
   }
 }
