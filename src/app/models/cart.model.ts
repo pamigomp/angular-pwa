@@ -4,6 +4,8 @@ export class CartModel implements Deserializable {
   _id: string;
   products: CartProductModel[];
   customerId: string;
+  createdAt: string;
+  updatedAt: string;
 
   deserialize(input: any): this {
     Object.assign(this, input);

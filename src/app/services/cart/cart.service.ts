@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 import { ConfigService } from '../config/config.service';
 import { CustomResponse, ErrorResponse } from '../../models/response.model';
 import { ProductModel } from '../../models/product.model';
+import { sortObjectKeys } from '../../common/common';
 
 @Injectable({
   providedIn: 'root'
@@ -43,16 +44,27 @@ export class CartService {
   }
 
   addToCart(product: ProductModel): void {
+    delete product.id;
+    delete product.imgUrl;
+    const sortObjectKeys = obj => Object.keys(obj).sort().reduce((acc, key) => {
+      acc[key] = obj[key];
+      return acc;
+    }, {});
+    const sortedProductKeys = sortObjectKeys(product);
     const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
-    if (!cartProducts.has(JSON.stringify(product))) {
-      cartProducts.add(JSON.stringify(product));
+    if (!cartProducts.has(JSON.stringify(sortedProductKeys))) {
+      cartProducts.add(JSON.stringify(sortedProductKeys));
     }
     localStorage.setItem('cartProducts', JSON.stringify(Array.from(cartProducts)));
   }
 
   isProductAddedToCart(product: ProductModel): boolean {
+    const productCopy = Object.assign({}, product);
+    delete productCopy.id;
+    delete productCopy.imgUrl;
+    const sortedProductKeys = sortObjectKeys(product);
     const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
-    return cartProducts.has(JSON.stringify(product));
+    return cartProducts.has(JSON.stringify(sortedProductKeys));
   }
 
   getAllProductsAddedToCart(): ProductModel[] {

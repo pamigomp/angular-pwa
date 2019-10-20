@@ -5,6 +5,8 @@ export class FeedbackModel implements Deserializable {
   value: string;
   customerId: string;
   productId: string;
+  createdAt: string;
+  updatedAt: string;
 
   deserialize(input: any): this {
     return Object.assign(this, input);

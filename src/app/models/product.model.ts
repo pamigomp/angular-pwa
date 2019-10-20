@@ -10,6 +10,7 @@ export class ProductModel implements Deserializable {
   categoryId: string;
   producerId: string;
   imgUrl?: string;
+  id?: string;
 
   deserialize(input: any): this {
     return Object.assign(this, input);
