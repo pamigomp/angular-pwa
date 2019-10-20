@@ -44,13 +44,10 @@ export class CartService {
   }
 
   addToCart(product: ProductModel): void {
-    delete product.id;
-    delete product.imgUrl;
-    const sortObjectKeys = obj => Object.keys(obj).sort().reduce((acc, key) => {
-      acc[key] = obj[key];
-      return acc;
-    }, {});
-    const sortedProductKeys = sortObjectKeys(product);
+    const productCopy = Object.assign({}, product);
+    delete productCopy.id;
+    delete productCopy.imgUrl;
+    const sortedProductKeys = sortObjectKeys(productCopy);
     const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
     if (!cartProducts.has(JSON.stringify(sortedProductKeys))) {
       cartProducts.add(JSON.stringify(sortedProductKeys));
@@ -62,7 +59,7 @@ export class CartService {
     const productCopy = Object.assign({}, product);
     delete productCopy.id;
     delete productCopy.imgUrl;
-    const sortedProductKeys = sortObjectKeys(product);
+    const sortedProductKeys = sortObjectKeys(productCopy);
     const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
     return cartProducts.has(JSON.stringify(sortedProductKeys));
   }
