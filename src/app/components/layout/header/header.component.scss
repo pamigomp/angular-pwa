@@ -42,3 +42,7 @@
   margin-top: 8px;
   margin-bottom: 8px;
 }
+
+::ng-deep .mat-list-item-content {
+  justify-content: space-between;
+}
