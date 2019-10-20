@@ -12,6 +12,8 @@ import { throwError } from 'rxjs';
 import { PageEvent } from '@angular/material';
 import { SortOptionModel } from '../../models/sort-option.model';
 import { CartService } from '../../services/cart/cart.service';
+import { RateService } from '../../services/rate/rate.service';
+import { RateModel } from '../../models/rate.model';
 
 @Component({
   selector: 'app-category',
@@ -25,6 +27,7 @@ export class CategoryComponent implements OnInit {
   selectedSortOption = 'Nazwa: A-Z';
   selectedPage = 0;
   selectedPageSize = 5;
+  isStarRatingReadonly = false;
   sortOptions: SortOptionModel[] = [{
     sortBy: 'salePriceGross',
     sortDir: 'asc',
@@ -53,6 +56,7 @@ export class CategoryComponent implements OnInit {
     private productService: ProductService,
     private imageService: ImageService,
     private cartService: CartService,
+    private rateService: RateService,
     private activatedRoute: ActivatedRoute,
     private router: Router) {
   }
@@ -105,6 +109,12 @@ export class CategoryComponent implements OnInit {
           this.imageService.getAllImagesForProductWithId(product._id).subscribe((images: ImageModel[]) => {
             paginatedProducts.collection[index].imgUrl = images[0].url;
           });
+          this.isStarRatingReadonly = false;
+          this.rateService.getAllRatesForProductWithId(product._id).subscribe((rates: RateModel[]) => {
+            paginatedProducts.collection[index].averageRate = this.calculateAverageRate(rates);
+            paginatedProducts.collection[index].rates = rates;
+            // this.isStarRatingReadonly = true; //TODO Fix setting star rating readonly mode
+          });
         });
         this.products = paginatedProducts;
       });
@@ -120,5 +130,21 @@ export class CategoryComponent implements OnInit {
 
   isProductAddedToCart(product: ProductModel): boolean {
     return this.cartService.isProductAddedToCart(product);
+  }
+
+  private calculateAverageRate(rates: RateModel[]): number {
+    const rateCount = this.getRatesCount(rates);
+    if (rateCount === 0) {
+      return 0;
+    }
+    let rateSum = 0;
+    rates.forEach((rate: RateModel) => {
+      rateSum += +rate.value;
+    });
+    return rateSum / rateCount;
+  }
+
+  getRatesCount(rates: RateModel[]): number {
+    return rates ? rates.length : 0;
   }
 }

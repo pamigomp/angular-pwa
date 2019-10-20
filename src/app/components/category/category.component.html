@@ -32,6 +32,11 @@
           <p class="truncate">
             {{product.description}}
           </p>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <star-rating [readonly]="isStarRatingReadonly" [value]="product.averageRate" checkedcolor="#F7B000"
+                         size="24px" uncheckedcolor="black"></star-rating>
+            <span>({{getRatesCount(product.rates)}})</span>
+          </div>
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <span class="price">{{product.salePriceGross | currency:'PLN'}}</span>
             <a (click)="addToCart(product)" [disabled]="isProductAddedToCart(product)"

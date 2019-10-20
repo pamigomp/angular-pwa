@@ -47,6 +47,8 @@ export class CartService {
     const productCopy = Object.assign({}, product);
     delete productCopy.id;
     delete productCopy.imgUrl;
+    delete productCopy.rates;
+    delete productCopy.averageRate;
     const sortedProductKeys = sortObjectKeys(productCopy);
     const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
     if (!cartProducts.has(JSON.stringify(sortedProductKeys))) {
@@ -59,6 +61,8 @@ export class CartService {
     const productCopy = Object.assign({}, product);
     delete productCopy.id;
     delete productCopy.imgUrl;
+    delete productCopy.rates;
+    delete productCopy.averageRate;
     const sortedProductKeys = sortObjectKeys(productCopy);
     const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
     return cartProducts.has(JSON.stringify(sortedProductKeys));

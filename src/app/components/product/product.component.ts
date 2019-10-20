@@ -61,18 +61,6 @@ export class ProductComponent implements OnInit {
     return this.cartService.isProductAddedToCart(product);
   }
 
-  calculateAverageRate(): number {
-    const rateCount = this.rates.length;
-    if (rateCount === 0) {
-      return 0;
-    }
-    let rateSum = 0;
-    this.rates.forEach((rate: RateModel) => {
-      rateSum += +rate.value;
-    });
-    return rateSum / rateCount;
-  }
-
   rateProduct($event: { oldValue: number; newValue: number; starRating: StarRatingComponent }): void {
     const rate: Partial<RateModel> = {
       customerId: this.customerId,
@@ -114,6 +102,23 @@ export class ProductComponent implements OnInit {
     return this.currentCustomerFeedback.value || '';
   }
 
+  getFeedbackAuthor(feedbackId: string): string {
+    // TODO Get feedback author
+    return 'M. Pietrzak';
+  }
+
+  private calculateAverageRate(): number {
+    const rateCount = this.rates.length;
+    if (rateCount === 0) {
+      return 0;
+    }
+    let rateSum = 0;
+    this.rates.forEach((rate: RateModel) => {
+      rateSum += +rate.value;
+    });
+    return rateSum / rateCount;
+  }
+
   private getProduct(): void {
     this.productService.getProduct(this.productId).subscribe((product: ProductModel) => {
       this.product = product;
@@ -148,10 +153,5 @@ export class ProductComponent implements OnInit {
 
   private getCurrentCustomerFeedback(): FeedbackModel {
     return this.feedbacks.find((feedback: FeedbackModel) => feedback.customerId === this.customerId) || {} as FeedbackModel;
-  }
-
-  getFeedbackAuthor(feedbackId: string): string {
-    // TODO Get feedback author
-    return 'M. Pietrzak';
   }
 }

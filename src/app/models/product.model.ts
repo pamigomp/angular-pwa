@@ -1,4 +1,5 @@
 import { Deserializable } from './deserializable.model';
+import { RateModel } from './rate.model';
 
 export class ProductModel implements Deserializable {
   _id: string;
@@ -10,6 +11,8 @@ export class ProductModel implements Deserializable {
   categoryId: string;
   producerId: string;
   imgUrl?: string;
+  rates?: RateModel[];
+  averageRate?: number;
   id?: string;
 
   deserialize(input: any): this {
