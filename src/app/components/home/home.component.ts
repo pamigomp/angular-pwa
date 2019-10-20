@@ -22,4 +22,9 @@ export class HomeComponent implements OnInit {
       this.categories = categories;
     });
   }
+
+  getMinPrice(categoryId: string): number {
+    // TODO Get min price of products in given category
+    return 15;
+  }
 }

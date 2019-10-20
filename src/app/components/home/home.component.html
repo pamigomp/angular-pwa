@@ -30,7 +30,7 @@
     <img alt="Zdjęcie kategorii {{category.name}}" mat-card-image
          src="../../../assets/categories/{{category.name}}.jpg">
     <mat-card-footer fxLayout="column" fxLayoutAlign="center center">
-      <strong>{{category.name}}</strong> od {{15 | currency:'PLN'}}
+      <strong>{{category.name}}</strong> od {{getMinPrice(category._id) | currency:'PLN'}}
       <a [queryParams]="{ id: category._id}" [routerLink]="['/categories', category.name]" mat-button>Sprawdź
         <mat-icon>double_arrow</mat-icon>
       </a>

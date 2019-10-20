@@ -26,8 +26,10 @@ export class ProductComponent implements OnInit {
   averageRate: number;
   isStarRatingReadonly = false;
   feedback: string;
-  private productId: string;
   currentRoute: string;
+  currentCustomerRate: RateModel = {} as RateModel;
+  currentCustomerFeedback: FeedbackModel = {} as FeedbackModel;
+  private productId: string;
 
   constructor(private productService: ProductService,
               private imageService: ImageService,
@@ -73,11 +75,19 @@ export class ProductComponent implements OnInit {
 
   rateProduct($event: { oldValue: number; newValue: number; starRating: StarRatingComponent }): void {
     const rate: Partial<RateModel> = {
-      value: $event.newValue.toString() as RateValue,
-      customerId: this.customerId
+      customerId: this.customerId,
+      value: $event.newValue.toString() as RateValue
     };
-    this.rateService.createRateForProductWithId(this.productId, rate).subscribe();
-    this.getRates();
+    this.isStarRatingReadonly = false;
+    if (!this.currentCustomerRate.value) {
+      this.rateService.createRateForProductWithId(this.productId, rate).subscribe(() => this.getRates());
+    } else {
+      rate._id = this.currentCustomerRate._id;
+      rate.customerId = this.customerId;
+      this.rateService.updateRate(rate).subscribe(() => {
+        this.getRates();
+      });
+    }
   }
 
   addComment(): void {
@@ -85,8 +95,23 @@ export class ProductComponent implements OnInit {
       customerId: this.customerId,
       value: this.feedback
     };
-    this.feedbackService.createFeedbackForProductWithId(this.productId, feedback).subscribe();
-    this.getFeedbacks();
+    if (!this.currentCustomerFeedback.value) {
+      this.feedbackService.createFeedbackForProductWithId(this.productId, feedback).subscribe(() => this.getFeedbacks());
+    } else {
+      feedback._id = this.currentCustomerFeedback._id;
+      feedback.customerId = this.customerId;
+      this.feedbackService.updateFeedback(feedback).subscribe(() => {
+        this.getFeedbacks();
+      });
+    }
+  }
+
+  getCurrentCustomerRateValue(): number {
+    return +this.currentCustomerRate.value || 0;
+  }
+
+  getCurrentCustomerFeedbackValue(): string {
+    return this.currentCustomerFeedback.value || '';
   }
 
   private getProduct(): void {
@@ -95,24 +120,38 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  private getImages() {
+  private getImages(): void {
     this.imageService.getAllImagesForProductWithId(this.productId).subscribe((images: ImageModel[]) => {
       this.images = images;
     });
   }
 
-  private getRates() {
+  private getRates(): void {
     this.rateService.getAllRatesForProductWithId(this.productId).subscribe((rates: RateModel[]) => {
       this.rates = rates;
-      this.isStarRatingReadonly = false;
       this.averageRate = this.calculateAverageRate();
+      this.currentCustomerRate = this.getCurrentCustomerRate();
       this.isStarRatingReadonly = true;
     });
   }
 
-  private getFeedbacks() {
+  private getFeedbacks(): void {
     this.feedbackService.getAllFeedbacksForProductWithId(this.productId).subscribe((feedbacks: FeedbackModel[]) => {
-      this.feedbacks = feedbacks;
+      this.feedbacks = feedbacks.sort((a: FeedbackModel, b: FeedbackModel) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+      this.currentCustomerFeedback = this.getCurrentCustomerFeedback();
     });
+  }
+
+  private getCurrentCustomerRate(): RateModel {
+    return this.rates.find((rate: RateModel) => rate.customerId === this.customerId) || {} as RateModel;
+  }
+
+  private getCurrentCustomerFeedback(): FeedbackModel {
+    return this.feedbacks.find((feedback: FeedbackModel) => feedback.customerId === this.customerId) || {} as FeedbackModel;
+  }
+
+  getFeedbackAuthor(feedbackId: string): string {
+    // TODO Get feedback author
+    return 'M. Pietrzak';
   }
 }

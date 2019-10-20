@@ -21,12 +21,27 @@
   text-align: justify;
 }
 
-.added-comment {
-  font-style: italic;
-}
-
 .price {
   font-size: 24px;
   margin-top: 8px;
   margin-bottom: 8px;
+}
+
+.add-to-cart {
+  margin-bottom: 8px;
+}
+
+.comment-card {
+  font-size: 14px;
+  font-style: italic;
+  margin-top: 8px;
+  margin-bottom: 8px;
+
+  mat-card-title {
+    font-size: 14px
+  }
+
+  ::ng-deep .mat-card-header-text {
+    margin: 0 !important;
+  }
 }

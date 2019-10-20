@@ -23,7 +23,7 @@ export class RateService {
     );
   }
 
-  updateRate(updatedRate: RateModel): Observable<CustomResponse> {
+  updateRate(updatedRate: Partial<RateModel>): Observable<CustomResponse> {
     return this.httpClient.put<CustomResponse>(`${this.SERVER_API_URL}/rates/${updatedRate._id}`, updatedRate).pipe(
       catchError((err: CustomResponse | ErrorResponse) => throwError(err.message))
     );

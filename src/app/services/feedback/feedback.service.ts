@@ -23,7 +23,7 @@ export class FeedbackService {
     );
   }
 
-  updateFeedback(updatedFeedback: FeedbackModel): Observable<CustomResponse> {
+  updateFeedback(updatedFeedback: Partial<FeedbackModel>): Observable<CustomResponse> {
     return this.httpClient.put<CustomResponse>(`${this.SERVER_API_URL}/feedbacks/${updatedFeedback._id}`, updatedFeedback).pipe(
       catchError((err: CustomResponse | ErrorResponse) => throwError(err.message))
     );

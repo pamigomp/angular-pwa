@@ -1,6 +1,6 @@
 <div class="product-container">
   <mat-card fxLayout="column">
-    <div class="first-row" fxLayout.lt-md="column-reverse" fxLayout.gt-sm="row">
+    <div class="first-row" fxLayout.gt-sm="row" fxLayout.lt-md="column-reverse">
       <div class="product-carousel">
         <mat-carousel [autoplay]="true"
                       [hideArrows]="false"
@@ -30,14 +30,14 @@
       <div fxLayout="column">
         <mat-card-title>{{product.title}}</mat-card-title>
         <div fxLayout="row" fxLayoutAlign="start center">
-          <star-rating [value]="averageRate" checkedcolor="#F7B000" uncheckedcolor="black" size="24px"
-                       [readonly]="isStarRatingReadonly"></star-rating>
+          <star-rating [readonly]="isStarRatingReadonly" [value]="averageRate" checkedcolor="#F7B000" size="24px"
+                       uncheckedcolor="black"></star-rating>
           <span>({{rates.length}})</span>
         </div>
         <div fxLayout="column" fxLayoutAlign="start start">
           <span class="price">{{product.salePriceGross | currency:'PLN'}}</span>
           <button (click)="addToCart(product)" [disabled]="isProductAddedToCart(product)"
-                  aria-label="Dodaj produkt do koszyka" mat-raised-button color="primary">
+                  aria-label="Dodaj produkt do koszyka" class="add-to-cart" color="primary" mat-raised-button>
             <mat-icon>add_shopping_cart</mat-icon>
             <span *ngIf="!isProductAddedToCart(product)">Dodaj do koszyka</span>
             <span *ngIf="isProductAddedToCart(product)">Dodano do koszyka</span>
@@ -54,25 +54,31 @@
       <div *ngIf="customerId">
         <div fxLayout="row" fxLayoutAlign="start center">
           <label>Wybierz ocenę:</label>
-          <star-rating [value]="0" checkedcolor="#F7B000" uncheckedcolor="black" size="24px" readonly="false"
-                       (rate)="rateProduct($event)"></star-rating>
+          <star-rating (rate)="rateProduct($event)" [value]="getCurrentCustomerRateValue()" checkedcolor="#F7B000"
+                       readonly="false" size="24px" uncheckedcolor="black"></star-rating>
         </div>
         <mat-form-field class="full-width">
-          <textarea [(ngModel)]="feedback" matInput placeholder="Napisz komentarz..."></textarea>
+          <textarea mat-autosize="true" maxlength="1024" [value]="getCurrentCustomerFeedbackValue()" [(ngModel)]="feedback" matInput
+                    placeholder="Napisz komentarz..."></textarea>
         </mat-form-field>
-        <button (click)="addComment()" aria-label="Dodaj komentarz" mat-raised-button color="primary">
-          <!--          <mat-icon>add_feedback</mat-icon>-->
-          <span>Dodaj komentarz</span>
+        <button (click)="addComment()" aria-label="Dodaj komentarz"
+                color="primary" mat-raised-button>
+          <mat-icon>add_comment</mat-icon>
+          <span *ngIf="!currentCustomerFeedback.value">Dodaj komentarz</span>
+          <span *ngIf="currentCustomerFeedback.value">Zaktualizuj komentarz</span>
         </button>
       </div>
       <div *ngIf="!customerId">
-        <span><a routerLink="/login" [queryParams]="{returnUrl: currentRoute}">Zaloguj się</a>, aby dodać opinię o produkcie</span>
+        <span><a [queryParams]="{returnUrl: currentRoute}" routerLink="/login">Zaloguj się</a>, aby dodać opinię o produkcie</span>
       </div>
-      <mat-card *ngFor="let feedback of feedbacks">
-        <mat-card-header fxLayoutAlign="end start">{{feedback.createdAt | date:'medium'}}</mat-card-header>
-        <mat-card-content class="added-comment">{{feedback.value}}</mat-card-content>
+      <mat-card class="comment-card" *ngFor="let feedback of feedbacks">
+        <mat-card-header>
+          <mat-card-title>{{getFeedbackAuthor(feedback._id)}}</mat-card-title>
+          <mat-card-subtitle>{{feedback.updatedAt | date:'medium'}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>{{feedback.value}}</mat-card-content>
       </mat-card>
-      <span *ngIf="feedbacks.length === 0">Brak komentarzy!</span>
+      <span class="comment-card" *ngIf="feedbacks.length === 0">Brak komentarzy!</span>
     </div>
   </mat-card>
 </div>

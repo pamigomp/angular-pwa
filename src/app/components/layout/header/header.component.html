@@ -38,7 +38,7 @@
   <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
     <div fxLayoutAlign="center">
       <a [matMenuTriggerFor]="cartList" aria-label="Przycisk twój koszyk" mat-button>
-        <mat-icon [matBadgeDescription]="'Ilość produktów dodanych do koszyka'" [matBadgeHidden]="getCartProductCount() === 0"
+        <mat-icon [matBadgeHidden]="getCartProductCount() === 0"
                   [matBadgeOverlap]="false" [matBadgePosition]="'above before'"
                   [matBadgeSize]="'medium'" [matBadge]="getCartProductCount().toString()"
                   matBadgeColor="warn">shopping_cart
