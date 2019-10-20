@@ -42,7 +42,7 @@ export class FeedbackService {
     );
   }
 
-  createFeedbackForProductWithId(productId: string, newFeedback: FeedbackModel): Observable<CustomResponse> {
+  createFeedbackForProductWithId(productId: string, newFeedback: Partial<FeedbackModel>): Observable<CustomResponse> {
     return this.httpClient.post<CustomResponse>(`${this.SERVER_API_URL}/products/${productId}/feedbacks`, newFeedback).pipe(
       catchError((err: ErrorResponse) => throwError(err.message))
     );

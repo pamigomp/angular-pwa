@@ -38,7 +38,7 @@ import { MatPaginatorIntl } from '@angular/material';
 import { PaginatorIntlService } from './services/paginator-intl.service';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { SearchComponent } from './components/search/search.component';
-
+import { RatingModule } from 'ng-starrating';
 
 registerLocaleData(localePl);
 
@@ -75,6 +75,7 @@ export function tokenGetter() {
     MatCarouselModule,
     MaterialModule,
     ReactiveFormsModule,
+    RatingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     DeviceDetectorModule.forRoot(),
     JwtModule.forRoot({

@@ -42,7 +42,7 @@ export class RateService {
     );
   }
 
-  createRateForProductWithId(productId: string, newRate: RateModel): Observable<CustomResponse> {
+  createRateForProductWithId(productId: string, newRate: Partial<RateModel>): Observable<CustomResponse> {
     return this.httpClient.post<CustomResponse>(`${this.SERVER_API_URL}/products/${productId}/rates`, newRate).pipe(
       catchError((err: ErrorResponse) => throwError(err.message))
     );
