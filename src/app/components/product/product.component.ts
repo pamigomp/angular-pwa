@@ -27,6 +27,7 @@ export class ProductComponent implements OnInit {
   isStarRatingReadonly = false;
   feedback: string;
   private productId: string;
+  currentRoute: string;
 
   constructor(private productService: ProductService,
               private imageService: ImageService,
@@ -39,6 +40,7 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentRoute = this.router.url;
     this.activatedRoute.params.subscribe((params: Params) => {
       this.productId = params.id;
       this.getProduct();
