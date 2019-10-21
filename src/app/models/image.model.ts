@@ -2,7 +2,7 @@ import { Deserializable } from './deserializable.model';
 
 export class ImageModel implements Deserializable {
   _id: string;
-  url = 'https://via.placeholder.com/512';
+  url: string;
   productId: string;
 
   deserialize(input: any): this {

@@ -12,7 +12,7 @@ export class CustomerModel implements Deserializable {
   postalCode?: string;
   city?: string;
   phone?: string;
-  regular = true;
+  regular: boolean;
   lastLogin: string;
   salt?: string;
 

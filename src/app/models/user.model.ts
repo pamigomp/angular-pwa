@@ -12,12 +12,12 @@ export class UserModel implements Deserializable {
   postalCode?: string;
   city?: string;
   phone?: string;
-  regular = true;
+  regular: boolean;
   lastLogin: string;
   token: string;
   provider?: 'FACEBOOK' | 'GOOGLE' | 'INSTAGRAM' | 'TWITTER';
   profilePicture?: string;
-  emailVerified = false;
+  emailVerified: boolean;
 
   deserialize(input: any): this {
     return Object.assign(this, input);

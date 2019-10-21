@@ -1,0 +1,35 @@
+.mat-column-title {
+  flex: 0 0 50%;
+}
+
+.mat-column-salePriceGross {
+  flex: 0 0 15%;
+}
+
+.mat-column-quantity {
+  flex: 0 0 15%;
+}
+
+.mat-column-totalPriceGross {
+  flex: 0 0 15%;
+}
+
+mat-table {
+  overflow: auto;
+}
+
+.mat-row, .mat-header-row {
+  min-width: 1280px;
+  width: 100%;
+}
+
+.mat-icon {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-btn {
+  margin: 10px;
+}

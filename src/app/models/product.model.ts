@@ -7,13 +7,14 @@ export class ProductModel implements Deserializable {
   saleTaxRate: number;
   salePriceGross: number;
   description: string;
-  stockAmount = 0;
+  stockAmount: number;
   categoryId: string;
   producerId: string;
   imgUrl?: string;
   rates?: RateModel[];
   averageRate?: number;
   id?: string;
+  orderQuantity?: number;
 
   deserialize(input: any): this {
     return Object.assign(this, input);

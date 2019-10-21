@@ -54,15 +54,15 @@ export class SearchComponent implements OnInit {
     private router: Router) {
   }
 
+  get isCollectionEmpty(): boolean {
+    return this.products.collection && this.products.collection.length === 0;
+  }
+
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.searchQuery = params.query;
       this.getProducts();
     });
-  }
-
-  get isCollectionEmpty(): boolean {
-    return this.products.collection && this.products.collection.length === 0;
   }
 
   changePage($event: PageEvent): void {

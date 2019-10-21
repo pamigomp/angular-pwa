@@ -13,7 +13,7 @@ import { PageEvent } from '@angular/material';
 import { SortOptionModel } from '../../models/sort-option.model';
 import { CartService } from '../../services/cart/cart.service';
 import { RateService } from '../../services/rate/rate.service';
-import { RateModel, RateValue } from '../../models/rate.model';
+import { RateModel } from '../../models/rate.model';
 
 @Component({
   selector: 'app-category',
