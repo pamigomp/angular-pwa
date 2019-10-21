@@ -9,7 +9,9 @@
             <mat-table [dataSource]="dataSource">
               <ng-container matColumnDef="title">
                 <mat-header-cell *matHeaderCellDef>Produkt</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.title}}</mat-cell>
+                <mat-cell *matCellDef="let element">
+                  <a class="product-link" [routerLink]="['/products', element._id]">{{element.title}}</a>
+                </mat-cell>
                 <mat-footer-cell *matFooterCellDef></mat-footer-cell>
               </ng-container>
               <ng-container matColumnDef="salePriceGross">
@@ -20,9 +22,13 @@
               <ng-container matColumnDef="quantity">
                 <mat-header-cell *matHeaderCellDef>Ilość</mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                  <mat-icon (click)="decreaseQuantity(element)">remove</mat-icon>
+                  <button mat-icon-button>
+                    <mat-icon (click)="decreaseQuantity(element)">remove</mat-icon>
+                  </button>
                   <span>{{element.orderQuantity}}</span>
-                  <mat-icon (click)="increaseQuantity(element)">add</mat-icon>
+                  <button mat-icon-button>
+                    <mat-icon (click)="increaseQuantity(element)">add</mat-icon>
+                  </button>
                 </mat-cell>
                 <mat-footer-cell *matFooterCellDef></mat-footer-cell>
               </ng-container>
@@ -41,7 +47,7 @@
           </div>
         </mat-card-content>
         <mat-card-footer fxLayoutAlign="end center">
-          <button class="step-btn" mat-raised-button matStepperNext>Dalej</button>
+          <button [disabled]="cartProducts.length === 0" color="primary" class="step-btn" mat-raised-button matStepperNext>Dalej</button>
         </mat-card-footer>
       </mat-card>
     </form>

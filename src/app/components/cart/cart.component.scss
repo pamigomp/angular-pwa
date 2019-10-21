@@ -23,13 +23,21 @@ mat-table {
   width: 100%;
 }
 
-.mat-icon {
-  font-size: 12px;
+.mat-icon-button {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.mat-icon {
+  font-size: 12px;
+}
+
 .step-btn {
   margin: 10px;
+}
+
+.product-link {
+  text-decoration: unset;
+  color: unset;
 }

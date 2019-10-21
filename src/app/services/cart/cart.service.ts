@@ -15,7 +15,7 @@ export class CartService {
   }
 
   addToCart(product: ProductModel): void {
-    const productCopy = Object.assign({}, product);
+    const productCopy: ProductModel = Object.assign({}, product);
     delete productCopy.id;
     delete productCopy.imgUrl;
     delete productCopy.rates;
@@ -29,7 +29,7 @@ export class CartService {
   }
 
   isProductAddedToCart(product: ProductModel): boolean {
-    const productCopy = Object.assign({}, product);
+    const productCopy: ProductModel = Object.assign({}, product);
     delete productCopy.id;
     delete productCopy.imgUrl;
     delete productCopy.rates;
@@ -49,6 +49,8 @@ export class CartService {
   }
 
   getCartTotalPrice(): number {
-    return this.getAllProductsAddedToCart().map((product: ProductModel) => product.salePriceGross).reduce((acc: number, value: number) => acc + value, 0);
+    return this.getAllProductsAddedToCart()
+      .map((product: ProductModel) => product.salePriceGross)
+      .reduce((acc: number, value: number) => acc + value, 0);
   }
 }

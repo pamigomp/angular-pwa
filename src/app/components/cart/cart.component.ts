@@ -52,7 +52,9 @@ export class CartComponent implements OnInit {
   }
 
   getTotalCost(): number {
-    return this.cartService.getCartTotalPrice();
+    return this.cartProducts
+      .map((product: ProductModel) => product.salePriceGross * product.orderQuantity)
+      .reduce((acc: number, value: number) => acc + value, 0);
   }
 
   decreaseQuantity(cartProduct: ProductModel): void {
