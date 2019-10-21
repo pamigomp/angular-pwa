@@ -21,9 +21,7 @@ export class OrderModel implements Deserializable {
   updatedAt: string;
 
   deserialize(input: any): this {
-    Object.assign(this, input);
-    this.products = input.products.map((product: CartProductModel) => new CartProductModel().deserialize(product));
-    return this;
+    return Object.assign(this, input);
   }
 }
 
