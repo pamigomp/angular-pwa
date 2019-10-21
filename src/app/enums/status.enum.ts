@@ -8,3 +8,13 @@ export enum StatusEnum {
   'COMPLETED' = 'Zamówienie zrealizowane',
   'CANCELLED' = 'Zamówienie anulowane'
 }
+
+export type Status =
+  'PENDING_PAYMENT'
+  | 'PENDING'
+  | 'PROCESSING'
+  | 'PENDING_SHIPMENT'
+  | 'SEND'
+  | 'SHIPPED'
+  | 'COMPLETED'
+  | 'CANCELLED';

@@ -44,7 +44,7 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <span *ngIf="isCollectionEmpty()">Brak wyników!</span>
+      <span *ngIf="isCollectionEmpty">Brak wyników!</span>
     </mat-card-content>
     <mat-card-footer>
       <mat-paginator (page)="changePage($event)"

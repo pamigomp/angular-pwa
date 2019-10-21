@@ -1,4 +1,7 @@
 import { Deserializable } from './deserializable.model';
+import { Payment } from '../enums/payment-method.enum';
+import { Status } from '../enums/status.enum';
+import { Shipping } from '../enums/shipping-method.enum';
 
 export class OrderModel implements Deserializable {
   _id: string;
@@ -11,9 +14,9 @@ export class OrderModel implements Deserializable {
   employeeId?: string;
   customerId: string;
   shippingId: string;
-  status: 'PENDING_PAYMENT' | 'PENDING' | 'PROCESSING' | 'PENDING_SHIPMENT' | 'SEND' | 'SHIPPED' | 'COMPLETED' | 'CANCELLED';
-  paymentMethod: 'CASH' | 'CREDIT_CARD' | 'DEBIT_CARD' | 'BANK_TRANSFER' | 'BLIK' | 'PAYPAL';
-  shippingMethod?: 'COLLECTION_IN_PERSON' | 'CASH_ON_DELIVERY' | 'COURIER_PREPAYMENT' | 'POCZTA_POLSKA' | 'PACZKOMATY_INPOST';
+  status: Status;
+  paymentMethod: Payment;
+  shippingMethod?: Shipping;
   createdAt: string;
   updatedAt: string;
 
@@ -21,3 +24,4 @@ export class OrderModel implements Deserializable {
     return Object.assign(this, input);
   }
 }
+

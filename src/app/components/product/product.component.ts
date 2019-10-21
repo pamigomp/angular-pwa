@@ -109,13 +109,7 @@ export class ProductComponent implements OnInit {
 
   private calculateAverageRate(): number {
     const rateCount = this.rates.length;
-    if (rateCount === 0) {
-      return 0;
-    }
-    let rateSum = 0;
-    this.rates.forEach((rate: RateModel) => {
-      rateSum += +rate.value;
-    });
+    const rateSum = this.rates.map((rate: RateModel) => +rate.value).reduce((acc: number, value: number) => acc + value, 0);
     return rateSum / rateCount;
   }
 

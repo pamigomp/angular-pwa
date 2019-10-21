@@ -6,3 +6,5 @@ export enum PaymentMethodEnum {
   'BLIK' = 'BLIK',
   'PAYPAL' = 'PayPal'
 }
+
+export type Payment = 'CASH' | 'CREDIT_CARD' | 'DEBIT_CARD' | 'BANK_TRANSFER' | 'BLIK' | 'PAYPAL';

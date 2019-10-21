@@ -1,11 +1,13 @@
 import { Deserializable } from './deserializable.model';
+import { Shipping } from '../enums/shipping-method.enum';
 
 export class ShippingModel implements Deserializable {
   _id: string;
-  method: 'COLLECTION_IN_PERSON' | 'CASH_ON_DELIVERY' | 'COURIER_PREPAYMENT' | 'POCZTA_POLSKA' | 'PACZKOMATY_INPOST';
+  method: Shipping;
   price: number;
 
   deserialize(input: any): this {
     return Object.assign(this, input);
   }
 }
+

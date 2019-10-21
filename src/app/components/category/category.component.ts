@@ -13,7 +13,7 @@ import { PageEvent } from '@angular/material';
 import { SortOptionModel } from '../../models/sort-option.model';
 import { CartService } from '../../services/cart/cart.service';
 import { RateService } from '../../services/rate/rate.service';
-import { RateModel } from '../../models/rate.model';
+import { RateModel, RateValue } from '../../models/rate.model';
 
 @Component({
   selector: 'app-category',
@@ -61,6 +61,10 @@ export class CategoryComponent implements OnInit {
     private router: Router) {
   }
 
+  get isCollectionEmpty(): boolean {
+    return this.products.collection && this.products.collection.length === 0;
+  }
+
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.categoryName = params.name;
@@ -69,10 +73,6 @@ export class CategoryComponent implements OnInit {
       this.categoryId = params.id;
       this.getProducts();
     });
-  }
-
-  isCollectionEmpty(): boolean {
-    return this.products.collection && this.products.collection.length === 0;
   }
 
   changePage($event: PageEvent): void {
@@ -132,19 +132,13 @@ export class CategoryComponent implements OnInit {
     return this.cartService.isProductAddedToCart(product);
   }
 
-  private calculateAverageRate(rates: RateModel[]): number {
-    const rateCount = this.getRatesCount(rates);
-    if (rateCount === 0) {
-      return 0;
-    }
-    let rateSum = 0;
-    rates.forEach((rate: RateModel) => {
-      rateSum += +rate.value;
-    });
-    return rateSum / rateCount;
-  }
-
   getRatesCount(rates: RateModel[]): number {
     return rates ? rates.length : 0;
+  }
+
+  private calculateAverageRate(rates: RateModel[]): number {
+    const rateCount = this.getRatesCount(rates);
+    const rateSum = rates.map((rate: RateModel) => +rate.value).reduce((acc: number, value: number) => acc + value, 0);
+    return rateSum / rateCount;
   }
 }

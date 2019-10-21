@@ -6,3 +6,9 @@ export enum ShippingMethodEnum {
   'PACZKOMATY_INPOST' = 'Paczkomaty InPost'
 }
 
+export type Shipping =
+  'COLLECTION_IN_PERSON'
+  | 'CASH_ON_DELIVERY'
+  | 'COURIER_PREPAYMENT'
+  | 'POCZTA_POLSKA'
+  | 'PACZKOMATY_INPOST';

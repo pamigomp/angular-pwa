@@ -78,11 +78,6 @@ export class CartService {
   }
 
   getCartTotalPrice(): number {
-    const products: ProductModel[] = this.getAllProductsAddedToCart();
-    let total = 0;
-    products.forEach((product: ProductModel) => {
-      total += product.salePriceGross;
-    });
-    return total;
+    return this.getAllProductsAddedToCart().map((product: ProductModel) => product.salePriceGross).reduce((acc: number, value: number) => acc + value, 0);
   }
 }

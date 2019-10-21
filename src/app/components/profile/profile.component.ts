@@ -6,11 +6,11 @@ import { OrderService } from '../../services/order/order.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { OrderModel } from '../../models/order.model';
 import { CustomerModel } from '../../models/customer.model';
-import { StatusEnum } from '../../enums/status.enum';
-import { PaymentMethodEnum } from '../../enums/payment-method.enum';
+import { Status, StatusEnum } from '../../enums/status.enum';
+import { Payment, PaymentMethodEnum } from '../../enums/payment-method.enum';
 import { ShippingService } from '../../services/shipping/shipping.service';
 import { ShippingModel } from '../../models/shipping.model';
-import { ShippingMethodEnum } from '../../enums/shipping-method.enum';
+import { Shipping, ShippingMethodEnum } from '../../enums/shipping-method.enum';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
@@ -45,15 +45,15 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  getShippingMethod(shippingMethod) {
+  getShippingMethod(shippingMethod: Shipping) {
     return ShippingMethodEnum[shippingMethod];
   }
 
-  getPaymentMethod(paymentMethod) {
+  getPaymentMethod(paymentMethod: Payment) {
     return PaymentMethodEnum[paymentMethod];
   }
 
-  getStatus(status) {
+  getStatus(status: Status) {
     return StatusEnum[status];
   }
 
