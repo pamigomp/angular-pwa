@@ -85,6 +85,10 @@
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Cena całkowita</mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.totalPrice | currency:'PLN'}} </mat-cell>
               </ng-container>
+              <ng-container matColumnDef="createdAt">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Data złożenia zamówienia</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.createdAt | date:'medium'}} </mat-cell>
+              </ng-container>
               <ng-container matColumnDef="shippingDate">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Data wysyłki</mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.shippingDate | date:'medium'}} </mat-cell>
@@ -110,8 +114,7 @@
               <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </mat-table>
 
-            <mat-paginator [pageSizeOptions]="[1, 5, 10, 25, 50, 100]" pageSize="10"
-                           showFirstLastButtons></mat-paginator>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" pageSize="10" showFirstLastButtons></mat-paginator>
           </div>
         </mat-card-content>
       </mat-card>

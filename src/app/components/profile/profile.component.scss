@@ -9,10 +9,14 @@
 }
 
 .mat-column-paymentStatus {
-  flex: 0 0 10%;
+  flex: 0 0 8%;
 }
 
 .mat-column-totalPrice {
+  flex: 0 0 8%;
+}
+
+.mat-column-createdAt {
   flex: 0 0 10%;
 }
 
@@ -21,11 +25,11 @@
 }
 
 .mat-column-shippingId {
-  flex: 0 0 15%;
+  flex: 0 0 12%;
 }
 
 .mat-column-status {
-  flex: 0 0 15%;
+  flex: 0 0 12%;
 }
 
 .mat-column-paymentMethod {

@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   error: string;
   loading = false;
   submitted = false;
-  displayedColumns: string[] = ['paymentStatus', 'totalPrice', 'shippingDate', 'shippingId', 'status', 'paymentMethod', 'additionalInformation'];
+  displayedColumns: string[] = ['createdAt', 'totalPrice', 'status', 'shippingDate', 'shippingId', 'paymentMethod', 'paymentStatus', 'additionalInformation'];
   dataSource: MatTableDataSource<OrderModel>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
