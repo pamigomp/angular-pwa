@@ -32,7 +32,7 @@
     <div class="padding">
       <mat-form-field>
         <mat-icon matPrefix>search</mat-icon>
-        <input (search)="getSearchResult()" [(ngModel)]="searchQuery" class="search-input" matInput
+        <input (search)="drawer.close() && getSearchResult()" [(ngModel)]="searchQuery" class="search-input" matInput
                placeholder="Szukaj..." type="search">
       </mat-form-field>
     </div>
