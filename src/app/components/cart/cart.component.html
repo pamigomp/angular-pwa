@@ -1,114 +1,160 @@
-<mat-horizontal-stepper #stepper linear="true">
+<mat-horizontal-stepper labelPosition="bottom" #stepper linear="true">
+  <!--  1. step -->
   <mat-step>
-    <form>
-      <ng-template matStepLabel>Twój koszyk</ng-template>
-      <mat-card>
-        <mat-card-title>Twój koszyk</mat-card-title>
-        <mat-card-content>
-          <div class="mat-elevation-z8 full-width">
-            <mat-table [dataSource]="dataSource">
-              <ng-container matColumnDef="title">
-                <mat-header-cell *matHeaderCellDef>Produkt</mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                  <a class="product-link" [routerLink]="['/products', element._id]">{{element.title}}</a>
-                </mat-cell>
-                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-              </ng-container>
-              <ng-container matColumnDef="salePriceGross">
-                <mat-header-cell *matHeaderCellDef>Cena</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.salePriceGross | currency:'PLN'}}</mat-cell>
-                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-              </ng-container>
-              <ng-container matColumnDef="quantity">
-                <mat-header-cell *matHeaderCellDef>Ilość</mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                  <button mat-icon-button>
-                    <mat-icon (click)="decreaseQuantity(element)">remove</mat-icon>
-                  </button>
-                  <span>{{element.orderQuantity}}</span>
-                  <button mat-icon-button>
-                    <mat-icon (click)="increaseQuantity(element)">add</mat-icon>
-                  </button>
-                </mat-cell>
-                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-              </ng-container>
-              <ng-container matColumnDef="totalPriceGross">
-                <mat-header-cell *matHeaderCellDef>Razem</mat-header-cell>
-                <mat-cell
-                  *matCellDef="let element">{{element.salePriceGross * element.orderQuantity | currency:'PLN'}}</mat-cell>
-                <mat-footer-cell *matFooterCellDef>
-                  <strong>RAZEM: {{getTotalCost() | currency:'PLN'}}</strong>
-                </mat-footer-cell>
-              </ng-container>
-              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-              <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
-            </mat-table>
-          </div>
-        </mat-card-content>
-        <mat-card-footer fxLayoutAlign="end center">
-          <button [disabled]="cartProducts.length === 0" color="primary" class="step-btn" mat-raised-button matStepperNext>Dalej</button>
-        </mat-card-footer>
-      </mat-card>
-    </form>
+    <ng-template matStepLabel>Twój koszyk</ng-template>
+    <mat-card>
+      <mat-card-title>Twój koszyk</mat-card-title>
+      <mat-card-content>
+        <div class="mat-elevation-z8 full-width">
+          <mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="title">
+              <mat-header-cell *matHeaderCellDef>Produkt</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <a class="product-link" [routerLink]="['/products', element._id]">{{element.title}}</a>
+              </mat-cell>
+              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+            </ng-container>
+            <ng-container matColumnDef="salePriceGross">
+              <mat-header-cell *matHeaderCellDef>Cena</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.salePriceGross | currency:'PLN'}}</mat-cell>
+              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+            </ng-container>
+            <ng-container matColumnDef="quantity">
+              <mat-header-cell *matHeaderCellDef>Ilość</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <button mat-icon-button>
+                  <mat-icon (click)="decreaseQuantity(element)">remove</mat-icon>
+                </button>
+                <span>{{element.orderQuantity}}</span>
+                <button mat-icon-button>
+                  <mat-icon (click)="increaseQuantity(element)">add</mat-icon>
+                </button>
+              </mat-cell>
+              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+            </ng-container>
+            <ng-container matColumnDef="totalPriceGross">
+              <mat-header-cell *matHeaderCellDef>Razem</mat-header-cell>
+              <mat-cell
+                *matCellDef="let element">{{element.salePriceGross * element.orderQuantity | currency:'PLN'}}</mat-cell>
+              <mat-footer-cell *matFooterCellDef>
+                <strong>RAZEM: {{getTotalCost() | currency:'PLN'}}</strong>
+              </mat-footer-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+          </mat-table>
+        </div>
+      </mat-card-content>
+      <mat-card-footer fxLayoutAlign="center center">
+        <button [disabled]="cartProducts.length === 0" color="primary" class="step-btn" mat-raised-button
+                matStepperNext>Dalej
+        </button>
+      </mat-card-footer>
+    </mat-card>
   </mat-step>
+
+  <!--  2. step -->
   <mat-step *ngIf="!isAuthenticated">
-    <form>
-      <ng-template matStepLabel>Logowanie</ng-template>
-      <div>
-        <button mat-raised-button matStepperPrevious>Wróć</button>
-        <button mat-raised-button matStepperNext>Dalej</button>
-      </div>
-    </form>
+    <ng-template matStepLabel>Logowanie</ng-template>
+    <mat-card>
+      <mat-card-title>Logowanie</mat-card-title>
+      <mat-card-content fxLayoutAlign="center center">
+        <form (ngSubmit)="login()" [formGroup]="loginForm">
+          <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input [ngClass]="{ 'is-invalid': submitted && loginForm.controls.email.errors }" formControlName="email"
+                   id="email" matInput name="email" placeholder="E-mail" type="email">
+            <mat-error *ngIf="submitted && loginForm.controls.email.errors?.required">E-mail jest wymagany</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Hasło</mat-label>
+            <input [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }"
+                   formControlName="password" id="password" matInput name="password" placeholder="Hasło"
+                   type="password">
+            <mat-error *ngIf="loginForm.controls.password.errors?.required">Hasło jest wymagane</mat-error>
+          </mat-form-field>
+
+          <p *ngIf="error" class="error full-width">
+            {{ error }}
+          </p>
+
+          <div fxLayoutAlign="center center">
+            <button class="step-btn" mat-raised-button matStepperPrevious>Wróć</button>
+            <mat-spinner *ngIf="loading" color="accent" diameter="25"></mat-spinner>
+            <button [disabled]="loading" color="primary" mat-raised-button type="submit">
+              Zaloguj
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
   </mat-step>
+
+  <!--  3. step -->
   <mat-step>
-    <form>
-      <ng-template matStepLabel>Dostawa</ng-template>
-      <mat-card *ngFor="let shipping of shippings">
-        {{getShippingMethod(shipping.method)}}
-      </mat-card>
-      <div>
-        <button mat-raised-button matStepperPrevious>Wróć</button>
-        <button mat-raised-button matStepperNext>Dalej</button>
-      </div>
-    </form>
+    <ng-template matStepLabel>Dostawa</ng-template>
+    <mat-card>
+      <mat-card-title>Wybierz sposób dostawy lub odbioru</mat-card-title>
+      <mat-card-content>
+        <mat-selection-list [(ngModel)]="selectedShipping" #shippingList>
+          <mat-list-option [value]="shipping._id" color="primary" checkboxPosition="before"
+                           *ngFor="let shipping of shippings">
+            {{getShippingMethod(shipping.method)}} ({{shipping.price | currency:'PLN'}})
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-card-content>
+      <mat-card-footer fxLayoutAlign="center center">
+        <button mat-raised-button class="step-btn" matStepperPrevious>Wróć</button>
+        <button [disabled]="!selectedShipping" color="primary" class="step-btn" mat-raised-button matStepperNext>Dalej
+        </button>
+      </mat-card-footer>
+    </mat-card>
   </mat-step>
+
+  <!--  4. step -->
   <mat-step>
-    <form>
-      <ng-template matStepLabel>Płatność</ng-template>
-      <mat-card *ngFor="let payment of payments">
-        {{getPaymentMethod(payment)}}
-      </mat-card>
-      <div>
-        <button mat-raised-button matStepperPrevious>Wróć</button>
-        <button mat-raised-button matStepperNext>Dalej</button>
-      </div>
-    </form>
+    <ng-template matStepLabel>Płatność</ng-template>
+    <mat-card>
+      <mat-card-title>Wybierz sposób płatności</mat-card-title>
+      <mat-card-content>
+        <mat-selection-list [(ngModel)]="selectedPayment" #paymentList>
+          <mat-list-option [value]="payment" color="primary" checkboxPosition="before" *ngFor="let payment of payments">
+            {{getPaymentMethod(payment)}}
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-card-content>
+      <mat-card-footer fxLayoutAlign="center center">
+        <button mat-raised-button class="step-btn" matStepperPrevious>Wróć</button>
+        <button [disabled]="!selectedPayment" color="primary" class="step-btn" mat-raised-button matStepperNext>Dalej</button>
+      </mat-card-footer>
+    </mat-card>
   </mat-step>
+
+  <!--  5. step -->
   <mat-step>
-    <form>
-      <ng-template matStepLabel>Dane do wysyłki</ng-template>
-      <div>
-        <button mat-raised-button matStepperPrevious>Wróć</button>
-        <button mat-raised-button matStepperNext>Dalej</button>
-      </div>
-    </form>
+    <ng-template matStepLabel>Dane do wysyłki</ng-template>
+    <mat-card-footer fxLayoutAlign="center center">
+      <button mat-raised-button class="step-btn" matStepperPrevious>Wróć</button>
+      <button color="primary" class="step-btn" mat-raised-button matStepperNext>Dalej</button>
+    </mat-card-footer>
   </mat-step>
+
+  <!--  6. step -->
   <mat-step>
-    <form>
-      <ng-template matStepLabel>Podsumowanie</ng-template>
-      <div>
-        <button mat-raised-button matStepperPrevious>Wróć</button>
-        <button mat-raised-button matStepperNext>Dalej</button>
-      </div>
-    </form>
+    <ng-template matStepLabel>Podsumowanie</ng-template>
+    <mat-card-footer fxLayoutAlign="center center">
+      <button mat-raised-button class="step-btn" matStepperPrevious>Wróć</button>
+      <button color="primary" class="step-btn" mat-raised-button matStepperNext>Dalej</button>
+    </mat-card-footer>
   </mat-step>
+
+  <!--  7. step -->
   <mat-step>
     <ng-template matStepLabel>Potwierdzenie</ng-template>
-    You are now done.
-    <div>
-      <button mat-raised-button matStepperPrevious>Wróć</button>
+    <mat-card-footer fxLayoutAlign="center center">
+      <button mat-raised-button class="step-btn" matStepperPrevious>Wróć</button>
       <button (click)="stepper.reset()" mat-raised-button>Reset</button>
-    </div>
+    </mat-card-footer>
   </mat-step>
 </mat-horizontal-stepper>

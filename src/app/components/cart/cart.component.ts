@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShippingService } from '../../services/shipping/shipping.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { ShippingModel } from '../../models/shipping.model';
@@ -6,7 +6,9 @@ import { Payment, PaymentMethodEnum } from '../../enums/payment-method.enum';
 import { Shipping, ShippingMethodEnum } from '../../enums/shipping-method.enum';
 import { CartService } from '../../services/cart/cart.service';
 import { ProductModel } from '../../models/product.model';
-import { MatTableDataSource } from '@angular/material';
+import { MatSelectionList, MatSelectionListChange, MatTableDataSource } from '@angular/material';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cart',
@@ -19,10 +21,19 @@ export class CartComponent implements OnInit {
   displayedColumns: string[] = ['title', 'salePriceGross', 'quantity', 'totalPriceGross'];
   dataSource: MatTableDataSource<ProductModel>;
   cartProducts: ProductModel[];
+  loginForm: FormGroup;
+  error: string;
+  loading = false;
+  submitted = false;
+  @ViewChild(MatSelectionList, {static: true}) shippingList: MatSelectionList;
+  @ViewChild(MatSelectionList, {static: true}) paymentList: MatSelectionList;
+  selectedShipping: string;
+  selectedPayment: any;
 
   constructor(private authService: AuthService,
               private cartService: CartService,
-              private shippingService: ShippingService) {
+              private shippingService: ShippingService,
+              private formBuilder: FormBuilder) {
   }
 
   get isAuthenticated(): boolean {
@@ -41,6 +52,18 @@ export class CartComponent implements OnInit {
     });
 
     this.dataSource = new MatTableDataSource(this.cartProducts);
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+    this.shippingList.selectionChange.subscribe((s: MatSelectionListChange) => {
+      this.shippingList.deselectAll();
+      s.option.selected = true;
+    });
+    this.paymentList.selectionChange.subscribe((s: MatSelectionListChange) => {
+      this.paymentList.deselectAll();
+      s.option.selected = true;
+    });
   }
 
   getShippingMethod(shippingMethod: Shipping): ShippingMethodEnum {
@@ -65,5 +88,24 @@ export class CartComponent implements OnInit {
 
   increaseQuantity(cartProduct: ProductModel): void {
     ++cartProduct.orderQuantity;
+  }
+
+  login() {
+    this.submitted = true;
+
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.authService.signInCustomerLocal(this.loginForm.controls.email.value, this.loginForm.controls.password.value)
+      .pipe(first())
+      .subscribe(
+        result => console.log('[App] Successfully logged in'),
+        err => {
+          this.error = `Nastąpił błąd podczas procesu logowania. ${err.error.message}`;
+          this.loading = false;
+        }
+      );
   }
 }
