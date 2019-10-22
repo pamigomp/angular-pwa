@@ -25,8 +25,8 @@ export class CartComponent implements OnInit {
   error: string;
   loading = false;
   submitted = false;
-  @ViewChild(MatSelectionList, {static: true}) shippingList: MatSelectionList;
-  @ViewChild(MatSelectionList, {static: true}) paymentList: MatSelectionList;
+  @ViewChild('shippingList', {static: true}) shippingList: MatSelectionList;
+  @ViewChild('paymentList', {static: true}) paymentList: MatSelectionList;
   selectedShipping: string;
   selectedPayment: any;
 
