@@ -22,12 +22,12 @@
             <ng-container matColumnDef="quantity">
               <mat-header-cell *matHeaderCellDef>Ilość</mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <button mat-icon-button>
-                  <mat-icon (click)="decreaseQuantity(element)">remove</mat-icon>
+                <button (click)="decreaseQuantity(element)" matTooltip="Zmniejsz ilość sztuk produktu" mat-icon-button>
+                  <mat-icon>remove</mat-icon>
                 </button>
                 <span>{{element.orderQuantity}}</span>
-                <button mat-icon-button>
-                  <mat-icon (click)="increaseQuantity(element)">add</mat-icon>
+                <button (click)="increaseQuantity(element)" matTooltip="Zwiększ ilość sztuk produktu" mat-icon-button>
+                  <mat-icon>add</mat-icon>
                 </button>
               </mat-cell>
               <mat-footer-cell *matFooterCellDef></mat-footer-cell>
@@ -35,7 +35,13 @@
             <ng-container matColumnDef="totalPriceGross">
               <mat-header-cell *matHeaderCellDef>Razem</mat-header-cell>
               <mat-cell
-                *matCellDef="let element">{{element.salePriceGross * element.orderQuantity | currency:'PLN'}}</mat-cell>
+                *matCellDef="let element">
+                <span>{{element.salePriceGross * element.orderQuantity | currency:'PLN'}}</span>
+                <button matTooltip="Usuń produkt z koszyka" (click)="deleteProductFromCart(element._id)"
+                        mat-icon-button>
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-cell>
               <mat-footer-cell *matFooterCellDef>
                 <strong>RAZEM: {{getTotalCost() | currency:'PLN'}}</strong>
               </mat-footer-cell>

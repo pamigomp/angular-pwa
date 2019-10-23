@@ -16,6 +16,7 @@ import {
   MatListModule,
   MatMenuModule,
   MatNativeDateModule,
+  MatPaginatorIntl,
   MatPaginatorModule,
   MatProgressBarModule,
   MatProgressSpinnerModule,
@@ -29,8 +30,10 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
+  MatTooltipModule,
   MatTreeModule
 } from '@angular/material';
+import { PaginatorIntlService } from './services/paginator-intl.service';
 
 @NgModule({
   imports: [
@@ -61,7 +64,8 @@ import {
     MatGridListModule,
     MatTreeModule,
     MatStepperModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTooltipModule
   ],
   exports: [
     MatButtonModule,
@@ -91,11 +95,15 @@ import {
     MatGridListModule,
     MatTreeModule,
     MatStepperModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTooltipModule
   ],
   providers: [{
     provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
     useValue: {duration: 3000, verticalPosition: 'top'}
+  }, {
+    provide: MatPaginatorIntl,
+    useClass: PaginatorIntlService
   }],
 })
 export class MaterialModule {

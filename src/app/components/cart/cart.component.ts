@@ -44,14 +44,7 @@ export class CartComponent implements OnInit {
     this.shippingService.getAllShippings().subscribe((shippings: ShippingModel[]) => {
       this.shippings = shippings;
     });
-    this.cartProducts = this.cartService.getAllProductsAddedToCart().map((product: ProductModel) => {
-      return new ProductModel().deserialize({
-        ...product,
-        orderQuantity: 1
-      });
-    });
-
-    this.dataSource = new MatTableDataSource(this.cartProducts);
+    this.getCartProducts();
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -64,6 +57,17 @@ export class CartComponent implements OnInit {
       this.paymentList.deselectAll();
       s.option.selected = true;
     });
+  }
+
+  getCartProducts(): void {
+    this.cartProducts = this.cartService.getAllProductsAddedToCart().map((product: ProductModel) => {
+      return new ProductModel().deserialize({
+        ...product,
+        orderQuantity: 1
+      });
+    });
+
+    this.dataSource = new MatTableDataSource(this.cartProducts);
   }
 
   getShippingMethod(shippingMethod: Shipping): ShippingMethodEnum {
@@ -107,5 +111,10 @@ export class CartComponent implements OnInit {
           this.loading = false;
         }
       );
+  }
+
+  deleteProductFromCart(productId: string): void {
+    this.cartService.deleteProductFromCart(productId);
+    this.getCartProducts();
   }
 }

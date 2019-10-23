@@ -34,8 +34,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { AddressFormComponent } from './components/cart/address-form/address-form.component';
 import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
-import { MatPaginatorIntl } from '@angular/material';
-import { PaginatorIntlService } from './services/paginator-intl.service';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { SearchComponent } from './components/search/search.component';
 import { RatingModule } from 'ng-starrating';
@@ -99,9 +97,6 @@ export function tokenGetter() {
     }, {
       provide: LOCALE_ID,
       useValue: 'pl-PL'
-    }, {
-      provide: MatPaginatorIntl,
-      useClass: PaginatorIntlService
     }],
   bootstrap: [AppComponent]
 })

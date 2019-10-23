@@ -53,4 +53,15 @@ export class CartService {
       .map((product: ProductModel) => product.salePriceGross)
       .reduce((acc: number, value: number) => acc + value, 0);
   }
+
+  deleteProductFromCart(productId: string): void {
+    const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
+    cartProducts.forEach((cartProduct: string) => {
+      const parsedProduct: ProductModel = JSON.parse(cartProduct);
+      if (parsedProduct._id === productId) {
+        cartProducts.delete(cartProduct);
+      }
+    });
+    localStorage.setItem('cartProducts', JSON.stringify(Array.from(cartProducts)));
+  }
 }
