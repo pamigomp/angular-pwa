@@ -22,6 +22,7 @@ export class CartComponent implements OnInit {
   dataSource: MatTableDataSource<ProductModel>;
   cartProducts: ProductModel[];
   loginForm: FormGroup;
+  shipmentForm: FormGroup;
   error: string;
   loading = false;
   submitted = false;
@@ -40,6 +41,10 @@ export class CartComponent implements OnInit {
     return this.authService.isAuthenticated;
   }
 
+  get isShipmentFormInvalid(): boolean {
+    return this.shipmentForm.invalid;
+  }
+
   ngOnInit() {
     this.shippingService.getAllShippings().subscribe((shippings: ShippingModel[]) => {
       this.shippings = shippings;
@@ -48,6 +53,14 @@ export class CartComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
+    });
+    this.shipmentForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      street: ['', Validators.required],
+      postalCode: ['', Validators.required],
+      city: ['', Validators.required],
+      phone: ['', Validators.required]
     });
     this.shippingList.selectionChange.subscribe((s: MatSelectionListChange) => {
       this.shippingList.deselectAll();
