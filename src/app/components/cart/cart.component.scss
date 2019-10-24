@@ -19,7 +19,7 @@ mat-table {
 }
 
 .mat-row, .mat-header-row, .mat-footer-row {
-  min-width: 1280px;
+  min-width: 599px;
   width: 100%;
 }
 
@@ -40,4 +40,13 @@ mat-table {
 .product-link {
   text-decoration: unset;
   color: unset;
+}
+
+.confirmation-content {
+  height: 150px;
+  font-size: 16px;
+}
+
+::ng-deep .mat-horizontal-stepper-header {
+  pointer-events: none !important;
 }

@@ -22,11 +22,11 @@
             <ng-container matColumnDef="quantity">
               <mat-header-cell *matHeaderCellDef>Ilość</mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <button (click)="decreaseQuantity(element)" matTooltip="Zmniejsz ilość sztuk produktu" mat-icon-button>
+                <button (click)="decreaseQuantity(element)" mat-icon-button matTooltip="Zmniejsz ilość sztuk produktu">
                   <mat-icon>remove</mat-icon>
                 </button>
                 <span>{{element.orderQuantity}}</span>
-                <button (click)="increaseQuantity(element)" matTooltip="Zwiększ ilość sztuk produktu" mat-icon-button>
+                <button (click)="increaseQuantity(element)" mat-icon-button matTooltip="Zwiększ ilość sztuk produktu">
                   <mat-icon>add</mat-icon>
                 </button>
               </mat-cell>
@@ -37,8 +37,8 @@
               <mat-cell
                 *matCellDef="let element">
                 <span>{{element.salePriceGross * element.orderQuantity | currency:'PLN'}}</span>
-                <button matTooltip="Usuń produkt z koszyka" (click)="deleteProductFromCart(element._id)"
-                        mat-icon-button>
+                <button (click)="deleteProductFromCart(element._id)" mat-icon-button
+                        matTooltip="Usuń produkt z koszyka">
                   <mat-icon>close</mat-icon>
                 </button>
               </mat-cell>
@@ -147,38 +147,38 @@
         <form [formGroup]="shipmentForm">
           <mat-form-field>
             <mat-label>Imię</mat-label>
-            <input [ngClass]="{ 'is-invalid': submitted && shipmentForm.controls.name.errors }" formControlName="name"
+            <input [ngClass]="{ 'is-invalid': shipmentForm.controls.name.errors }" formControlName="name"
                    id="name" matInput name="name" placeholder="Imię" type="text">
-            <mat-error *ngIf="submitted && shipmentForm.controls.name.errors?.required">Imię jest wymagane</mat-error>
+            <mat-error *ngIf="shipmentForm.controls.name.errors?.required">Imię jest wymagane</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Nazwisko</mat-label>
-            <input [ngClass]="{ 'is-invalid': submitted && shipmentForm.controls.surname.errors }"
+            <input [ngClass]="{ 'is-invalid': shipmentForm.controls.surname.errors }"
                    formControlName="surname" id="surname" matInput name="surname" placeholder="Nazwisko" type="text">
             <mat-error *ngIf="shipmentForm.controls.surname.errors?.required">Nazwisko jest wymagane</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Ulica</mat-label>
-            <input [ngClass]="{ 'is-invalid': submitted && shipmentForm.controls.street.errors }"
+            <input [ngClass]="{ 'is-invalid': shipmentForm.controls.street.errors }"
                    formControlName="street" id="street" matInput name="street" placeholder="Ulica" type="text">
             <mat-error *ngIf="shipmentForm.controls.street.errors?.required">Ulica jest wymagana</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Kod pocztowy</mat-label>
-            <input [ngClass]="{ 'is-invalid': submitted && shipmentForm.controls.postalCode.errors }"
+            <input [ngClass]="{ 'is-invalid': shipmentForm.controls.postalCode.errors }"
                    formControlName="postalCode" id="postalCode" matInput name="postalCode" placeholder="Kod pocztowy"
                    type="text">
             <mat-error *ngIf="shipmentForm.controls.postalCode.errors?.required">Kod pocztowy jest wymagany</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Miejscowość</mat-label>
-            <input [ngClass]="{ 'is-invalid': submitted && shipmentForm.controls.city.errors }"
+            <input [ngClass]="{ 'is-invalid': shipmentForm.controls.city.errors }"
                    formControlName="city" id="city" matInput name="city" placeholder="Miejscowość" type="text">
             <mat-error *ngIf="shipmentForm.controls.city.errors?.required">Miejscowość jest wymagana</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Numer telefonu</mat-label>
-            <input [ngClass]="{ 'is-invalid': submitted && shipmentForm.controls.phone.errors }"
+            <input [ngClass]="{ 'is-invalid': shipmentForm.controls.phone.errors }"
                    formControlName="phone" id="phone" matInput name="phone" placeholder="Numer telefonu" type="text">
             <mat-error *ngIf="shipmentForm.controls.phone.errors?.required">Numer telefonu jest wymagany</mat-error>
           </mat-form-field>
@@ -196,18 +196,69 @@
   <!--  6. step -->
   <mat-step>
     <ng-template matStepLabel>Podsumowanie</ng-template>
-    <mat-card-footer fxLayoutAlign="center center">
-      <button class="step-btn" mat-raised-button matStepperPrevious>Wróć</button>
-      <button class="step-btn" color="primary" mat-raised-button matStepperNext>Dalej</button>
-    </mat-card-footer>
+    <mat-card>
+      <mat-card-title>Podsumowanie zamówienia</mat-card-title>
+      <mat-card-subtitle>Poniżej możesz sprawdzić swoje zamówienie przed jego realizacją.</mat-card-subtitle>
+      <mat-card-content>
+        <div class="mat-elevation-z8 full-width">
+          <mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="title">
+              <mat-header-cell *matHeaderCellDef>Produkt</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.title}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="salePriceGross">
+              <mat-header-cell *matHeaderCellDef>Cena</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.salePriceGross | currency:'PLN'}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="quantity">
+              <mat-header-cell *matHeaderCellDef>Ilość</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.orderQuantity}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="totalPriceGross">
+              <mat-header-cell *matHeaderCellDef>Razem</mat-header-cell>
+              <mat-cell
+                *matCellDef="let element">{{element.salePriceGross * element.orderQuantity | currency:'PLN'}}</mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
+        <mat-list role="list">
+          <mat-list-item role="listitem">
+            <span>Wartość zakupów</span>
+            <span>{{getTotalCost() | currency:'PLN'}}</span>
+          </mat-list-item>
+          <mat-list-item role="listitem">
+            <span>Dostawa</span>
+            <span>{{getShippingPrice() | currency:'PLN'}}</span>
+          </mat-list-item>
+          <mat-list-item role="listitem">
+            <strong>Do zapłaty</strong>
+            <strong>{{getTotalCost() + getShippingPrice() | currency:'PLN'}}</strong>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-footer fxLayoutAlign="center center">
+        <button class="step-btn" mat-raised-button matStepperPrevious>Wróć</button>
+        <button (click)="order()" class="step-btn" color="primary" mat-raised-button matStepperNext>Kupuję i płacę</button>
+      </mat-card-footer>
+    </mat-card>
   </mat-step>
 
   <!--  7. step -->
   <mat-step>
     <ng-template matStepLabel>Potwierdzenie</ng-template>
-    <mat-card-footer fxLayoutAlign="center center">
-      <button class="step-btn" mat-raised-button matStepperPrevious>Wróć</button>
-      <button (click)="stepper.reset()" mat-raised-button>Reset</button>
-    </mat-card-footer>
+    <mat-card>
+      <mat-card-title>Potwierdzenie złożenia zamówienia</mat-card-title>
+      <mat-card-content class="confirmation-content" fxLayout="column" fxLayoutAlign="space-evenly center">
+        <span>Dziękujemy za złożenia zamówienie</span>
+        <span>Numer zamówienia: <strong>{{orderId}}</strong></span>
+        <span>Zapraszamy do skorzystania z naszych usług ponownie</span>
+      </mat-card-content>
+      <mat-card-footer fxLayoutAlign="center center">
+        <button [routerLink]="['/home']" class="step-btn" color="primary" mat-raised-button>Wróć do strony głównej
+        </button>
+      </mat-card-footer>
+    </mat-card>
   </mat-step>
 </mat-horizontal-stepper>

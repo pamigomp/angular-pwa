@@ -9,6 +9,7 @@ import { sortObjectKeys } from '../../common/common';
 })
 export class CartService {
   private readonly SERVER_API_URL: string;
+  private readonly CART_PRODUCTS_KEY = 'cartProducts';
 
   constructor(private httpClient: HttpClient, private configService: ConfigService) {
     this.SERVER_API_URL = this.configService.get('API_URL');
@@ -21,11 +22,11 @@ export class CartService {
     delete productCopy.rates;
     delete productCopy.averageRate;
     const sortedProductKeys = sortObjectKeys(productCopy);
-    const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
+    const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem(this.CART_PRODUCTS_KEY))) || new Set();
     if (!cartProducts.has(JSON.stringify(sortedProductKeys))) {
       cartProducts.add(JSON.stringify(sortedProductKeys));
     }
-    localStorage.setItem('cartProducts', JSON.stringify(Array.from(cartProducts)));
+    localStorage.setItem(this.CART_PRODUCTS_KEY, JSON.stringify(Array.from(cartProducts)));
   }
 
   isProductAddedToCart(product: ProductModel): boolean {
@@ -35,12 +36,12 @@ export class CartService {
     delete productCopy.rates;
     delete productCopy.averageRate;
     const sortedProductKeys = sortObjectKeys(productCopy);
-    const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
+    const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem(this.CART_PRODUCTS_KEY))) || new Set();
     return cartProducts.has(JSON.stringify(sortedProductKeys));
   }
 
   getAllProductsAddedToCart(): ProductModel[] {
-    const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
+    const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem(this.CART_PRODUCTS_KEY))) || new Set();
     const products: ProductModel[] = [];
     cartProducts.forEach((product: string) => {
       products.push(JSON.parse(product));
@@ -55,13 +56,17 @@ export class CartService {
   }
 
   deleteProductFromCart(productId: string): void {
-    const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem('cartProducts'))) || new Set();
+    const cartProducts: Set<string> = new Set(JSON.parse(localStorage.getItem(this.CART_PRODUCTS_KEY))) || new Set();
     cartProducts.forEach((cartProduct: string) => {
       const parsedProduct: ProductModel = JSON.parse(cartProduct);
       if (parsedProduct._id === productId) {
         cartProducts.delete(cartProduct);
       }
     });
-    localStorage.setItem('cartProducts', JSON.stringify(Array.from(cartProducts)));
+    localStorage.setItem(this.CART_PRODUCTS_KEY, JSON.stringify(Array.from(cartProducts)));
+  }
+
+  clearCart(): void {
+    localStorage.removeItem(this.CART_PRODUCTS_KEY);
   }
 }

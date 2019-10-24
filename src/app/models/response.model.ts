@@ -1,5 +1,6 @@
 export interface CustomResponse {
   message: string;
+  orderId?: string;
 }
 
 export interface ErrorResponse {

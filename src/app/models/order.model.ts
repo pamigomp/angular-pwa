@@ -1,12 +1,11 @@
 import { Deserializable } from './deserializable.model';
 import { Payment } from '../enums/payment-method.enum';
 import { Status } from '../enums/status.enum';
-import { Shipping } from '../enums/shipping-method.enum';
 
 export class OrderModel implements Deserializable {
-  _id: string;
+  _id?: string;
   paymentStatus: boolean;
-  discount?: string;
+  discountCode?: string;
   totalPrice: number;
   shippingDate?: string;
   additionalInformation: string;
@@ -16,9 +15,8 @@ export class OrderModel implements Deserializable {
   shippingId: string;
   status: Status;
   paymentMethod: Payment;
-  shippingMethod?: Shipping;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 
   deserialize(input: any): this {
     return Object.assign(this, input);

@@ -9,6 +9,9 @@ import { ProductModel } from '../../models/product.model';
 import { MatSelectionList, MatSelectionListChange, MatTableDataSource } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { CustomResponse } from '../../models/response.model';
+import { OrderService } from '../../services/order/order.service';
+import { CartProductModel, OrderModel } from '../../models/order.model';
 
 @Component({
   selector: 'app-cart',
@@ -28,11 +31,13 @@ export class CartComponent implements OnInit {
   submitted = false;
   @ViewChild('shippingList', {static: true}) shippingList: MatSelectionList;
   @ViewChild('paymentList', {static: true}) paymentList: MatSelectionList;
-  selectedShipping: string;
-  selectedPayment: any;
+  selectedShipping: string[];
+  selectedPayment: Payment[];
+  orderId: string;
 
   constructor(private authService: AuthService,
               private cartService: CartService,
+              private orderService: OrderService,
               private shippingService: ShippingService,
               private formBuilder: FormBuilder) {
   }
@@ -129,5 +134,40 @@ export class CartComponent implements OnInit {
   deleteProductFromCart(productId: string): void {
     this.cartService.deleteProductFromCart(productId);
     this.getCartProducts();
+  }
+
+  getShippingPrice(): number {
+    if (this.shippings && this.selectedShipping) {
+      const selectedShipping: ShippingModel = this.shippings.find((shipping: ShippingModel) => shipping._id === this.selectedShipping[0]);
+      return selectedShipping.price;
+    }
+  }
+
+  getOrderedProducts(): CartProductModel[] {
+    return this.cartProducts.map((product: ProductModel) => {
+      return new CartProductModel().deserialize({
+        id: product._id,
+        price: product.salePriceGross,
+        amount: product.orderQuantity
+      });
+    });
+  }
+
+  order() {
+    const customerId: string = this.authService.getId();
+    const order: OrderModel = new OrderModel().deserialize({
+      paymentStatus: true,
+      totalPrice: this.getTotalCost() + this.getShippingPrice(),
+      additionalInformation: '',
+      products: this.getOrderedProducts(),
+      customerId,
+      shippingId: this.selectedShipping[0],
+      status: 'PENDING',
+      paymentMethod: this.selectedPayment[0]
+    });
+    this.orderService.createOrderForCustomerWithId(customerId, order).subscribe((res: CustomResponse) => {
+      this.orderId = res.orderId;
+      this.cartService.clearCart();
+    });
   }
 }
