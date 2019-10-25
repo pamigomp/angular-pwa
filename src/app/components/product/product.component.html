@@ -58,8 +58,9 @@
                        readonly="false" size="24px" uncheckedcolor="black"></star-rating>
         </div>
         <mat-form-field class="full-width">
-          <textarea [(ngModel)]="feedback" [value]="getCurrentCustomerFeedbackValue()" mat-autosize="true"
-                    matInput maxlength="1024" placeholder="Napisz komentarz..."></textarea>
+          <textarea [(ngModel)]="feedback" mat-autosize="true" matInput maxlength="1024"
+                    placeholder="Napisz komentarz..."></textarea>
+          <mat-hint align="end">{{feedback.length}} / 1024</mat-hint>
         </mat-form-field>
         <button (click)="addComment()" aria-label="Dodaj komentarz"
                 color="primary" mat-raised-button>

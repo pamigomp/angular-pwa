@@ -186,6 +186,7 @@
                       formControlName="additionalInformation" id="additionalInformation" mat-autosize="true" matInput
                       maxlength="1024" name="additionalInformation"
                       placeholder="Wprowadź dodatkowe informacje..."></textarea>
+            <mat-hint align="end">{{shipmentForm.controls.additionalInformation.value.length}} / 1024</mat-hint>
           </mat-form-field>
           <div fxLayoutAlign="center center">
             <button class="step-btn" mat-raised-button matStepperPrevious>Wróć</button>

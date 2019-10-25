@@ -25,7 +25,7 @@ export class ProductComponent implements OnInit {
   customerId: string;
   averageRate: number;
   isStarRatingReadonly = false;
-  feedback: string;
+  feedback = '';
   currentRoute: string;
   currentCustomerRate: RateModel = {} as RateModel;
   currentCustomerFeedback: FeedbackModel = {} as FeedbackModel;
@@ -98,10 +98,6 @@ export class ProductComponent implements OnInit {
     return +this.currentCustomerRate.value || 0;
   }
 
-  getCurrentCustomerFeedbackValue(): string {
-    return this.currentCustomerFeedback.value || '';
-  }
-
   getFeedbackAuthor(feedbackId: string): string {
     // TODO Get feedback author
     return 'M. Pietrzak';
@@ -138,6 +134,7 @@ export class ProductComponent implements OnInit {
     this.feedbackService.getAllFeedbacksForProductWithId(this.productId).subscribe((feedbacks: FeedbackModel[]) => {
       this.feedbacks = feedbacks.sort((a: FeedbackModel, b: FeedbackModel) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
       this.currentCustomerFeedback = this.getCurrentCustomerFeedback();
+      this.feedback = this.currentCustomerFeedback.value || '';
     });
   }
 
