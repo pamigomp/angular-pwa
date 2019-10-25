@@ -6,7 +6,7 @@ import { Payment, PaymentMethodEnum } from '../../enums/payment-method.enum';
 import { Shipping, ShippingMethodEnum } from '../../enums/shipping-method.enum';
 import { CartService } from '../../services/cart/cart.service';
 import { ProductModel } from '../../models/product.model';
-import { MatSelectionList, MatSelectionListChange, MatTableDataSource } from '@angular/material';
+import { MatSelectionList, MatSelectionListChange, MatStepper, MatTableDataSource } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { CustomResponse } from '../../models/response.model';
@@ -34,6 +34,8 @@ export class CartComponent implements OnInit {
   selectedShipping: string[];
   selectedPayment: Payment[];
   orderId: string;
+  errorMessage: string;
+  @ViewChild('stepper', {static: true}) private stepper: MatStepper;
 
   constructor(private authService: AuthService,
               private cartService: CartService,
@@ -65,7 +67,8 @@ export class CartComponent implements OnInit {
       street: ['', Validators.required],
       postalCode: ['', Validators.required],
       city: ['', Validators.required],
-      phone: ['', Validators.required]
+      phone: ['', Validators.required],
+      additionalInformation: ['']
     });
     this.shippingList.selectionChange.subscribe((s: MatSelectionListChange) => {
       this.shippingList.deselectAll();
@@ -136,10 +139,17 @@ export class CartComponent implements OnInit {
     this.getCartProducts();
   }
 
-  getShippingPrice(): number {
+  getSelectedShippingPrice(): number {
     if (this.shippings && this.selectedShipping) {
       const selectedShipping: ShippingModel = this.shippings.find((shipping: ShippingModel) => shipping._id === this.selectedShipping[0]);
       return selectedShipping.price;
+    }
+  }
+
+  getSelectedShippingMethod(): Shipping {
+    if (this.shippings && this.selectedShipping) {
+      const selectedShipping: ShippingModel = this.shippings.find((shipping: ShippingModel) => shipping._id === this.selectedShipping[0]);
+      return selectedShipping.method;
     }
   }
 
@@ -157,17 +167,22 @@ export class CartComponent implements OnInit {
     const customerId: string = this.authService.getId();
     const order: OrderModel = new OrderModel().deserialize({
       paymentStatus: true,
-      totalPrice: this.getTotalCost() + this.getShippingPrice(),
-      additionalInformation: '',
+      totalPrice: this.getTotalCost() + this.getSelectedShippingPrice(),
       products: this.getOrderedProducts(),
       customerId,
       shippingId: this.selectedShipping[0],
       status: 'PENDING',
       paymentMethod: this.selectedPayment[0]
     });
+    if (this.shipmentForm.controls.additionalInformation.value) {
+      order.additionalInformation = this.shipmentForm.controls.additionalInformation.value;
+    }
     this.orderService.createOrderForCustomerWithId(customerId, order).subscribe((res: CustomResponse) => {
       this.orderId = res.orderId;
       this.cartService.clearCart();
+      this.stepper.next();
+    }, (err: string) => {
+      this.errorMessage = `Nastąpił błąd podczas procesu składania zamówienia. ${err}`;
     });
   }
 }

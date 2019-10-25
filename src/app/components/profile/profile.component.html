@@ -51,9 +51,7 @@
               <input formControlName="phone" id="phone" matInput name="phone" placeholder="Telefon" type="text">
             </mat-form-field>
 
-            <p *ngIf="error" class="error full-width">
-              {{ error }}
-            </p>
+            <mat-card *ngIf="error" class="error">{{error}}</mat-card>
 
             <div fxLayoutAlign="center center">
               <mat-spinner *ngIf="loading" color="accent" diameter="25"></mat-spinner>

@@ -81,9 +81,7 @@
             <mat-error *ngIf="loginForm.controls.password.errors?.required">Hasło jest wymagane</mat-error>
           </mat-form-field>
 
-          <p *ngIf="error" class="error full-width">
-            {{ error }}
-          </p>
+          <mat-card *ngIf="error" class="error">{{error}}</mat-card>
 
           <div fxLayoutAlign="center center">
             <button class="step-btn" mat-raised-button matStepperPrevious>Wróć</button>
@@ -182,6 +180,13 @@
                    formControlName="phone" id="phone" matInput name="phone" placeholder="Numer telefonu" type="text">
             <mat-error *ngIf="shipmentForm.controls.phone.errors?.required">Numer telefonu jest wymagany</mat-error>
           </mat-form-field>
+          <mat-form-field>
+            <mat-label>Dodatkowe informacje</mat-label>
+            <textarea [ngClass]="{ 'is-invalid': shipmentForm.controls.additionalInformation.errors }"
+                      formControlName="additionalInformation" id="additionalInformation" mat-autosize="true" matInput
+                      maxlength="1024" name="additionalInformation"
+                      placeholder="Wprowadź dodatkowe informacje..."></textarea>
+          </mat-form-field>
           <div fxLayoutAlign="center center">
             <button class="step-btn" mat-raised-button matStepperPrevious>Wróć</button>
             <button [disabled]="isShipmentFormInvalid" class="step-btn" color="primary" mat-raised-button
@@ -223,24 +228,38 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
           </mat-table>
         </div>
-        <mat-list role="list">
+        <mat-list class="summary-list" role="list">
           <mat-list-item role="listitem">
-            <span>Wartość zakupów</span>
+            <span class="mat-list-item-header">Wartość zakupów</span>
             <span>{{getTotalCost() | currency:'PLN'}}</span>
           </mat-list-item>
           <mat-list-item role="listitem">
-            <span>Dostawa</span>
-            <span>{{getShippingPrice() | currency:'PLN'}}</span>
+            <span class="mat-list-item-header">Dostawa ({{getShippingMethod(getSelectedShippingMethod())}})</span>
+            <span>{{getSelectedShippingPrice() | currency:'PLN'}}</span>
           </mat-list-item>
           <mat-list-item role="listitem">
-            <strong>Do zapłaty</strong>
-            <strong>{{getTotalCost() + getShippingPrice() | currency:'PLN'}}</strong>
+            <strong class="mat-list-item-header">Do zapłaty</strong>
+            <strong>{{getTotalCost() + getSelectedShippingPrice() | currency:'PLN'}}</strong>
+          </mat-list-item>
+          <mat-list-item class="auto-height" role="listitem">
+            <span class="mat-list-item-header">Dane do wysyłki</span>
+            <div fxLayout="column">
+              <span>{{shipmentForm.controls.name.value}} {{shipmentForm.controls.surname.value}}</span>
+              <span>{{shipmentForm.controls.street.value}}</span>
+              <span>{{shipmentForm.controls.postalCode.value}} {{shipmentForm.controls.city.value}}</span>
+              <span>{{shipmentForm.controls.phone.value}}</span>
+            </div>
+          </mat-list-item>
+          <mat-list-item class="auto-height" role="listitem">
+            <span class="mat-list-item-header">Dodatkowe informacje</span>
+            <span>{{shipmentForm.controls.additionalInformation.value}}</span>
           </mat-list-item>
         </mat-list>
+        <mat-card *ngIf="errorMessage" class="error">{{errorMessage}}</mat-card>
       </mat-card-content>
       <mat-card-footer fxLayoutAlign="center center">
         <button class="step-btn" mat-raised-button matStepperPrevious>Wróć</button>
-        <button (click)="order()" class="step-btn" color="primary" mat-raised-button matStepperNext>Kupuję i płacę</button>
+        <button (click)="order()" class="step-btn" color="primary" mat-raised-button>Kupuję i płacę</button>
       </mat-card-footer>
     </mat-card>
   </mat-step>

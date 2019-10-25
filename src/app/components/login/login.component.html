@@ -16,9 +16,7 @@
           <mat-error *ngIf="loginForm.controls.password.errors?.required">Hasło jest wymagane</mat-error>
         </mat-form-field>
 
-        <p *ngIf="error" class="error full-width">
-          {{ error }}
-        </p>
+        <mat-card *ngIf="error" class="error">{{error}}</mat-card>
 
         <div fxLayoutAlign="center center">
           <mat-spinner *ngIf="loading" color="accent" diameter="25"></mat-spinner>

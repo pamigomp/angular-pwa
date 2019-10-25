@@ -50,3 +50,19 @@ mat-table {
 ::ng-deep .mat-horizontal-stepper-header {
   pointer-events: none !important;
 }
+
+.auto-height {
+  height: auto;
+}
+
+.summary-list {
+  margin-top: 15px;
+
+  ::ng-deep .mat-list-item-content {
+    align-items: start !important;
+  }
+}
+
+.mat-list-item-header {
+  margin-right: 10px;
+}
