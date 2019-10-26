@@ -4,13 +4,24 @@
     </mat-card-title>
     <mat-card-subtitle fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between start"
                        fxLayoutAlign.lt-sm="start start">
-      <div class="sort-by">
-        <mat-form-field>
-          <mat-select (selectionChange)="changeSortOption()" [(ngModel)]="selectedSortOption">
+      <div fxLayout="row wrap" fxLayoutAlign="center center">
+        <mat-form-field class="sort-by">
+          <mat-select (selectionChange)="getProducts()" [(ngModel)]="selectedSortOption">
             <mat-option *ngFor="let option of sortOptions" [disabled]="option.disabled"
                         [value]="option.title">{{option.title}}</mat-option>
           </mat-select>
         </mat-form-field>
+        <div fxLayoutAlign="center center">
+          <mat-form-field class="price-filter">
+            <input [(ngModel)]="minPrice" (change)="getProducts()" matInput placeholder="Cena od...">
+            <span matSuffix>zł</span>
+          </mat-form-field>
+          <mat-icon>remove</mat-icon>
+          <mat-form-field class="price-filter">
+            <input [(ngModel)]="maxPrice" (change)="getProducts()" matInput placeholder="Cena do...">
+            <span matSuffix>zł</span>
+          </mat-form-field>
+        </div>
       </div>
       <mat-paginator (page)="changePage($event)"
                      [length]="products.total"
@@ -33,7 +44,12 @@
           <p class="truncate">
             {{product.description}}
           </p>
-          <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxLayoutAlign="start center">
+            <star-rating [readonly]="isStarRatingReadonly" [value]="product.averageRate" checkedcolor="#F7B000"
+                         size="24px" uncheckedcolor="black"></star-rating>
+            <span>({{getRatesCount(product.rates)}})</span>
+          </div>
+          <div fxLayoutAlign="space-between center">
             <span class="price">{{product.salePriceGross | currency:'PLN'}}</span>
             <a (click)="addToCart(product)" [disabled]="isProductAddedToCart(product)"
                aria-label="Dodaj produkt do koszyka" mat-button>

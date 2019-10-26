@@ -35,7 +35,7 @@
     <input (search)="getSearchResult()" [(ngModel)]="searchQuery" class="search-input" matInput placeholder="Szukaj..."
            type="search">
   </mat-form-field>
-  <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+  <div fxFlex fxLayoutAlign="flex-end">
     <div fxLayoutAlign="center">
       <a [matMenuTriggerFor]="cartList" aria-label="Przycisk twój koszyk" mat-button>
         <mat-icon [matBadgeHidden]="getCartProductCount() === 0"

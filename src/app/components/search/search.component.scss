@@ -8,6 +8,7 @@
 
 .sort-by {
   width: 170px;
+  margin-right: 15px;
 }
 
 mat-card.product-card {
@@ -45,4 +46,12 @@ mat-card.product-card {
 
 .search-query {
   font-style: italic;
+}
+
+.price-filter {
+  width: 90px;
+
+  input {
+    color: black;
+  }
 }

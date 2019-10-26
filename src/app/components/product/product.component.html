@@ -29,7 +29,7 @@
       </div>
       <div fxLayout="column">
         <mat-card-title>{{product.title}}</mat-card-title>
-        <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayoutAlign="start center">
           <star-rating [readonly]="isStarRatingReadonly" [value]="averageRate" checkedcolor="#F7B000" size="24px"
                        uncheckedcolor="black"></star-rating>
           <span>({{rates.length}})</span>
@@ -52,7 +52,7 @@
     <div class="third-row" fxLayout="column">
       <h3>Komentarze</h3>
       <div *ngIf="customerId">
-        <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayoutAlign="start center">
           <label>Wybierz ocenę:</label>
           <star-rating (rate)="rateProduct($event)" [value]="getCurrentCustomerRateValue()" checkedcolor="#F7B000"
                        readonly="false" size="24px" uncheckedcolor="black"></star-rating>

@@ -50,6 +50,8 @@ export class CategoryComponent implements OnInit {
     title: 'Ocena: od najlepszej',
     disabled: true
   }];
+  minPrice: number;
+  maxPrice: number;
 
   constructor(
     private categoryService: CategoryService,
@@ -81,10 +83,6 @@ export class CategoryComponent implements OnInit {
     this.getProducts();
   }
 
-  changeSortOption(): void {
-    this.getProducts();
-  }
-
   getSelectedSortOptionProps(): SortOptionModel {
     return this.sortOptions.find((sortOption: SortOptionModel) => sortOption.title === this.selectedSortOption);
   }
@@ -97,6 +95,12 @@ export class CategoryComponent implements OnInit {
       page: this.selectedPage + 1,
       limit: this.selectedPageSize
     };
+    if (this.minPrice) {
+      queryParams.minPrice = this.minPrice;
+    }
+    if (this.maxPrice) {
+      queryParams.maxPrice = this.maxPrice;
+    }
     this.productService.getAllProductsForCategoryWithId(this.categoryId, queryParams)
       .pipe(
         catchError((err: string) => {
