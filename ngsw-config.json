@@ -38,13 +38,16 @@
     {
       "name": "backend-api",
       "urls": [
-        "https://localhost/api/**",
-        "https://shop-master-thesis.herokuapp.com/api/**"
+        "http://localhost:8080/api/**",
+        "https://localhost:8081/api/**",
+        "https://shop-master-thesis.herokuapp.com/api/**",
+        "https://www.e-fotojoker.pl/imageserve/**",
+        "https://cdn.x-kom.pl/i/setup/images/prod/**"
       ],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 20,
-        "maxAge": "1h",
+        "maxAge": "12h",
         "timeout": "5s"
       }
     }
