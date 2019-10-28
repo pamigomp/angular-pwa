@@ -6,17 +6,27 @@
           <form (ngSubmit)="update()" [formGroup]="profileForm">
             <mat-form-field>
               <mat-label>E-mail</mat-label>
-              <input formControlName="email" id="email" matInput name="email" placeholder="E-mail" type="email">
+              <input [ngClass]="{ 'is-invalid': submitted && profileForm.controls.email.errors }"
+                     formControlName="email" id="email" matInput name="email" placeholder="E-mail" type="email"
+                     required>
+              <mat-error *ngIf="submitted && profileForm.controls.email.errors?.required">E-mail jest wymagany
+              </mat-error>
             </mat-form-field>
             <mat-form-field>
               <mat-label>Imię</mat-label>
-              <input formControlName="firstName" id="firstName" matInput name="firstName" placeholder="Imię"
-                     type="text">
+              <input [ngClass]="{ 'is-invalid': submitted && profileForm.controls.firstName.errors }"
+                     formControlName="firstName" id="firstName" matInput name="firstName" placeholder="Imię" type="text"
+                     required>
+              <mat-error *ngIf="submitted && profileForm.controls.firstName.errors?.required">Imię jest wymagane
+              </mat-error>
             </mat-form-field>
             <mat-form-field>
               <mat-label>Nazwisko</mat-label>
-              <input formControlName="lastName" id="lastName" matInput name="lastName" placeholder="Nazwisko"
-                     type="text">
+              <input [ngClass]="{ 'is-invalid': submitted && profileForm.controls.lastName.errors }"
+                     formControlName="lastName" id="lastName" matInput name="lastName" placeholder="Nazwisko"
+                     type="text" required>
+              <mat-error *ngIf="submitted && profileForm.controls.lastName.errors?.required">Nazwisko jest wymagane
+              </mat-error>
             </mat-form-field>
             <div>
               <label>Płeć</label>

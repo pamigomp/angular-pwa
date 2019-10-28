@@ -6,14 +6,14 @@
         <mat-form-field>
           <mat-label>E-mail</mat-label>
           <input [ngClass]="{ 'is-invalid': submitted && registrationForm.controls.email.errors }"
-                 formControlName="email" id="email" matInput name="email" placeholder="E-mail">
+                 formControlName="email" id="email" matInput name="email" placeholder="E-mail" required>
           <mat-error *ngIf="registrationForm.controls.email.errors?.required">E-mail jest wymagany</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Hasło</mat-label>
           <input [ngClass]="{ 'is-invalid': submitted && registrationForm.controls.password.errors }"
                  formControlName="password" id="password" matInput minlength="8" name="password" placeholder="Hasło"
-                 type="password">
+                 type="password" required>
           <mat-error *ngIf="registrationForm.controls.password.errors?.required">Hasło jest wymagane</mat-error>
           <mat-error *ngIf="registrationForm.controls.password.errors?.minlength">
             Hasło jest zbyt krótkie (min. 8 znaków)
@@ -22,13 +22,13 @@
         <mat-form-field>
           <mat-label>Imię</mat-label>
           <input [ngClass]="{ 'is-invalid': submitted && registrationForm.controls.firstName.errors }"
-                 formControlName="firstName" id="firstName" matInput name="firstName" placeholder="Imię">
+                 formControlName="firstName" id="firstName" matInput name="firstName" placeholder="Imię" required>
           <mat-error *ngIf="registrationForm.controls.firstName.errors?.required">Imię jest wymagane</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Nazwisko</mat-label>
           <input [ngClass]="{ 'is-invalid': submitted && registrationForm.controls.lastName.errors }"
-                 formControlName="lastName" id="lastName" matInput name="lastName" placeholder="Nazwisko">
+                 formControlName="lastName" id="lastName" matInput name="lastName" placeholder="Nazwisko" required>
           <mat-error *ngIf="registrationForm.controls.lastName.errors?.required">Nazwisko jest wymagane</mat-error>
         </mat-form-field>
         <div>

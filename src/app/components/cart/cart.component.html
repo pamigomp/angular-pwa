@@ -70,14 +70,14 @@
           <mat-form-field>
             <mat-label>E-mail</mat-label>
             <input [ngClass]="{ 'is-invalid': submitted && loginForm.controls.email.errors }" formControlName="email"
-                   id="email" matInput name="email" placeholder="E-mail" type="email">
+                   id="email" matInput name="email" placeholder="E-mail" type="email" required>
             <mat-error *ngIf="submitted && loginForm.controls.email.errors?.required">E-mail jest wymagany</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Hasło</mat-label>
             <input [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }"
                    formControlName="password" id="password" matInput name="password" placeholder="Hasło"
-                   type="password">
+                   type="password" required>
             <mat-error *ngIf="loginForm.controls.password.errors?.required">Hasło jest wymagane</mat-error>
           </mat-form-field>
 
@@ -146,38 +146,38 @@
           <mat-form-field>
             <mat-label>Imię</mat-label>
             <input [ngClass]="{ 'is-invalid': shipmentForm.controls.name.errors }" formControlName="name"
-                   id="name" matInput name="name" placeholder="Imię" type="text">
+                   id="name" matInput name="name" placeholder="Imię" type="text" required>
             <mat-error *ngIf="shipmentForm.controls.name.errors?.required">Imię jest wymagane</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Nazwisko</mat-label>
             <input [ngClass]="{ 'is-invalid': shipmentForm.controls.surname.errors }"
-                   formControlName="surname" id="surname" matInput name="surname" placeholder="Nazwisko" type="text">
+                   formControlName="surname" id="surname" matInput name="surname" placeholder="Nazwisko" type="text" required>
             <mat-error *ngIf="shipmentForm.controls.surname.errors?.required">Nazwisko jest wymagane</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Ulica</mat-label>
             <input [ngClass]="{ 'is-invalid': shipmentForm.controls.street.errors }"
-                   formControlName="street" id="street" matInput name="street" placeholder="Ulica" type="text">
+                   formControlName="street" id="street" matInput name="street" placeholder="Ulica" type="text" required>
             <mat-error *ngIf="shipmentForm.controls.street.errors?.required">Ulica jest wymagana</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Kod pocztowy</mat-label>
             <input [ngClass]="{ 'is-invalid': shipmentForm.controls.postalCode.errors }"
                    formControlName="postalCode" id="postalCode" matInput name="postalCode" placeholder="Kod pocztowy"
-                   type="text">
+                   type="text" required>
             <mat-error *ngIf="shipmentForm.controls.postalCode.errors?.required">Kod pocztowy jest wymagany</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Miejscowość</mat-label>
             <input [ngClass]="{ 'is-invalid': shipmentForm.controls.city.errors }"
-                   formControlName="city" id="city" matInput name="city" placeholder="Miejscowość" type="text">
+                   formControlName="city" id="city" matInput name="city" placeholder="Miejscowość" type="text" required>
             <mat-error *ngIf="shipmentForm.controls.city.errors?.required">Miejscowość jest wymagana</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Numer telefonu</mat-label>
             <input [ngClass]="{ 'is-invalid': shipmentForm.controls.phone.errors }"
-                   formControlName="phone" id="phone" matInput name="phone" placeholder="Numer telefonu" type="text">
+                   formControlName="phone" id="phone" matInput name="phone" placeholder="Numer telefonu" type="text" required>
             <mat-error *ngIf="shipmentForm.controls.phone.errors?.required">Numer telefonu jest wymagany</mat-error>
           </mat-form-field>
           <mat-form-field>

@@ -6,13 +6,13 @@
         <mat-form-field>
           <mat-label>E-mail</mat-label>
           <input [ngClass]="{ 'is-invalid': submitted && loginForm.controls.email.errors }" formControlName="email"
-                 id="email" matInput name="email" placeholder="E-mail" type="email">
+                 id="email" matInput name="email" placeholder="E-mail" type="email" required>
           <mat-error *ngIf="submitted && loginForm.controls.email.errors?.required">E-mail jest wymagany</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Hasło</mat-label>
           <input [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }"
-                 formControlName="password" id="password" matInput name="password" placeholder="Hasło" type="password">
+                 formControlName="password" id="password" matInput name="password" placeholder="Hasło" type="password" required>
           <mat-error *ngIf="loginForm.controls.password.errors?.required">Hasło jest wymagane</mat-error>
         </mat-form-field>
 

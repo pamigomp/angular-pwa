@@ -51,7 +51,7 @@
     </div>
     <div class="third-row" fxLayout="column">
       <h3>Komentarze</h3>
-      <div *ngIf="customerId">
+      <div *ngIf="isAuthenticated">
         <div fxLayoutAlign="start center">
           <label>Wybierz ocenę:</label>
           <star-rating (rate)="rateProduct($event)" [value]="getCurrentCustomerRateValue()" checkedcolor="#F7B000"
@@ -69,7 +69,7 @@
           <span *ngIf="currentCustomerFeedback.value">Zaktualizuj komentarz</span>
         </button>
       </div>
-      <div *ngIf="!customerId">
+      <div *ngIf="!isAuthenticated">
         <span><a [queryParams]="{returnUrl: currentRoute}" routerLink="/login">Zaloguj się</a>, aby dodać opinię o produkcie</span>
       </div>
       <mat-card *ngFor="let feedback of feedbacks" class="comment-card">

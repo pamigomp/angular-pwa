@@ -41,6 +41,10 @@ export class ProductComponent implements OnInit {
               private activatedRoute: ActivatedRoute) {
   }
 
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated;
+  }
+
   ngOnInit() {
     this.currentRoute = this.router.url;
     this.activatedRoute.params.subscribe((params: Params) => {
