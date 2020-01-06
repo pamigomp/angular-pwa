@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import {
+  MAT_DATE_LOCALE,
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatBadgeModule,
   MatButtonModule,
@@ -104,6 +105,8 @@ import { PaginatorIntlService } from './services/paginator-intl.service';
   }, {
     provide: MatPaginatorIntl,
     useClass: PaginatorIntlService
+  }, {
+    provide: MAT_DATE_LOCALE, useValue: 'pl-PL'
   }],
 })
 export class MaterialModule {

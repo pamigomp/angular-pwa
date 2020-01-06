@@ -43,7 +43,7 @@
           <mat-label>Data urodzenia</mat-label>
           <input [matDatepicker]="picker"
                  [ngClass]="{ 'is-invalid': submitted && registrationForm.controls.dob.errors }"
-                 formControlName="dob" id="dob" matInput name="dob" placeholder="Wybierz datę">
+                 formControlName="dob" id="dob" matInput name="dob" placeholder="Wybierz datę" readonly>
           <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

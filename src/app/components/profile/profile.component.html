@@ -39,7 +39,7 @@
             <mat-form-field>
               <mat-label>Data urodzenia</mat-label>
               <input [matDatepicker]="picker" formControlName="dob" id="dob" matInput name="dob"
-                     placeholder="Wybierz datę">
+                     placeholder="Wybierz datę" readonly>
               <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
